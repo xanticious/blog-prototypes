@@ -613,16 +613,16 @@ button:focus-visible {
 .prototype[data-layout="cards"] .cover { width: min(100%, 9.5rem); }
 
 .prototype[data-layout="folio"] .home-intro h1 {
-  font-size: clamp(3.4rem, 9vw, 7rem);
-  line-height: 0.84;
+  font-size: clamp(3rem, 7vw, 5.6rem);
+  line-height: 0.96;
   text-transform: uppercase;
+  padding-bottom: 0.08em;
 }
 
 .prototype[data-layout="folio"] .featured {
-  min-height: 62vh;
-  align-items: end;
+  align-items: center;
   grid-template-columns: auto minmax(0, 1fr);
-  gap: 2rem;
+  gap: 2.5rem;
 }
 
 .prototype[data-layout="folio"] .featured-copy {
@@ -630,8 +630,8 @@ button:focus-visible {
 }
 
 .prototype[data-layout="folio"] .featured h2 {
-  font-size: clamp(2.8rem, 6vw, 5.4rem);
-  line-height: 0.88;
+  font-size: clamp(2.2rem, 4.5vw, 4rem);
+  line-height: 1;
   font-weight: 500;
 }
 
