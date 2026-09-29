@@ -1,6 +1,6 @@
 ---
 slug: alices-adventures
-title: "The Logic of Nonsense"
+title: "Book review: Alice’s Adventures in Wonderland"
 dek: "Lewis Carroll’s Wonderland is not random. It is a place where rules are enforced by people who change them, and a girl who keeps asking the next reasonable question."
 bookId: alices-adventures
 published: "2026-04-06"

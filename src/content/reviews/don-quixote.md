@@ -1,6 +1,6 @@
 ---
 slug: don-quixote
-title: "When Reading Rewrites the World"
+title: "Book review: Don Quixote"
 dek: "Cervantes sends a mild country gentleman out of his library and into a Spain that did not agree to become a romance. The jokes are enormous. So is the tenderness."
 bookId: don-quixote
 published: "2026-05-04"

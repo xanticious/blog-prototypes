@@ -1,6 +1,6 @@
 ---
 slug: dracula
-title: "Many Voices, One Hunger"
+title: "Book review: Dracula"
 dek: "Bram Stoker tells a vampire story as a file of documents. Diaries, letters, and a ship’s log turn superstition into a case the modern world has to answer."
 bookId: dracula
 published: "2026-03-18"

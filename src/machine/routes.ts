@@ -1,4 +1,4 @@
-import { isPrototypeId } from "../prototypes/catalog";
+import { isPrototypeId, sitePrototypeId } from "../prototypes/catalog";
 
 export type View =
   | { kind: "home" }
@@ -9,15 +9,13 @@ export type View =
   | { kind: "poem"; slug: string }
   | { kind: "about" };
 
-export type Route =
-  | { name: "gallery" }
-  | { name: "prototype"; prototypeId: string; view: View };
+export type Route = { name: "prototype"; prototypeId: string; view: View };
 
 export function hashToRoute(hash: string): Route {
   const raw = decodeURIComponent(hash.replace(/^#/, "").replace(/^\//, ""));
   const parts = raw.split("/").filter(Boolean);
   if (parts[0] !== "p" || !parts[1] || !isPrototypeId(parts[1])) {
-    return { name: "gallery" };
+    return { name: "prototype", prototypeId: sitePrototypeId, view: { kind: "home" } };
   }
   const prototypeId = parts[1];
   const section = parts[2];
@@ -44,7 +42,6 @@ export function hashToRoute(hash: string): Route {
 }
 
 export function routeToHash(route: Route): string {
-  if (route.name === "gallery") return "#/";
   const base = `#/p/${route.prototypeId}`;
   switch (route.view.kind) {
     case "home":
@@ -69,16 +66,16 @@ export function viewLabel(view: View): string {
     case "home":
       return "Home";
     case "reviews":
-      return "Reviews";
+      return "Book reviews";
     case "review":
-      return "Review";
+      return "Book review";
     case "guides":
-      return "Reading guides";
+      return "Blog posts";
     case "guide":
-      return "Guide";
+      return "Blog post";
     case "poem":
       return "Poem";
     case "about":
-      return "About this design";
+      return "About";
   }
 }

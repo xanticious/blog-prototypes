@@ -1,6 +1,6 @@
 ---
 slug: tale-of-two-cities
-title: "The Private Cost of Public History"
+title: "Book review: A Tale of Two Cities"
 dek: "Dickens opens with the most balanced sentence in English and then spends a novel tipping the scale: London and Paris, mercy and vengeance, a wastrel and a seamstress, a name used twice."
 bookId: tale-of-two-cities
 published: "2026-04-26"

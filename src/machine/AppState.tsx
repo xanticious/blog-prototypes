@@ -14,7 +14,6 @@ const AppStateContext = createContext<AppApi | null>(null);
 
 function pageTitle(snapshot: AppSnapshot): string {
   const route = snapshot.context.route;
-  if (route.name === "gallery") return "Spine & Page — book blog prototypes";
   const prototype = getPrototype(route.prototypeId);
   const name = prototype?.name ?? "Prototype";
   if (route.view.kind === "review") {
@@ -64,7 +63,7 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     document.title = pageTitle(snapshot);
     window.scrollTo(0, 0);
-    // Menu and gallery-filter changes should not jump the page.
+    // Opening the menu should not jump the page.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [routeKey]);
 

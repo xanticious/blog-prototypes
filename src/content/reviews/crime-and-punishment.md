@@ -1,6 +1,6 @@
 ---
 slug: crime-and-punishment
-title: "Fever, Theory, and a Staircase"
+title: "Book review: Crime and Punishment"
 dek: "Dostoevsky’s novel follows a student who tries to turn a murder into an idea. The city, the family, and his own body refuse to keep the idea clean."
 bookId: crime-and-punishment
 published: "2026-02-28"

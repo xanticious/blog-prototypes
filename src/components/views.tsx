@@ -6,7 +6,6 @@ import {
   getReview,
   guides,
   poems,
-  readingTime,
   reviews,
   type Guide,
   type Review,
@@ -82,10 +81,9 @@ export function HomeView({
                 {featured.title}
               </NavLink>
             </h2>
-            <p className="dek">{featured.dek}</p>
             <p className="excerpt">{excerpt(featured.body, 320)}</p>
             <p className="byline">
-              {featured.book.author} · {featured.book.year} · {readingTime(featured.body)}
+              {featured.book.author} · {featured.book.year}
             </p>
           </div>
         </article>
@@ -109,7 +107,7 @@ export function HomeView({
       </section>
       <section className="guide-row" aria-labelledby="guide-heading">
         <h2 id="guide-heading" className="section-label">
-          Reading guides
+          Blog posts
         </h2>
         <ul className="guide-list">
           {guides.map((guide) => (
@@ -127,11 +125,10 @@ export function ReviewsView({ prototype, reviews }: { prototype: Prototype; revi
   return (
     <div className="section-page">
       <header className="page-intro">
-        <p className="eyebrow">Reviews</p>
+        <p className="eyebrow">Book reviews</p>
         <h1>Essays on the books.</h1>
         <p className="lede">
-          Twelve long reviews of books old enough to belong to everyone. The words stay the same in every
-          prototype; only the room changes. A poem sits with them on the home shelf.
+          Twelve long reviews of books old enough to belong to everyone. Open a cover to read the essay.
         </p>
       </header>
       <ul className="piece-list">
@@ -149,7 +146,7 @@ export function ReviewView({ prototype, slug }: { prototype: Prototype; slug: st
   const review = getReview(slug);
   if (!review) {
     return (
-      <Missing prototype={prototype} heading="That review is not on the shelf." label="All reviews" view={{ kind: "reviews" }} />
+      <Missing prototype={prototype} heading="That review is not on the shelf." label="All book reviews" view={{ kind: "reviews" }} />
     );
   }
   return (
@@ -162,7 +159,7 @@ export function ReviewView({ prototype, slug }: { prototype: Prototype; slug: st
           <p className="dek">{review.dek}</p>
           <p className="byline">
             On {review.book.title} by {review.book.author} · {review.book.year}
-            <span> · {formatDate(review.published)} · {readingTime(review.body)}</span>
+            <span> · {formatDate(review.published)}</span>
           </p>
           {review.spoilers ? <p className="spoiler-warning">This review contains spoilers.</p> : null}
         </div>
@@ -194,7 +191,7 @@ export function ReviewView({ prototype, slug }: { prototype: Prototype; slug: st
           href={routeToHash({ name: "prototype", prototypeId: prototype.id, view: { kind: "reviews" } })}
           event={{ type: "OPEN_VIEW", view: { kind: "reviews" } }}
         >
-          More reviews
+          More book reviews
         </NavLink>
       </p>
     </article>
@@ -205,7 +202,7 @@ export function GuidesView({ prototype, guides }: { prototype: Prototype; guides
   return (
     <div className="section-page">
       <header className="page-intro">
-        <p className="eyebrow">Reading guides</p>
+        <p className="eyebrow">Blog posts</p>
         <h1>How to stay with a book.</h1>
         <p className="lede">
           Short tutorials for the part of a book blog that is not a review: taking notes, rereading a page,
@@ -227,19 +224,17 @@ export function GuideView({ prototype, slug }: { prototype: Prototype; slug: str
   const guide = getGuide(slug);
   if (!guide) {
     return (
-      <Missing prototype={prototype} heading="That guide is not on the shelf." label="All guides" view={{ kind: "guides" }} />
+      <Missing prototype={prototype} heading="That post is not on the shelf." label="All blog posts" view={{ kind: "guides" }} />
     );
   }
   return (
     <article className="essay">
       <div className="essay-top essay-top-plain">
         <div>
-          <p className="kicker">Reading guide</p>
+          <p className="kicker">Blog post</p>
           <h1>{guide.title}</h1>
           <p className="dek">{guide.dek}</p>
-          <p className="byline">
-            {formatDate(guide.published)} · {readingTime(guide.body)}
-          </p>
+          <p className="byline">{formatDate(guide.published)}</p>
         </div>
       </div>
       <MarkdownBody body={guide.body} />
@@ -248,7 +243,7 @@ export function GuideView({ prototype, slug }: { prototype: Prototype; slug: str
           href={routeToHash({ name: "prototype", prototypeId: prototype.id, view: { kind: "guides" } })}
           event={{ type: "OPEN_VIEW", view: { kind: "guides" } }}
         >
-          More guides
+          More blog posts
         </NavLink>
       </p>
     </article>
@@ -275,9 +270,7 @@ export function PoemView({ prototype, slug }: { prototype: Prototype; slug: stri
           <p className="kicker">Poem</p>
           <h1>{poem.title}</h1>
           <p className="dek">{poem.dek}</p>
-          <p className="byline">
-            {formatDate(poem.published)} · {readingTime(poem.body)}
-          </p>
+          <p className="byline">{formatDate(poem.published)}</p>
         </div>
       </div>
       <MarkdownBody body={poem.body} />
@@ -305,7 +298,7 @@ export function RelatedPosts({ prototype, current }: { prototype: Prototype; cur
     ...reviews.map((review) => ({
       key: `review-${review.slug}`,
       title: review.title,
-      meta: review.book.title,
+      meta: review.book.author,
       view: { kind: "review" as const, slug: review.slug },
     })),
     ...poems.map((poem) => ({
@@ -317,7 +310,7 @@ export function RelatedPosts({ prototype, current }: { prototype: Prototype; cur
     ...guides.map((guide) => ({
       key: `guide-${guide.slug}`,
       title: guide.title,
-      meta: "Reading guide",
+      meta: "Blog post",
       view: { kind: "guide" as const, slug: guide.slug },
     })),
   ].filter((post) => {
@@ -384,9 +377,8 @@ export function AboutView({ prototype }: { prototype: Prototype }) {
         <p>{prototype.about}</p>
         <p>{prototype.description}</p>
         <p>
-          The essays and guides are shared sample content, written so the prototypes can be compared fairly.
-          A finished blog would keep one of these designs, or mix pieces of several, and then replace the
-          sample shelf with your own reading.
+          The essays are sample book reviews, with a few blog posts on how to stay with a book. The shelf is
+          here so the room can be read with real writing in it.
         </p>
       </div>
     </article>

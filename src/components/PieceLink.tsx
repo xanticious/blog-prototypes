@@ -1,5 +1,5 @@
 import type { Guide, Poem, Review } from "../content/library";
-import { excerpt, formatDate, readingTime } from "../content/library";
+import { formatDate } from "../content/library";
 import type { View } from "../machine/routes";
 import { routeToHash } from "../machine/routes";
 import type { Prototype } from "../prototypes/catalog";
@@ -47,10 +47,7 @@ export function ReviewPiece({
           {review.book.author} · {review.book.year}
         </span>
         <span className="piece-title">{review.title}</span>
-        <span className="piece-dek">{excerpt(review.dek, 160)}</span>
-        <span className="piece-meta">
-          {formatDate(review.published)} · {readingTime(review.body)}
-        </span>
+        <span className="piece-meta">{formatDate(review.published)}</span>
       </span>
     </NavLink>
   );
@@ -79,9 +76,7 @@ export function PoemPiece({
         <span className="kicker">Poem</span>
         <span className="piece-title">{poem.title}</span>
         <span className="piece-dek">{poem.dek}</span>
-        <span className="piece-meta">
-          {formatDate(poem.published)} · {readingTime(poem.body)}
-        </span>
+        <span className="piece-meta">{formatDate(poem.published)}</span>
       </span>
     </NavLink>
   );
@@ -95,7 +90,7 @@ export function GuidePiece({ prototype, guide }: { prototype: Prototype; guide: 
       href={routeToHash({ name: "prototype", prototypeId: prototype.id, view })}
       event={{ type: "OPEN_VIEW", view }}
     >
-      <span className="kicker">Reading guide</span>
+      <span className="kicker">Blog post</span>
       <span className="piece-title">{guide.title}</span>
       <span className="piece-dek">{guide.dek}</span>
     </NavLink>
