@@ -25,10 +25,12 @@ npm install
 npm run dev
 ```
 
-`npm run dev` starts a local preview. `npm run build` typechecks and writes `dist/`. `npm run preview` serves that folder.
+`npm run dev` starts a local preview. `npm run build` typechecks, writes `dist/`, and copies the published JavaScript, CSS, and favicon to the repository root. `npm run preview` serves `dist/`.
 
 ## GitHub Pages
 
-The workflow in `.github/workflows/pages.yml` builds the site and deploys it when commits land on `main`. In the repository settings, set Pages to **GitHub Actions**.
+This repository's Pages site is published from the `main` branch, folder `/ (root)`. Pages serves those files as they are. It does not compile TypeScript.
 
-The Vite `base` is `./`, so the built asset paths stay relative on a project site such as `https://<user>.github.io/<repo>/`.
+`index.html` loads `./assets/index.js`, `./assets/index.css`, and `./favicon.svg`. Relative URLs keep the project-site prefix, so a page at `https://<user>.github.io/<repo>/` requests `https://<user>.github.io/<repo>/assets/index.js` rather than `https://<user>.github.io/src/main.tsx`.
+
+`npm run build` produces those files. The workflow in `.github/workflows/pages.yml` runs that build when commits land on `main` and commits the result. In the repository settings, leave Pages on **Deploy from a branch**, branch `main`, folder `/ (root)`.
