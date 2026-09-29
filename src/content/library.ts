@@ -157,12 +157,6 @@ export function getPoem(slug: string): Poem | undefined {
   return poemsBySlug.get(slug);
 }
 
-export function readingTime(body: string): string {
-  const words = body.split(/\s+/).filter(Boolean).length;
-  const minutes = Math.max(1, Math.round(words / 230));
-  return `${minutes} min read`;
-}
-
 export function excerpt(body: string, max = 240): string {
   const paragraph = body
     .split(/\n\n+/)

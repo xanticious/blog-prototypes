@@ -1,6 +1,6 @@
 ---
 slug: frankenstein
-title: "The Creature Who Learned to Read"
+title: "Book review: Frankenstein"
 dek: "Mary Shelley’s novel is usually remembered for a lightning storm and a laboratory. The sharper terror is a rejected mind that learned language, sympathy, and then revenge."
 bookId: frankenstein
 published: "2026-01-20"

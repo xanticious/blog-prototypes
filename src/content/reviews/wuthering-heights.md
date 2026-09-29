@@ -1,6 +1,6 @@
 ---
 slug: wuthering-heights
-title: "Weather as a Moral Force"
+title: "Book review: Wuthering Heights"
 dek: "Emily Brontë’s only novel is not a love story that happens to be stormy. It is a study of possession: of houses, of children, of the right to tell the past."
 bookId: wuthering-heights
 published: "2026-03-08"

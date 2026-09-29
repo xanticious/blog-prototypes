@@ -1,6 +1,6 @@
 ---
 slug: dorian-gray
-title: "A Portrait That Keeps the Score"
+title: "Book review: The Picture of Dorian Gray"
 dek: "Oscar Wilde’s novel gives a beautiful man a magical way to hide the cost of his life. The portrait in the schoolroom becomes a ledger, and the ledger does not do aesthetics."
 bookId: dorian-gray
 published: "2026-04-16"

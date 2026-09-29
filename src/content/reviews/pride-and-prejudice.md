@@ -1,6 +1,6 @@
 ---
 slug: pride-and-prejudice
-title: "The Intelligence of Manners"
+title: "Book review: Pride and Prejudice"
 dek: "Jane Austen’s novel is not a soft painting of country life. It is a precise instrument for measuring how people hide, flirt, misread, and revise themselves."
 bookId: pride-and-prejudice
 published: "2026-01-12"

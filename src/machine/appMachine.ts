@@ -1,26 +1,20 @@
 import { assign, setup, type StateFrom } from "xstate";
-import type { Mood } from "../prototypes/catalog";
 import { hashToRoute, routeToHash, type Route, type View } from "./routes";
-
-export type GalleryFilter = "all" | Mood;
 
 export type SidebarMode = "collapsed" | "icons" | "text";
 
 export type AppContext = {
   route: Route;
   menuOpen: boolean;
-  galleryFilter: GalleryFilter;
   sidebarMode: SidebarMode;
 };
 
 export type AppEvent =
   | { type: "HASH_CHANGED"; hash: string }
-  | { type: "GO_GALLERY" }
   | { type: "OPEN_PROTOTYPE"; prototypeId: string }
   | { type: "OPEN_VIEW"; view: View }
   | { type: "TOGGLE_MENU" }
   | { type: "CLOSE_MENU" }
-  | { type: "SET_FILTER"; filter: GalleryFilter }
   | { type: "CYCLE_SIDEBAR" };
 
 export type AppInput = {
@@ -28,8 +22,6 @@ export type AppInput = {
 };
 
 function sameRoute(a: Route, b: Route): boolean {
-  if (a.name !== b.name) return false;
-  if (a.name === "gallery" || b.name === "gallery") return a.name === b.name;
   if (a.prototypeId !== b.prototypeId) return false;
   if (a.view.kind !== b.view.kind) return false;
   if (a.view.kind === "review" && b.view.kind === "review") return a.view.slug === b.view.slug;
@@ -58,7 +50,6 @@ export const appMachine = setup({
   context: ({ input }) => ({
     route: hashToRoute(input.hash || ""),
     menuOpen: false,
-    galleryFilter: "all",
     sidebarMode: "text",
   }),
   on: {
@@ -70,15 +61,6 @@ export const appMachine = setup({
             route,
             menuOpen: sameRoute(context.route, route) ? context.menuOpen : false,
           };
-        }),
-        "syncHash",
-      ],
-    },
-    GO_GALLERY: {
-      actions: [
-        assign({
-          route: { name: "gallery" },
-          menuOpen: false,
         }),
         "syncHash",
       ],
@@ -120,11 +102,6 @@ export const appMachine = setup({
     },
     CLOSE_MENU: {
       actions: assign({ menuOpen: false }),
-    },
-    SET_FILTER: {
-      actions: assign({
-        galleryFilter: ({ event }) => event.filter,
-      }),
     },
     CYCLE_SIDEBAR: {
       actions: assign({

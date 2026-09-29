@@ -3,14 +3,14 @@ import { guides, reviews } from "../content/library";
 import { useApp } from "../machine/AppState";
 import type { SidebarMode } from "../machine/appMachine";
 import { routeToHash, type View } from "../machine/routes";
-import { getPrototype, layoutLabels, type Prototype } from "../prototypes/catalog";
+import { getPrototype, layoutLabels, sitePrototypeId, type Prototype } from "../prototypes/catalog";
 import { NavLink } from "./NavLink";
 import { AboutView, GuideView, GuidesView, HomeView, PoemView, RelatedPosts, ReviewView, ReviewsView } from "./views";
 
 const internalNav: { label: string; view: View; match: View["kind"][]; icon: IconName }[] = [
   { label: "Home", view: { kind: "home" }, match: ["home"], icon: "home" },
-  { label: "Reviews", view: { kind: "reviews" }, match: ["reviews", "review"], icon: "book" },
-  { label: "Guides", view: { kind: "guides" }, match: ["guides", "guide"], icon: "guide" },
+  { label: "Book reviews", view: { kind: "reviews" }, match: ["reviews", "review"], icon: "book" },
+  { label: "Blog posts", view: { kind: "guides" }, match: ["guides", "guide"], icon: "guide" },
   { label: "About", view: { kind: "about" }, match: ["about"], icon: "about" },
 ];
 
@@ -96,13 +96,7 @@ function TopBar({
   return (
     <header className="topbar">
       <div className="topbar-global">
-        <NavLink className="back-link" href="#/" event={{ type: "GO_GALLERY" }}>
-          ← All prototypes
-        </NavLink>
-        <p className="proto-name">
-          <span className="proto-name-label">Viewing</span>
-          {prototype.name}
-        </p>
+        <p className="proto-name">{prototype.name}</p>
         <button
           type="button"
           className="menu-toggle"
@@ -147,13 +141,7 @@ function FloatingMenu({
       </button>
       {menuOpen ? <button type="button" className="float-scrim" aria-label="Close menu" onClick={onClose} /> : null}
       <div id="prototype-nav" className="float-panel" hidden={!menuOpen}>
-        <p className="proto-name">
-          <span className="proto-name-label">Viewing</span>
-          {prototype.name}
-        </p>
-        <NavLink className="back-link" href="#/" event={{ type: "GO_GALLERY" }}>
-          ← All prototypes
-        </NavLink>
+        <p className="proto-name">{prototype.name}</p>
         <nav className="proto-links float-links" aria-label={`${prototype.name} sections`}>
           <SectionLinks prototype={prototype} view={view} />
         </nav>
@@ -188,10 +176,6 @@ function SideBar({
       </button>
       {mode === "collapsed" ? null : (
         <nav className="sidebar-links" aria-label={`${prototype.name} sections`}>
-          <NavLink href="#/" event={{ type: "GO_GALLERY" }} title={iconOnly ? "All prototypes" : undefined}>
-            <Icon name="back" />
-            <span className={iconOnly ? "sr-only" : undefined}>All prototypes</span>
-          </NavLink>
           <SectionLinks prototype={prototype} view={view} withIcons iconOnly={iconOnly} />
         </nav>
       )}
@@ -233,9 +217,9 @@ export function PrototypeApp() {
   if (!prototype) {
     return (
       <main className="missing-shell">
-        <h1>That prototype is not on the table.</h1>
-        <NavLink href="#/" event={{ type: "GO_GALLERY" }}>
-          Back to all prototypes
+        <h1>That page is not on the shelf.</h1>
+        <NavLink href={`#/p/${sitePrototypeId}`} event={{ type: "OPEN_PROTOTYPE", prototypeId: sitePrototypeId }}>
+          Back home
         </NavLink>
       </main>
     );

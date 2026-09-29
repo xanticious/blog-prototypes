@@ -1,6 +1,6 @@
 ---
 slug: moby-dick
-title: "The Ship That Contains a World"
+title: "Book review: Moby-Dick"
 dek: "Melville’s whale book is a novel, a work manual, a sermon, and a joke that keeps going until it is not a joke. You do not have to love every chapter to feel the size of the hold."
 bookId: moby-dick
 published: "2026-02-14"

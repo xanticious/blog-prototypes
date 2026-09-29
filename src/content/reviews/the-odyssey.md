@@ -1,6 +1,6 @@
 ---
 slug: the-odyssey
-title: "Getting Home Is the Whole Story"
+title: "Book review: The Odyssey"
 dek: "Homer’s epic is an adventure catalogue only on the surface. Under the monsters is a poem about hospitality, disguise, and the slow work of recognizing someone who has been gone too long."
 bookId: the-odyssey
 published: "2026-03-28"

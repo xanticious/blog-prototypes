@@ -1,6 +1,6 @@
 ---
 slug: jane-eyre
-title: "A Voice That Will Not Shrink"
+title: "Book review: Jane Eyre"
 dek: "Charlotte Brontë gives a plain, employed, watchful girl the narrative authority usually reserved for heroes. The result is a novel about love that keeps insisting on terms."
 bookId: jane-eyre
 published: "2026-02-02"
