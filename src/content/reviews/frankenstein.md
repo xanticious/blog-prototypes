@@ -4,6 +4,7 @@ title: "The Creature Who Learned to Read"
 dek: "Mary Shelley’s novel is usually remembered for a lightning storm and a laboratory. The sharper terror is a rejected mind that learned language, sympathy, and then revenge."
 bookId: frankenstein
 published: "2026-01-20"
+spoilers: true
 ---
 
 *Frankenstein* begins far from the laboratory, on ice. A captain named Walton, hungry for glory and a little lonely, writes home about a man he has pulled aboard: Victor Frankenstein, already ruined, already chasing something across the pole. Shelley builds the book as a nest of voices. Walton tells his sister what Victor tells him, and Victor, at the center, must finally repeat what the creature told him on the mountain. By the time we reach the famous creation scene, we are already inside a story about who gets to narrate a life.
@@ -24,4 +25,14 @@ It is tempting to reduce the novel to a warning about technology. The warning is
 
 ## How to read it now
 
-Read the frame. Walton’s letters are not a porch you can skip. They show the hunger that makes Victor possible: the wish to be first, to be seen, to risk other people’s bodies for a story you can tell. Then read the creature’s months in the hovel as carefully as the night in the lab. Shelley was eighteen when she began this book, writing inside a conversation about galvanism, slavery, revolution, and what a creator owes the living. The lightning is the least of it. The lasting image is a student who will not stay to hear the first cry, and a pupil who learns to speak anyway.
+Read the frame. Walton’s letters are not a porch you can skip. A few things are worth keeping beside you:
+
+- Walton’s letters, which show the hunger that makes Victor possible.
+- The months in the hovel, read as carefully as the night in the lab.
+- The **half-made companion** Victor destroys and then calls prudence.
+
+Shelley was eighteen when she began this book, writing inside a conversation about galvanism, slavery, revolution, and what a creator owes the living. The lightning is the least of it. The lasting image is a student who will not stay to hear the first cry, and a pupil who learns to speak anyway.
+
+:::spoiler
+Victor dies on Walton’s ship, still urging the captain toward glory and then, at the last, telling him to turn back. The creature boards after the death, grieves the maker who rejected him, and promises to build his own funeral pyre at the northernmost end of the earth. Shelley gives him the book’s last eloquence. Walton, watching, chooses to go home.
+:::

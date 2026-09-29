@@ -2,17 +2,21 @@ import {
   excerpt,
   formatDate,
   getGuide,
+  getPoem,
   getReview,
+  guides,
+  poems,
   readingTime,
+  reviews,
   type Guide,
   type Review,
 } from "../content/library";
-import { routeToHash } from "../machine/routes";
-import { layoutLabels, moodLabels, type Prototype } from "../prototypes/catalog";
+import { routeToHash, type View } from "../machine/routes";
+import { layoutLabels, moodLabels, shellLabels, type Prototype } from "../prototypes/catalog";
 import { BookCover } from "./BookCover";
 import { MarkdownBody } from "./MarkdownBody";
 import { NavLink } from "./NavLink";
-import { GuidePiece, ReviewPiece } from "./PieceLink";
+import { GuidePiece, PoemPiece, ReviewPiece } from "./PieceLink";
 
 function Missing({
   prototype,
@@ -23,7 +27,7 @@ function Missing({
   prototype: Prototype;
   heading: string;
   label: string;
-  view: { kind: "reviews" } | { kind: "guides" };
+  view: View;
 }) {
   return (
     <div className="missing">
@@ -41,14 +45,14 @@ function Missing({
 
 export function HomeView({
   prototype,
-  reviews,
+  reviews: shelfReviews,
   guides,
 }: {
   prototype: Prototype;
   reviews: Review[];
   guides: Guide[];
 }) {
-  const featured = reviews[0];
+  const featured = shelfReviews[0];
   return (
     <div className="home">
       <header className="home-intro">
@@ -91,9 +95,14 @@ export function HomeView({
           On the shelf
         </h2>
         <ul className="piece-list">
-          {reviews.map((review, index) => (
+          {shelfReviews.map((review, index) => (
             <li key={review.slug}>
               <ReviewPiece prototype={prototype} review={review} index={index} />
+            </li>
+          ))}
+          {poems.map((poem, index) => (
+            <li key={poem.slug}>
+              <PoemPiece prototype={prototype} poem={poem} index={shelfReviews.length + index} />
             </li>
           ))}
         </ul>
@@ -122,7 +131,7 @@ export function ReviewsView({ prototype, reviews }: { prototype: Prototype; revi
         <h1>Essays on the books.</h1>
         <p className="lede">
           Twelve long reviews of books old enough to belong to everyone. The words stay the same in every
-          prototype; only the room changes.
+          prototype; only the room changes. A poem sits with them on the home shelf.
         </p>
       </header>
       <ul className="piece-list">
@@ -155,6 +164,7 @@ export function ReviewView({ prototype, slug }: { prototype: Prototype; slug: st
             On {review.book.title} by {review.book.author} · {review.book.year}
             <span> · {formatDate(review.published)} · {readingTime(review.body)}</span>
           </p>
+          {review.spoilers ? <p className="spoiler-warning">This review contains spoilers.</p> : null}
         </div>
       </div>
       <aside className="book-facts">
@@ -245,6 +255,98 @@ export function GuideView({ prototype, slug }: { prototype: Prototype; slug: str
   );
 }
 
+export function PoemView({ prototype, slug }: { prototype: Prototype; slug: string }) {
+  const poem = getPoem(slug);
+  if (!poem) {
+    return (
+      <Missing
+        prototype={prototype}
+        heading="That poem is not on the shelf."
+        label="Back home"
+        view={{ kind: "home" }}
+      />
+    );
+  }
+  return (
+    <article className="essay">
+      <div className="essay-top">
+        <BookCover bookId="margin-light" title={poem.title} author="A poem" size="md" />
+        <div>
+          <p className="kicker">Poem</p>
+          <h1>{poem.title}</h1>
+          <p className="dek">{poem.dek}</p>
+          <p className="byline">
+            {formatDate(poem.published)} · {readingTime(poem.body)}
+          </p>
+        </div>
+      </div>
+      <MarkdownBody body={poem.body} />
+      <p className="essay-foot">
+        <NavLink
+          href={routeToHash({ name: "prototype", prototypeId: prototype.id, view: { kind: "home" } })}
+          event={{ type: "OPEN_VIEW", view: { kind: "home" } }}
+        >
+          Back home
+        </NavLink>
+      </p>
+    </article>
+  );
+}
+
+type RelatedPost = {
+  key: string;
+  title: string;
+  meta: string;
+  view: View;
+};
+
+export function RelatedPosts({ prototype, current }: { prototype: Prototype; current: View }) {
+  const posts: RelatedPost[] = [
+    ...reviews.map((review) => ({
+      key: `review-${review.slug}`,
+      title: review.title,
+      meta: review.book.title,
+      view: { kind: "review" as const, slug: review.slug },
+    })),
+    ...poems.map((poem) => ({
+      key: `poem-${poem.slug}`,
+      title: poem.title,
+      meta: "Poem",
+      view: { kind: "poem" as const, slug: poem.slug },
+    })),
+    ...guides.map((guide) => ({
+      key: `guide-${guide.slug}`,
+      title: guide.title,
+      meta: "Reading guide",
+      view: { kind: "guide" as const, slug: guide.slug },
+    })),
+  ].filter((post) => {
+    if (current.kind === "review" && post.view.kind === "review") return post.view.slug !== current.slug;
+    if (current.kind === "guide" && post.view.kind === "guide") return post.view.slug !== current.slug;
+    if (current.kind === "poem" && post.view.kind === "poem") return post.view.slug !== current.slug;
+    return true;
+  });
+
+  return (
+    <aside className="related-panel" aria-label="Other posts">
+      <p className="rail-label">Other posts</p>
+      <ul>
+        {posts.map((post) => (
+          <li key={post.key}>
+            <NavLink
+              href={routeToHash({ name: "prototype", prototypeId: prototype.id, view: post.view })}
+              event={{ type: "OPEN_VIEW", view: post.view }}
+            >
+              <span className="related-title">{post.title}</span>
+              <span className="related-meta">{post.meta}</span>
+            </NavLink>
+          </li>
+        ))}
+      </ul>
+    </aside>
+  );
+}
+
 export function AboutView({ prototype }: { prototype: Prototype }) {
   return (
     <article className="essay about-essay">
@@ -263,6 +365,10 @@ export function AboutView({ prototype }: { prototype: Prototype }) {
         <p>
           <span>Layout</span>
           {layoutLabels[prototype.layout]}
+        </p>
+        <p>
+          <span>Navigation</span>
+          {shellLabels[prototype.shell]}
         </p>
         <p>
           <span>Type</span>

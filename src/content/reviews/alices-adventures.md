@@ -24,4 +24,10 @@ There is a thread of anxiety that the jokes do not cancel. Alice is afraid of di
 
 ## How to enjoy it without hunting symbols
 
-You can write a serious essay about Alice, and many people have. You can also read it aloud, which is how it began, as a story told on a boat to the real Alice Liddell. If you annotate, annotate the conversations, not just the creatures. Notice who interrupts, who demands a recitation, who changes a definition halfway through a sentence. Nonsense, in Carroll’s hands, is not the absence of rules. It is what rules sound like when they are no longer required to be fair. Alice gets to go home. The last paragraph, gently, reminds us that the sister left on the bank will grow up, and that the dream will become a story she tells. The book knows it is a book. That wink is part of its kindness.
+You can write a serious essay about Alice, and many people have. You can also read it aloud, which is how it began, as a story told on a boat to the real Alice Liddell. Three pleasures, if you do:
+
+1. The puns that refuse to stay decorations.
+2. The **rules that are enforced and unfair**, which is the book’s real nonsense.
+3. The kindness of getting to go home.
+
+If you annotate, annotate the conversations, not just the creatures. Notice who interrupts, who demands a recitation, who changes a definition halfway through a sentence. Nonsense, in Carroll’s hands, is not the absence of rules. It is what rules sound like when they are no longer required to be fair. Alice gets to go home. The last paragraph, gently, reminds us that the sister left on the bank will grow up, and that the dream will become a story she tells. The book knows it is a book. That wink is part of its kindness.

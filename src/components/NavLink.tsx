@@ -7,12 +7,14 @@ export function NavLink({
   event,
   current = false,
   className,
+  title,
   children,
 }: {
   href: string;
   event: AppEvent;
   current?: boolean;
   className?: string;
+  title?: string;
   children: ReactNode;
 }) {
   const { send } = useApp();
@@ -31,7 +33,7 @@ export function NavLink({
   };
 
   return (
-    <a href={href} className={className} aria-current={current ? "page" : undefined} onClick={onClick}>
+    <a href={href} className={className} title={title} aria-current={current ? "page" : undefined} onClick={onClick}>
       {children}
     </a>
   );

@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useMemo, type ReactNode } from "react";
 import { useMachine } from "@xstate/react";
-import { getGuide, getReview } from "../content/library";
+import { getGuide, getPoem, getReview } from "../content/library";
 import { getPrototype } from "../prototypes/catalog";
 import { appMachine, type AppEvent, type AppSnapshot } from "./appMachine";
 import { routeToHash, viewLabel } from "./routes";
@@ -24,6 +24,10 @@ function pageTitle(snapshot: AppSnapshot): string {
   if (route.view.kind === "guide") {
     const guide = getGuide(route.view.slug);
     return guide ? `${guide.title} — ${name}` : `${viewLabel(route.view)} — ${name}`;
+  }
+  if (route.view.kind === "poem") {
+    const poem = getPoem(route.view.slug);
+    return poem ? `${poem.title} — ${name}` : `${viewLabel(route.view)} — ${name}`;
   }
   if (route.view.kind === "home") return `${name} — Spine & Page`;
   return `${viewLabel(route.view)} — ${name}`;

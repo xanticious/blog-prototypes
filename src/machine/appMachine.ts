@@ -4,10 +4,13 @@ import { hashToRoute, routeToHash, type Route, type View } from "./routes";
 
 export type GalleryFilter = "all" | Mood;
 
+export type SidebarMode = "collapsed" | "icons" | "text";
+
 export type AppContext = {
   route: Route;
   menuOpen: boolean;
   galleryFilter: GalleryFilter;
+  sidebarMode: SidebarMode;
 };
 
 export type AppEvent =
@@ -17,7 +20,8 @@ export type AppEvent =
   | { type: "OPEN_VIEW"; view: View }
   | { type: "TOGGLE_MENU" }
   | { type: "CLOSE_MENU" }
-  | { type: "SET_FILTER"; filter: GalleryFilter };
+  | { type: "SET_FILTER"; filter: GalleryFilter }
+  | { type: "CYCLE_SIDEBAR" };
 
 export type AppInput = {
   hash: string;
@@ -30,6 +34,7 @@ function sameRoute(a: Route, b: Route): boolean {
   if (a.view.kind !== b.view.kind) return false;
   if (a.view.kind === "review" && b.view.kind === "review") return a.view.slug === b.view.slug;
   if (a.view.kind === "guide" && b.view.kind === "guide") return a.view.slug === b.view.slug;
+  if (a.view.kind === "poem" && b.view.kind === "poem") return a.view.slug === b.view.slug;
   return true;
 }
 
@@ -54,6 +59,7 @@ export const appMachine = setup({
     route: hashToRoute(input.hash || ""),
     menuOpen: false,
     galleryFilter: "all",
+    sidebarMode: "text",
   }),
   on: {
     HASH_CHANGED: {
@@ -118,6 +124,12 @@ export const appMachine = setup({
     SET_FILTER: {
       actions: assign({
         galleryFilter: ({ event }) => event.filter,
+      }),
+    },
+    CYCLE_SIDEBAR: {
+      actions: assign({
+        sidebarMode: ({ context }) =>
+          context.sidebarMode === "collapsed" ? "icons" : context.sidebarMode === "icons" ? "text" : "collapsed",
       }),
     },
   },

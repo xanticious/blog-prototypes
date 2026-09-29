@@ -1,10 +1,10 @@
 import { useApp } from "../machine/AppState";
 import type { GalleryFilter } from "../machine/appMachine";
-import { moodLabels, prototypes, type Mood } from "../prototypes/catalog";
+import { moodLabels, prototypes, shellLabels, type Mood } from "../prototypes/catalog";
 import { NavLink } from "./NavLink";
 
 const filters: { id: GalleryFilter; label: string }[] = [
-  { id: "all", label: "All twenty" },
+  { id: "all", label: "All twenty-one" },
   { id: "literary", label: moodLabels.literary },
   { id: "dark", label: moodLabels.dark },
   { id: "editorial", label: moodLabels.editorial },
@@ -25,7 +25,7 @@ export function Gallery() {
       </a>
       <header className="gallery-hero">
         <p className="gallery-kicker">A static studio for a book blog</p>
-        <h1>Twenty ways to keep a shelf.</h1>
+        <h1>Twenty-one ways to keep a shelf.</h1>
         <p className="gallery-lede">
           Spine &amp; Page is a set of prototypes for a blog about books: reviews, reading guides, and the
           quiet work of paying attention. Every prototype holds the same essays, so you can compare type,
@@ -34,7 +34,7 @@ export function Gallery() {
         </p>
         <p className="gallery-note">
           New to writing reviews? The plain-language guide is in <code>design/getting-started.md</code>. The
-          notes for these twenty designs are in <code>design/prototypes.md</code>.
+          notes for these twenty-one designs are in <code>design/prototypes.md</code>.
         </p>
       </header>
 
@@ -91,6 +91,7 @@ export function Gallery() {
               <span className="card-tags">
                 <span>{moodLabels[prototype.mood as Mood]}</span>
                 <span>{prototype.layout}</span>
+                <span>{shellLabels[prototype.shell]}</span>
               </span>
             </NavLink>
           </li>

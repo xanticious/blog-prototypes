@@ -4,9 +4,10 @@ title: "The Private Cost of Public History"
 dek: "Dickens opens with the most balanced sentence in English and then spends a novel tipping the scale: London and Paris, mercy and vengeance, a wastrel and a seamstress, a name used twice."
 bookId: tale-of-two-cities
 published: "2026-04-26"
+spoilers: true
 ---
 
-“It was the best of times, it was the worst of times.” Charles Dickens begins *A Tale of Two Cities* with a paragraph that can be recited by people who have not read the book. The paragraph earns its fame. It is a machine for holding contradiction, and the novel that follows is contradiction practiced at the scale of two capitals. London muddles along. Paris ignites. A doctor, destroyed by a letter he was imprisoned for, is “recalled to life.” A young woman raised in exile learns she has a father. A man who has wasted his talents decides, very late, to spend them.
+“It was the best of times, it was the worst of times.” Charles Dickens begins *A Tale of Two Cities* with a paragraph that can be recited by people who have not read the book. The paragraph earns its fame. It is a machine for holding contradiction, and the novel that follows is contradiction practiced at the scale of two capitals. London muddles along. Paris ignites. A doctor, destroyed by a letter he was imprisoned for, is **recalled to life**. A young woman raised in exile learns she has a father. A man who has wasted his talents decides, very late, to spend them.
 
 This is Dickens in a tighter cut than the doorstop comedies. There are fewer wandering subplots, and the symbols repeat until they sound like a bell: footsteps, wine, knitting, a grave, a cart. The repetition is the design. History, in this book, is what happens when private injuries are copied onto a crowd.
 
@@ -25,3 +26,7 @@ Carton’s last act is so famous it can eclipse the book’s better question: wh
 ## A reading note
 
 Keep the two families straight, and do not be ashamed of a pencil. The book’s coincidences are real; Dickens liked a design you can see. Under the design is a hard thought about political violence. He grants the oppressed their fury and then refuses to sanctify a machine that no longer distinguishes. The paired sentences of the opening are a promise the last page keeps: a time can be two things at once, and a single life can still choose which sentence it will finish.
+
+:::spoiler
+Sydney Carton takes Charles Darnay’s place at the guillotine, buying the other man’s life with a face similar enough to pass. The famous last lines are his, imagined rather than spoken, walking toward a death that finally spends the talents he had wasted. Dickens asks you to find that sacrifice moving, and he builds the whole second half of the book so that you might.
+:::

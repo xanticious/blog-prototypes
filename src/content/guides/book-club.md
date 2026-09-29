@@ -5,7 +5,7 @@ dek: "A good book conversation is hosted, not performed. A few questions prepare
 published: "2026-04-02"
 ---
 
-Book clubs die of two causes: nobody finished the book, or one person talks as if the living room were a panel. Both are solvable. You do not need a syllabus, a themed snack, or a theory of the novel. You need a shared stretch of pages, a start time, and questions that more than one kind of reader can answer.
+Book clubs die of two causes: nobody finished the book, or one person talks as if the living room were a *panel*. Both are solvable. You do not need a syllabus, a themed snack, or a theory of the novel. You need a shared stretch of pages, a start time, and questions that more than one kind of reader can answer.
 
 ## Before the meeting
 
