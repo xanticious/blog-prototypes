@@ -92,7 +92,7 @@ This is the right choice if you never want to see a file. It is a weaker choice 
 
 MDX is Markdown that can also contain little islands of website code (a custom pull-quote, an audio player, a spoiler box). Markdoc, used by some documentation sites, is a cousin with stricter rules.
 
-These are wonderful when a developer is building custom components and a writer is willing to type a few tags. They are a bad first step. A book review rarely needs a component. It needs paragraphs. This project stays with ordinary Markdown so a new essay cannot accidentally break the page.
+These are wonderful when a developer is building custom components and a writer is willing to type a few tags. They are a bad first step. A book review rarely needs a component. It needs paragraphs. This project stays with ordinary Markdown, plus two small fences the viewer already understands: `:::spoiler` for a collapsed block, and `:::verse` for a poem’s line breaks. A new essay cannot accidentally embed a program.
 
 ### Writing the essay inside the program
 
@@ -107,7 +107,7 @@ Here is the whole loop, from “I finished a book” to “it is on the site.”
 3. **Add the book, if it is new.** Open `src/content/books.ts`. Copy one of the existing book blocks and fill in an id (lowercase, hyphens), title, author, year, and genre. The id is how a review finds its cover.
 4. **Add a cover, if you want one.** Open `src/components/BookCover.tsx`. Each book has colors, a short title broken over a line or two, and a simple drawing. Copy a block, change the colors, and pick a motif. The drawings are original jacket designs, not reproductions of published covers, so you are not borrowing someone else’s artwork.
 5. **Write the review.** Create a new file in `src/content/reviews/`. The name can match the slug. Copy the front matter pattern above. Write the essay in Markdown underneath. Save.
-6. **Look at it in more than one prototype.** The home page of the app is a table of twenty designs. Open two or three. The words should be the same. If a paragraph looks bad in only one design, that is a design problem, not a writing problem.
+6. **Look at it in more than one prototype.** The home page of the app is a table of twenty-one designs. Open two or three. The words should be the same. If a paragraph looks bad in only one design, that is a design problem, not a writing problem.
 7. **Write a guide the same way,** in `src/content/guides/`, if the piece is a tutorial rather than a review. Guides do not need a `bookId`.
 8. **Check that the site still builds.** Run `npm run build`. This is the same command GitHub will run. If it complains about missing front matter, the message names the file.
 9. **Save the change in Git.** Git is a history of the folder. The usual three commands are `git add`, `git commit`, and `git push`. A commit is a labeled snapshot. Push sends that snapshot to GitHub.
@@ -127,7 +127,7 @@ This repository is one option. It is not the simplest, and it is not the only go
 | Hugo | Markdown in, a very fast site out | A large archive of reviews | The template language is its own dialect. |
 | Eleventy (11ty) | Markdown plus small templates | A personal site you want to understand end to end | You assemble the design yourself, which is also the joy of it. |
 | Astro | A modern static-site tool that likes content folders | You want components, but only a little application behavior | A programmer should set it up. Writers can still live in Markdown. |
-| This project | A React app with twenty designs and a hash address | You want to compare custom looks, with a developer friend nearby | Heavier than a blog needs to be once you have chosen one look. |
+| This project | A React app with twenty-one designs and a hash address | You want to compare custom looks, with a developer friend nearby | Heavier than a blog needs to be once you have chosen one look. |
 
 Jekyll, Hugo, Eleventy, and Astro are all “static site generators.” You write Markdown. A command turns the folder into HTML, which is the language browsers already understand. GitHub Pages can host the result. For a finished book blog, one of those generators is often the calmer long-term home. This React project exists so you can see many designs before you choose, and so a custom version is possible if you want the site to behave like a small application.
 
@@ -140,7 +140,7 @@ You can split the work cleanly.
 - Which books get written about, and in what order.
 - The essays and the guides, as Markdown.
 - The tone: a classroom, a diary, a magazine, a scrapbook.
-- The decision about which of the twenty prototypes feels like the site you would actually keep.
+- The decision about which of the twenty-one prototypes feels like the site you would actually keep.
 
 **A developer can own:**
 
@@ -154,7 +154,7 @@ Custom does not mean “invent a new system from a blank file.” Reasonable cus
 1. **Use a generator and a theme.** Jekyll or Hugo, a theme you both like, Markdown for every post. Fastest way to a real blog. Least like a designed object.
 2. **Use Astro or Eleventy and design one layout.** Your friend builds a single reading page. You never think about components. This is the best “we want it to feel like ours” path for most pairs.
 3. **Keep this project and pick one prototype.** The navigation, the content folder, and the GitHub Pages setup are already here. Your friend removes the gallery when you have chosen, and keeps the XState hash router. Do this if you liked one of these rooms and want to stay in it.
-4. **Treat the twenty as sketches and build a twenty-first.** Use `design/prototypes.md` as the brief. Your friend copies a layout, changes the fonts and colors, and you react to a real page full of real essays instead of a mood board.
+4. **Treat the set as sketches and build one more.** Use `design/prototypes.md` as the brief. Your friend copies a layout, changes the fonts and colors, and you react to a real page full of real essays instead of a mood board.
 
 What you should not do, early, is design a login system, a commenting platform, and a custom database. A book blog can be a stack of pages. Comments can be an email link. Subscriptions can be a newsletter you add when strangers are actually reading.
 

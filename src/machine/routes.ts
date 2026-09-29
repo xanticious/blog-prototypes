@@ -6,6 +6,7 @@ export type View =
   | { kind: "review"; slug: string }
   | { kind: "guides" }
   | { kind: "guide"; slug: string }
+  | { kind: "poem"; slug: string }
   | { kind: "about" };
 
 export type Route =
@@ -33,6 +34,9 @@ export function hashToRoute(hash: string): Route {
   if (section === "guides") {
     return { name: "prototype", prototypeId, view: { kind: "guides" } };
   }
+  if (section === "poems" && slug) {
+    return { name: "prototype", prototypeId, view: { kind: "poem", slug } };
+  }
   if (section === "about") {
     return { name: "prototype", prototypeId, view: { kind: "about" } };
   }
@@ -53,6 +57,8 @@ export function routeToHash(route: Route): string {
       return `${base}/guides`;
     case "guide":
       return `${base}/guides/${encodeURIComponent(route.view.slug)}`;
+    case "poem":
+      return `${base}/poems/${encodeURIComponent(route.view.slug)}`;
     case "about":
       return `${base}/about`;
   }
@@ -70,6 +76,8 @@ export function viewLabel(view: View): string {
       return "Reading guides";
     case "guide":
       return "Guide";
+    case "poem":
+      return "Poem";
     case "about":
       return "About this design";
   }

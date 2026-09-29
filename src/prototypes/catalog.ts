@@ -11,7 +11,10 @@ export type LayoutId =
   | "manuscript"
   | "grid"
   | "scatter"
-  | "index";
+  | "index"
+  | "tiles";
+
+export type ShellId = "sticky" | "static" | "hamburger" | "sidebar";
 
 export type Palette = {
   bg: string;
@@ -32,6 +35,8 @@ export type Prototype = {
   mood: Mood;
   layout: LayoutId;
   tone: "light" | "dark";
+  shell: ShellId;
+  relatedPosts?: boolean;
   displayFont: string;
   textFont: string;
   sansFont: string;
@@ -62,9 +67,45 @@ export const layoutLabels: Record<LayoutId, string> = {
   grid: "Modular grid",
   scatter: "Scattered notes",
   index: "Quiet index",
+  tiles: "Cover tiles",
+};
+
+export const shellLabels: Record<ShellId, string> = {
+  sticky: "Sticky top bar",
+  static: "Static top bar",
+  hamburger: "Floating menu",
+  sidebar: "Side bar",
 };
 
 export const prototypes: Prototype[] = [
+  {
+    id: "window-seat",
+    name: "Window Seat",
+    tagline: "A tiled shelf, and then just the page.",
+    description:
+      "Reading Nook’s clay and cream, covers packed like an Instagram grid, and Chapbook’s quiet measure once an essay opens — with the jacket kept beside the title.",
+    about:
+      "Window Seat borrows three rooms and refuses to blend them into a fourth costume. The colors are Reading Nook’s: clay, sage-brown, and a lamp-warm surface. The home page is a tight grid of covers, the way Storybook Hour trusts the jacket to be the picture, only squared and edge to edge. The type is Chapbook’s EB Garamond, and the essay page is that same narrow, centered column — except the cover stays, because a tile that led you here should still be in the room. The top bar stays put, the way those three prototypes already do.",
+    mood: "cozy",
+    layout: "tiles",
+    tone: "light",
+    shell: "sticky",
+    displayFont: '"EB Garamond", serif',
+    textFont: '"EB Garamond", serif',
+    sansFont: '"EB Garamond", serif',
+    monoFont: '"IBM Plex Mono", monospace',
+    fontLabel: "EB Garamond",
+    palette: {
+      bg: "#f3e6d4",
+      ink: "#3a261c",
+      muted: "#6d5144",
+      accent: "#c4653a",
+      accentInk: "#fff8f2",
+      surface: "#fff8ef",
+      rule: "#e2cbb3",
+    },
+    featuredSlug: "jane-eyre",
+  },
   {
     id: "inkwell",
     name: "Inkwell",
@@ -75,6 +116,8 @@ export const prototypes: Prototype[] = [
     mood: "literary",
     layout: "column",
     tone: "light",
+    shell: "sticky",
+    relatedPosts: true,
     displayFont: '"Fraunces", serif',
     textFont: '"Source Serif 4", serif',
     sansFont: '"Public Sans", sans-serif',
@@ -101,6 +144,8 @@ export const prototypes: Prototype[] = [
     mood: "dark",
     layout: "stacks",
     tone: "dark",
+    shell: "static",
+    relatedPosts: true,
     displayFont: '"Cormorant Garamond", serif',
     textFont: '"Cormorant Garamond", serif',
     sansFont: '"Outfit", sans-serif',
@@ -127,6 +172,7 @@ export const prototypes: Prototype[] = [
     mood: "educational",
     layout: "rail",
     tone: "light",
+    shell: "hamburger",
     displayFont: '"Literata", serif',
     textFont: '"Literata", serif',
     sansFont: '"Public Sans", sans-serif',
@@ -153,6 +199,7 @@ export const prototypes: Prototype[] = [
     mood: "editorial",
     layout: "broadsheet",
     tone: "light",
+    shell: "static",
     displayFont: '"Newsreader", serif',
     textFont: '"Newsreader", serif',
     sansFont: '"Archivo", sans-serif',
@@ -173,12 +220,13 @@ export const prototypes: Prototype[] = [
     id: "chapbook",
     name: "Chapbook",
     tagline: "Almost nothing but the words.",
-    description: "A small-press page: huge margins, no cards, titles set like a pamphlet. The quietest of the twenty.",
+    description: "A small-press page: huge margins, no cards, titles set like a pamphlet. The quietest of the set.",
     about:
       "Chapbook assumes the reader came to read. EB Garamond is an old-style face with a small x-height, set with generous line height. There is no accent color worth mentioning. If a decoration does not help you find the next essay, it is not on the page. Choose this when you want the prototypes to include a near-minimum.",
     mood: "literary",
     layout: "column",
     tone: "light",
+    shell: "sticky",
     displayFont: '"EB Garamond", serif',
     textFont: '"EB Garamond", serif',
     sansFont: '"EB Garamond", serif',
@@ -205,6 +253,7 @@ export const prototypes: Prototype[] = [
     mood: "cozy",
     layout: "cards",
     tone: "light",
+    shell: "sticky",
     displayFont: '"Lora", serif',
     textFont: '"Lora", serif',
     sansFont: '"Nunito", sans-serif',
@@ -231,6 +280,7 @@ export const prototypes: Prototype[] = [
     mood: "editorial",
     layout: "folio",
     tone: "light",
+    shell: "sidebar",
     displayFont: '"Bodoni Moda", serif',
     textFont: '"Bodoni Moda", serif',
     sansFont: '"Jost", sans-serif',
@@ -257,6 +307,7 @@ export const prototypes: Prototype[] = [
     mood: "literary",
     layout: "catalog",
     tone: "light",
+    shell: "sidebar",
     displayFont: '"Libre Baskerville", serif',
     textFont: '"Libre Baskerville", serif',
     sansFont: '"Public Sans", sans-serif',
@@ -283,6 +334,7 @@ export const prototypes: Prototype[] = [
     mood: "dark",
     layout: "column",
     tone: "dark",
+    shell: "static",
     displayFont: '"Spectral", serif',
     textFont: '"Spectral", serif',
     sansFont: '"Outfit", sans-serif',
@@ -309,6 +361,7 @@ export const prototypes: Prototype[] = [
     mood: "literary",
     layout: "manuscript",
     tone: "light",
+    shell: "hamburger",
     displayFont: '"Courier Prime", monospace',
     textFont: '"Courier Prime", monospace',
     sansFont: '"Courier Prime", monospace',
@@ -335,6 +388,7 @@ export const prototypes: Prototype[] = [
     mood: "cozy",
     layout: "cards",
     tone: "light",
+    shell: "hamburger",
     displayFont: '"Crimson Pro", serif',
     textFont: '"Crimson Pro", serif',
     sansFont: '"Nunito", sans-serif',
@@ -361,6 +415,7 @@ export const prototypes: Prototype[] = [
     mood: "editorial",
     layout: "folio",
     tone: "light",
+    shell: "static",
     displayFont: '"Fraunces", serif',
     textFont: '"Source Serif 4", serif',
     sansFont: '"Outfit", sans-serif',
@@ -387,6 +442,7 @@ export const prototypes: Prototype[] = [
     mood: "dark",
     layout: "column",
     tone: "dark",
+    shell: "hamburger",
     displayFont: '"Playfair Display", serif',
     textFont: '"Playfair Display", serif',
     sansFont: '"Jost", sans-serif',
@@ -413,6 +469,7 @@ export const prototypes: Prototype[] = [
     mood: "educational",
     layout: "rail",
     tone: "light",
+    shell: "sticky",
     displayFont: '"Source Serif 4", serif',
     textFont: '"Source Serif 4", serif',
     sansFont: '"Source Sans 3", sans-serif',
@@ -439,6 +496,7 @@ export const prototypes: Prototype[] = [
     mood: "literary",
     layout: "column",
     tone: "light",
+    shell: "static",
     displayFont: '"Cormorant Garamond", serif',
     textFont: '"Cardo", serif',
     sansFont: '"Jost", sans-serif',
@@ -465,6 +523,7 @@ export const prototypes: Prototype[] = [
     mood: "educational",
     layout: "rail",
     tone: "light",
+    shell: "hamburger",
     displayFont: '"Alegreya", serif',
     textFont: '"Alegreya", serif',
     sansFont: '"Outfit", sans-serif',
@@ -491,6 +550,7 @@ export const prototypes: Prototype[] = [
     mood: "playful",
     layout: "cards",
     tone: "light",
+    shell: "sticky",
     displayFont: '"Fraunces", serif',
     textFont: '"Nunito", sans-serif',
     sansFont: '"Nunito", sans-serif',
@@ -517,6 +577,8 @@ export const prototypes: Prototype[] = [
     mood: "editorial",
     layout: "grid",
     tone: "light",
+    shell: "sidebar",
+    relatedPosts: true,
     displayFont: '"Syne", sans-serif',
     textFont: '"Archivo", sans-serif',
     sansFont: '"Archivo", sans-serif',
@@ -543,6 +605,7 @@ export const prototypes: Prototype[] = [
     mood: "playful",
     layout: "scatter",
     tone: "light",
+    shell: "sidebar",
     displayFont: '"Libre Baskerville", serif',
     textFont: '"Libre Baskerville", serif',
     sansFont: '"Patrick Hand", cursive',
@@ -565,10 +628,11 @@ export const prototypes: Prototype[] = [
     tagline: "A list, a number, and no ceremony.",
     description: "Swiss-ish and nearly silent. Every essay is a row: number, title, author, year. The fastest way to compare the shelf.",
     about:
-      "Quiet Index is the control group. Manrope, a plain contemporary sans, does almost everything, with Newsreader appearing only inside the essay so long reading still has a book face. Rows instead of cards. An olive accent, used sparingly. If you are comparing the twenty prototypes, look at this one last: it shows how little interface a blog actually needs.",
+      "Quiet Index is the control group. Manrope, a plain contemporary sans, does almost everything, with Newsreader appearing only inside the essay so long reading still has a book face. Rows instead of cards. An olive accent, used sparingly. If you are comparing the full set, look at this one last: it shows how little interface a blog actually needs.",
     mood: "literary",
     layout: "index",
     tone: "light",
+    shell: "sidebar",
     displayFont: '"Manrope", sans-serif',
     textFont: '"Newsreader", serif',
     sansFont: '"Manrope", sans-serif',

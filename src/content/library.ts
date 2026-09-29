@@ -7,10 +7,19 @@ export type Review = {
   bookId: string;
   book: Book;
   published: string;
+  spoilers: boolean;
   body: string;
 };
 
 export type Guide = {
+  slug: string;
+  title: string;
+  dek: string;
+  published: string;
+  body: string;
+};
+
+export type Poem = {
   slug: string;
   title: string;
   dek: string;
@@ -33,6 +42,12 @@ const reviewFiles = import.meta.glob("./reviews/*.md", {
 });
 
 const guideFiles = import.meta.glob("./guides/*.md", {
+  query: "?raw",
+  import: "default",
+  eager: true,
+});
+
+const poemFiles = import.meta.glob("./poems/*.md", {
   query: "?raw",
   import: "default",
   eager: true,
@@ -82,6 +97,7 @@ function loadReviews(): Review[] {
         bookId,
         book,
         published: requireField(data, "published", file),
+        spoilers: data.spoilers === "true",
         body,
       };
       return review;
@@ -105,11 +121,29 @@ function loadGuides(): Guide[] {
     .sort((a, b) => a.published.localeCompare(b.published));
 }
 
+function loadPoems(): Poem[] {
+  return Object.entries(poemFiles)
+    .map(([file, raw]) => {
+      const { data, body } = parseFrontmatter(String(raw), file);
+      const poem: Poem = {
+        slug: data.slug || file,
+        title: requireField(data, "title", file),
+        dek: requireField(data, "dek", file),
+        published: requireField(data, "published", file),
+        body,
+      };
+      return poem;
+    })
+    .sort((a, b) => a.published.localeCompare(b.published));
+}
+
 export const reviews: Review[] = loadReviews();
 export const guides: Guide[] = loadGuides();
+export const poems: Poem[] = loadPoems();
 
 const reviewsBySlug = new Map(reviews.map((review) => [review.slug, review]));
 const guidesBySlug = new Map(guides.map((guide) => [guide.slug, guide]));
+const poemsBySlug = new Map(poems.map((poem) => [poem.slug, poem]));
 
 export function getReview(slug: string): Review | undefined {
   return reviewsBySlug.get(slug);
@@ -117,6 +151,10 @@ export function getReview(slug: string): Review | undefined {
 
 export function getGuide(slug: string): Guide | undefined {
   return guidesBySlug.get(slug);
+}
+
+export function getPoem(slug: string): Poem | undefined {
+  return poemsBySlug.get(slug);
 }
 
 export function readingTime(body: string): string {
@@ -129,7 +167,7 @@ export function excerpt(body: string, max = 240): string {
   const paragraph = body
     .split(/\n\n+/)
     .map((block) => block.trim())
-    .find((block) => block && !block.startsWith("#") && !block.startsWith(">"));
+    .find((block) => block && !block.startsWith("#") && !block.startsWith(">") && !block.startsWith(":::"));
   if (!paragraph) return "";
   const clean = paragraph.replace(/[*_]/g, "");
   if (clean.length <= max) return clean;

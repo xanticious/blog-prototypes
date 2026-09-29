@@ -26,4 +26,10 @@ Van Helsing can sound, to a contemporary ear, like a trunk of proverbs with a cr
 
 ## Reading the file
 
-Try not to hunt only for the famous scenes: the mirror, the wolves, the nocturnal visits. Read the cutting-in of voices. Notice who is believed, who keeps the minutes, and how a group of people builds a chronology strong enough to act on. *Dracula* is a gothic novel with the soul of a case file. The monster is old. The method of fighting him is a stack of papers, passed from hand to hand, read aloud in a room before morning.
+Try not to hunt only for the famous scenes: the mirror, the wolves, the nocturnal visits. The case file is built from ordinary tools:
+
+- Shorthand journals, and a solicitor’s trained eye.
+- Medical notes, a phonograph, and railway timetables.
+- **Mina’s index**, which turns a pile of papers into a plan.
+
+Read the cutting-in of voices. Notice who is believed, who keeps the minutes, and how a group of people builds a chronology strong enough to act on. *Dracula* is a gothic novel with the soul of a case file. The monster is old. The method of fighting him is a stack of papers, passed from hand to hand, read aloud in a room before morning.

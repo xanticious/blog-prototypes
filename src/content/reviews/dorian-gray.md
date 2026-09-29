@@ -4,6 +4,7 @@ title: "A Portrait That Keeps the Score"
 dek: "Oscar Wilde’s novel gives a beautiful man a magical way to hide the cost of his life. The portrait in the schoolroom becomes a ledger, and the ledger does not do aesthetics."
 bookId: dorian-gray
 published: "2026-04-16"
+spoilers: true
 ---
 
 Basil Hallward does not want to exhibit the portrait. He says it has too much of himself in it. Lord Henry Wotton sees the same canvas and begins, almost idly, to talk a young man into a philosophy. Dorian Gray listens, beautiful and unfinished, and makes a wish that the painting will age instead of him. Oscar Wilde then writes a novel about influence: how a sentence dropped in a studio can become a life, and how a life that refuses to show its damage will store the damage somewhere else.
@@ -26,4 +27,8 @@ Wilde added a preface of aphorisms after the first public storm over the novel. 
 
 Watch the rooms. The studio, the theater, the club, the country house, the locked schoolroom: each is a different rule for who Dorian gets to be. Watch Lord Henry’s laziness. He rarely does the worst things himself. He talks, and then he is elsewhere. The novel understands a particular kind of harm that arrives dressed as conversation, from a person who will claim he was only being interesting.
 
-The last pages are gothic in the old sense: a body, a knife, a picture restored. They work because the talk came first. Wilde does not ask us to hate beauty. He asks us to notice a man who wanted beauty to be a passport out of consequence, and a canvas that kept the accounts anyway.
+The last pages are gothic in the old sense: a body, a knife, a picture restored. They work because the talk came first. Wilde does not ask us to hate beauty. He asks us to notice a man who wanted beauty to be a passport out of consequence, and a canvas that **kept the accounts** anyway.
+
+:::spoiler
+Dorian stabs the portrait, meaning to destroy the record. The servants find him dead on the floor, aged and unrecognizable, with a knife in his heart, while the portrait hangs young and unmarked again. Wilde gives the last image to the picture, not to the alibi.
+:::

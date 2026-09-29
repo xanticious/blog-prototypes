@@ -24,4 +24,10 @@ The so-called whale chapters — cetology, the anatomy of the head, the rope, th
 
 ## A way in
 
-You do not have to read *Moby-Dick* at a sprint, and you do not have to pretend every digression delights you. Read Ishmael’s beginning until you trust him. Read “The Quarter-Deck” aloud if you can. Then let the ship’s labor be part of the plot, not a pause in it. The ending is swift because the middle was vast. A ship organized around one man’s metaphor runs out of world. The ocean, which never agreed to be a metaphor, remains.
+You do not have to read *Moby-Dick* at a sprint, and you do not have to pretend every digression delights you. If you want a path through the hold:
+
+- Trust Ishmael’s beginning before you trust the captain.
+- Read **“The Quarter-Deck”** aloud if you can.
+- Let the chapters about work count as plot, not as delay.
+
+The ending is swift because the middle was vast. A ship organized around one man’s metaphor runs out of world. The ocean, which never agreed to be a metaphor, remains.

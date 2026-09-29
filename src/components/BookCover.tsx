@@ -10,7 +10,8 @@ type Motif =
   | "rabbit"
   | "frame"
   | "scales"
-  | "mill";
+  | "mill"
+  | "lamp";
 
 type Jacket = {
   bg: string;
@@ -131,6 +132,15 @@ const jackets: Record<string, Jacket> = {
     author: "Miguel de Cervantes",
     motif: "mill",
   },
+  "margin-light": {
+    bg: "#c4653a",
+    panel: "#fff8ef",
+    ink: "#3a261c",
+    accent: "#6d5144",
+    lines: ["Margin", "Light"],
+    author: "A poem",
+    motif: "lamp",
+  },
 };
 
 function Motif({ motif, ink, accent }: { motif: Motif; ink: string; accent: string }) {
@@ -230,6 +240,15 @@ function Motif({ motif, ink, accent }: { motif: Motif; ink: string; accent: stri
           <path d="M100 74 L100 48 M100 74 L126 86 M100 74 L74 86 M100 74 L100 100" />
         </g>
       );
+    case "lamp":
+      return (
+        <g fill="none" stroke={ink} strokeWidth="2">
+          <path d="M78 112 H122" />
+          <path d="M100 112 V80" />
+          <path d="M68 80 H132 L122 58 H78 Z" fill={accent} />
+          <path d="M86 58 C90 44 110 44 114 58" />
+        </g>
+      );
   }
 }
 
@@ -242,7 +261,7 @@ export function BookCover({
   bookId: string;
   title: string;
   author: string;
-  size?: "sm" | "md" | "lg";
+  size?: "sm" | "md" | "lg" | "tile";
 }) {
   const jacket = jackets[bookId] ?? {
     bg: "#333",
@@ -258,6 +277,7 @@ export function BookCover({
     <svg
       className={`cover cover-${size}`}
       viewBox="0 0 200 300"
+      preserveAspectRatio={size === "tile" ? "xMidYMid slice" : undefined}
       role="img"
       aria-label={`Cover of ${title} by ${author}`}
     >

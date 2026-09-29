@@ -24,4 +24,10 @@ Some of the jokes are rough. Quixote is beaten. Sancho is tossed in a blanket. P
 
 ## Why it still feels new
 
-*Don Quixote* is often called the first modern novel because it is so interested in how stories get into a head and then into a landscape. You can read it for the set pieces, and you should: the windmills, the galley slaves, the cave, the puppet show. Then keep an eye on the conversations between battles, when two men ride slowly and talk about what they are doing as if talking might make a shape of it. Quixote’s deathbed renunciation is sober. Whether you take it as a cure or as a loss says a lot about what you think fiction is for. Cervantes, sly to the end, has already made the stronger case. He shows a reader so changed by books that the world has to reorganize itself around him — not always kindly, not always falsely, and never again as if stories were only ink.
+*Don Quixote* is often called the first modern novel because it is so interested in how stories get into a head and then into a landscape. You can read it for the set pieces, and you should:
+
+- The windmills, and the dignity that survives them.
+- Sancho’s **fake island**, where a supposedly simple man judges with mercy.
+- The conversations between battles, which are the novel’s modern weather.
+
+Then keep an eye on those conversations, when two men ride slowly and talk about what they are doing as if talking might make a shape of it. Quixote’s deathbed renunciation is sober. Whether you take it as a cure or as a loss says a lot about what you think fiction is for. Cervantes, sly to the end, has already made the stronger case. He shows a reader so changed by books that the world has to reorganize itself around him — not always kindly, not always falsely, and never again as if stories were only ink.

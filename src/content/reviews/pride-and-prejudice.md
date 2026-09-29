@@ -4,11 +4,12 @@ title: "The Intelligence of Manners"
 dek: "Jane Austen’s novel is not a soft painting of country life. It is a precise instrument for measuring how people hide, flirt, misread, and revise themselves."
 bookId: pride-and-prejudice
 published: "2026-01-12"
+spoilers: true
 ---
 
 The first sentence of *Pride and Prejudice* is so familiar that it can sound like a proverb instead of a joke. “It is a truth universally acknowledged, that a single man in possession of a good fortune, must be in want of a wife.” Read it again, slowly, and you can hear the neighborhood talking. Austen is not announcing a law of nature. She is imitating the way a small community turns a rich newcomer into a plot.
 
-That is the book’s real subject: interpretation. Elizabeth Bennet is charming because she is quick, and she is in danger for the same reason. She trusts her first reading of a room. Mr. Darcy, at the Meryton assembly, is stiff, proud, and apparently unwilling to dance with her. Wickham, by contrast, arrives with an injured story and an easy manner. Elizabeth knows how to rank them. The novel’s long middle is the record of that ranking coming apart.
+That is the book’s real subject: interpretation. Elizabeth Bennet is charming because she is quick, and she is in danger for the same reason. She trusts her first reading of a room. Mr. Darcy, at the Meryton assembly, is stiff, proud, and apparently unwilling to dance with her. Wickham, by contrast, arrives with an injured story and an easy manner. Elizabeth knows how to rank them. The novel’s long middle is the record of that ranking **coming apart**.
 
 ## A comedy with a moral instrument
 
@@ -23,6 +24,10 @@ Elizabeth’s prejudice is attractive because it feels like integrity. She will 
 The hinge of the book is a letter. After Elizabeth refuses him, Darcy writes the account of Wickham that speech could not carry in a drawing room. Austen makes us sit with Elizabeth while she rereads. The first time through, Elizabeth is hunting for phrases she can still despise. The second time, she is stuck with facts. This is one of the great scenes of reading in English fiction: a character discovering that her wit has been used as a shield.
 
 It is worth noticing what Austen does not do. She does not humiliate Elizabeth in public. The correction is private, which is why it can last. By the time Elizabeth walks the galleries at Pemberley and hears the housekeeper praise Darcy, the novel has taught us to distrust charm and also to distrust our own satisfying dislike.
+
+:::spoiler
+Lydia does run off with Wickham, and the marriage that repairs the scandal is bought with Darcy’s money and effort, which Elizabeth learns only later. The novel ends with Elizabeth and Darcy engaged, Lady Catherine defied, and the neighborhood adjusting its story to a fortune it can finally approve. The joke of the first sentence gets its answer, and Austen lets you hear how expensive the answer was.
+:::
 
 ## What to watch for on a first read
 

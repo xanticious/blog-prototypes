@@ -24,4 +24,10 @@ The second half of the poem, back on Ithaca, is slower and, for many readers, de
 
 ## Where a new reader can stand
 
+The poem is three movements, and the middle one is the famous one:
+
+1. Telemachus, learning what his father’s absence costs.
+2. Odysseus, telling his own **sea-monsters** to people who may not believe him.
+3. Ithaca, where coming home is a series of tests.
+
 Translations differ so much that choosing one is part of the reading. A plainer contemporary English will show you the plot and the hospitality scenes. A more formal line will remind you that this was song. Either way, do not skip the Telemachy at the start, and do not rush the recognitions at the end in order to get back to the sea monsters. The monsters are the part everyone already knows. The poem’s rarer gift is the difficulty of coming home and being believed.
