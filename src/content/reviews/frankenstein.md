@@ -5,6 +5,7 @@ dek: "Mary Shelley’s novel is usually remembered for a lightning storm and a l
 bookId: frankenstein
 published: "2026-01-20"
 spoilers: true
+tags: gothic, creation, science, responsibility
 ---
 
 *Frankenstein* begins far from the laboratory, on ice. A captain named Walton, hungry for glory and a little lonely, writes home about a man he has pulled aboard: Victor Frankenstein, already ruined, already chasing something across the pole. Shelley builds the book as a nest of voices. Walton tells his sister what Victor tells him, and Victor, at the center, must finally repeat what the creature told him on the mountain. By the time we reach the famous creation scene, we are already inside a story about who gets to narrate a life.

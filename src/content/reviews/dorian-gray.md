@@ -5,6 +5,7 @@ dek: "Oscar Wilde’s novel gives a beautiful man a magical way to hide the cost
 bookId: dorian-gray
 published: "2026-04-16"
 spoilers: true
+tags: beauty, morality, portrait, decadence
 ---
 
 Basil Hallward does not want to exhibit the portrait. He says it has too much of himself in it. Lord Henry Wotton sees the same canvas and begins, almost idly, to talk a young man into a philosophy. Dorian Gray listens, beautiful and unfinished, and makes a wish that the painting will age instead of him. Oscar Wilde then writes a novel about influence: how a sentence dropped in a studio can become a life, and how a life that refuses to show its damage will store the damage somewhere else.

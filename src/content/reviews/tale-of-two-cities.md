@@ -5,6 +5,7 @@ dek: "Dickens opens with the most balanced sentence in English and then spends a
 bookId: tale-of-two-cities
 published: "2026-04-26"
 spoilers: true
+tags: history, sacrifice, revolution, city
 ---
 
 “It was the best of times, it was the worst of times.” Charles Dickens begins *A Tale of Two Cities* with a paragraph that can be recited by people who have not read the book. The paragraph earns its fame. It is a machine for holding contradiction, and the novel that follows is contradiction practiced at the scale of two capitals. London muddles along. Paris ignites. A doctor, destroyed by a letter he was imprisoned for, is **recalled to life**. A young woman raised in exile learns she has a father. A man who has wasted his talents decides, very late, to spend them.

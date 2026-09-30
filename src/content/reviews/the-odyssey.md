@@ -4,6 +4,7 @@ title: "Book review: The Odyssey"
 dek: "Homer’s epic is an adventure catalogue only on the surface. Under the monsters is a poem about hospitality, disguise, and the slow work of recognizing someone who has been gone too long."
 bookId: the-odyssey
 published: "2026-03-28"
+tags: epic, journey, home, myth
 ---
 
 The *Odyssey* does not start with the hero. It starts with a council of gods and a son who is tired of hosting his mother’s suitors. Telemachus is roughly twenty. His father has been missing since he was a baby. The house is being eaten in public. Athena, in disguise, nudges him out of the hall and into a journey of his own. Homer’s structure is a kindness to the latecomer: before we follow Odysseus from cave to ship to shore, we understand what his absence costs.

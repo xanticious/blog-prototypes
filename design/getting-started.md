@@ -60,27 +60,50 @@ This is a paragraph. *This is italic.* **This is bold.**
 > This is a quotation.
 ```
 
-You can write it in any text editor. You can read it even if the website disappears. The sample reviews in this project are Markdown files. A small library called `react-markdown` is the viewer: it reads those marks and turns them into headings, paragraphs, and quotations in the browser.
+You can write it in any text editor. You can read it even if the website disappears. The sample reviews in this project are Markdown files. A small library called `react-markdown` is the viewer: it reads those marks and turns them into headings, paragraphs, and quotations in the browser. A plain tour of the tools is one of the blog posts (`src/content/guides/editing-markdown.md`).
 
 Markdown is the best default for a beginner who is willing to learn about ten symbols. It is also what most static-site tools expect.
 
-Each review here starts with **front matter**, a little block of facts between `---` lines. The site reads those facts (title, date, which book) and uses the rest of the file as the essay.
+Each review and each blog post starts with **front matter**, a little block of facts between `---` lines. The site reads those facts and uses the rest of the file as the essay. Every post shows the same five facts on the page: the book, the author, a publication date, the genre, and one or more tags.
+
+A review points at a book that already lives in `src/content/books.ts`. That record holds the title, the author, the original year, and the genre. The review file adds the date the essay went up, and the tags.
 
 ```markdown
 ---
 slug: pride-and-prejudice
-title: "The Intelligence of Manners"
+title: "Book review: Pride and Prejudice"
 dek: "One sentence that tells a passerby what the essay is doing."
 bookId: pride-and-prejudice
 published: "2026-01-12"
+tags: manners, romance, rereading
 ---
 
 The essay starts here.
 ```
 
+A blog post that is not itself a review writes the book facts in the file, because there may be no cover to look up:
+
+```markdown
+---
+slug: getting-started-with-git
+title: "Git, Briefly, for People Who Write"
+dek: "One sentence under the headline."
+book: "The Odyssey"
+author: "Homer"
+bookPublished: "8th century BCE"
+published: "2026-05-25"
+genre: "Epic poem"
+tags: git, saving, versions, beginners
+---
+```
+
+The book on a practical post is the one the post is thinking beside. Say so in a sentence, so the fact does not feel pinned on from outside.
+
 `slug` is the bit that shows up in the address. Use lowercase words and hyphens, and do not change it after you have shared the link.
 
 `dek` is newspaper slang for the sentence under the headline. Write it for someone who has not decided to read yet.
+
+Separate tags with commas. Use words a reader might actually search: `gothic`, `rereading`, `letters`. The search page can take two genres and any of these tags.
 
 ### A visual editor
 
@@ -107,8 +130,8 @@ Here is the whole loop, from “I finished a book” to “it is on the site.”
 3. **Add the book, if it is new.** Open `src/content/books.ts`. Copy one of the existing book blocks and fill in an id (lowercase, hyphens), title, author, year, and genre. The id is how a review finds its cover.
 4. **Add a cover, if you want one.** Open `src/components/BookCover.tsx`. Each book has colors, a short title broken over a line or two, and a simple drawing. Copy a block, change the colors, and pick a motif. The drawings are original jacket designs, not reproductions of published covers, so you are not borrowing someone else’s artwork.
 5. **Write the review.** Create a new file in `src/content/reviews/`. The name can match the slug. Copy the front matter pattern above. Write the essay in Markdown underneath. Save.
-6. **Look at it in more than one prototype.** The home page of the app is a table of twenty-one designs. Open two or three. The words should be the same. If a paragraph looks bad in only one design, that is a design problem, not a writing problem.
-7. **Write a guide the same way,** in `src/content/guides/`, if the piece is a tutorial rather than a review. Guides do not need a `bookId`.
+6. **Read it in Window Seat.** The site is one design now, the one we kept. Open the new essay from the home grid and from the review list. If a paragraph is hard to read, fix the paragraph. A short introduction to Git, if you want one before step 9, is `src/content/guides/getting-started-with-git.md`.
+7. **Write a blog post the same way,** in `src/content/guides/`, if the piece is a tutorial rather than a review. Give it a book, an author, a genre, a publication date, and at least one tag. It does not need a `bookId` or a cover.
 8. **Check that the site still builds.** Run `npm run build`. This is the same command GitHub will run. If it complains about missing front matter, the message names the file.
 9. **Save the change in Git.** Git is a history of the folder. The usual three commands are `git add`, `git commit`, and `git push`. A commit is a labeled snapshot. Push sends that snapshot to GitHub.
 
@@ -127,9 +150,9 @@ This repository is one option. It is not the simplest, and it is not the only go
 | Hugo | Markdown in, a very fast site out | A large archive of reviews | The template language is its own dialect. |
 | Eleventy (11ty) | Markdown plus small templates | A personal site you want to understand end to end | You assemble the design yourself, which is also the joy of it. |
 | Astro | A modern static-site tool that likes content folders | You want components, but only a little application behavior | A programmer should set it up. Writers can still live in Markdown. |
-| This project | A React app with twenty-one designs and a hash address | You want to compare custom looks, with a developer friend nearby | Heavier than a blog needs to be once you have chosen one look. |
+| This project | A React app with one kept design, Window Seat, and a hash address | You already liked this room and want to improve it in small steps | Heavier than a one-page generator, and that is acceptable while the writing and the tools stay in one folder. |
 
-Jekyll, Hugo, Eleventy, and Astro are all “static site generators.” You write Markdown. A command turns the folder into HTML, which is the language browsers already understand. GitHub Pages can host the result. For a finished book blog, one of those generators is often the calmer long-term home. This React project exists so you can see many designs before you choose, and so a custom version is possible if you want the site to behave like a small application.
+Jekyll, Hugo, Eleventy, and Astro are all “static site generators.” You write Markdown. A command turns the folder into HTML, which is the language browsers already understand. GitHub Pages can host the result. For a finished book blog, one of those generators is often the calmer long-term home. This React project has already chosen its look. Window Seat stays, and the work from here is iterative: a new post, a clearer search, a page that was missing.
 
 ## If a friend who builds websites is helping
 
@@ -140,21 +163,21 @@ You can split the work cleanly.
 - Which books get written about, and in what order.
 - The essays and the guides, as Markdown.
 - The tone: a classroom, a diary, a magazine, a scrapbook.
-- The decision about which of the twenty-one prototypes feels like the site you would actually keep.
+- Whether a new idea belongs on Window Seat, or belongs in `design/futureenhancements.md` instead.
 
 **A developer can own:**
 
 - Getting the project running, and putting it on GitHub Pages.
-- Choosing one prototype and deleting the other nineteen when you are done comparing.
+- Keeping Window Seat as the only room, and making the next small improvement to it.
 - Adjusting type, color, and layout in `src/styles/global.css` and `src/prototypes/catalog.ts`.
-- Adding a visual editor, a search box, or an RSS feed later, if you discover you need them.
+- An RSS feed, or a visual editor on top of the Markdown, if you discover you need them. Search and the bio are already here.
 
 Custom does not mean “invent a new system from a blank file.” Reasonable custom paths, from lightest to heaviest:
 
 1. **Use a generator and a theme.** Jekyll or Hugo, a theme you both like, Markdown for every post. Fastest way to a real blog. Least like a designed object.
 2. **Use Astro or Eleventy and design one layout.** Your friend builds a single reading page. You never think about components. This is the best “we want it to feel like ours” path for most pairs.
-3. **Keep this project and pick one prototype.** The navigation, the content folder, and the GitHub Pages setup are already here. Your friend removes the gallery when you have chosen, and keeps the XState hash router. Do this if you liked one of these rooms and want to stay in it.
-4. **Treat the set as sketches and build one more.** Use `design/prototypes.md` as the brief. Your friend copies a layout, changes the fonts and colors, and you react to a real page full of real essays instead of a mood board.
+3. **Keep this project.** The navigation, the content folder, and the GitHub Pages setup are already here, and the gallery is already gone. Improve Window Seat one change at a time. Do this if this is the room you want to stay in.
+4. **Treat an old sketch as a brief, only if you truly need a different room.** `design/prototypes.md` describes the site you have. A second layout is a large decision, not the default next step.
 
 What you should not do, early, is design a login system, a commenting platform, and a custom database. A book blog can be a stack of pages. Comments can be an email link. Subscriptions can be a newsletter you add when strangers are actually reading.
 
@@ -173,8 +196,9 @@ A hash address will not give you pretty links like `/reviews/jane-eyre` without 
 - [ ] I have three concrete notes, not just a star rating.
 - [ ] The draft opens inside a scene.
 - [ ] I quoted less than I talked.
-- [ ] The front matter has a slug, title, dek, book id, and date.
-- [ ] I looked at the essay in at least two prototypes.
+- [ ] The front matter has a slug, title, dek, publication date, and at least one tag.
+- [ ] A review has a `bookId`. A blog post has a book, an author, and a genre.
+- [ ] I read the essay on Window Seat, including the metadata at the top.
 - [ ] `npm run build` succeeds.
 - [ ] I committed the Markdown file.
 

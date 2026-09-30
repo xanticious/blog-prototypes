@@ -4,6 +4,7 @@ title: "Book review: Don Quixote"
 dek: "Cervantes sends a mild country gentleman out of his library and into a Spain that did not agree to become a romance. The jokes are enormous. So is the tenderness."
 bookId: don-quixote
 published: "2026-05-04"
+tags: comedy, reading, adventure, idealism
 ---
 
 Alonso Quixano owns too many books of chivalry and not enough moderation. He renames himself Don Quixote, appoints his old horse Rocinante, and rides out to revive a profession the countryside is not hiring. Miguel de Cervantes published the first part of *Don Quixote* in 1605, into a Europe that already knew the knightly romance was a little tired. The joke could have been a short one: man mistakes windmills for giants, gets knocked down, goes home. Cervantes wrote a long one, and the length is where the book becomes more than a satire. A person who misreads the world is still a person in it. Other people have to decide whether to mock him, use him, or go with him.

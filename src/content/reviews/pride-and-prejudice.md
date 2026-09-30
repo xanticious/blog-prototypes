@@ -5,6 +5,7 @@ dek: "Jane Austen’s novel is not a soft painting of country life. It is a prec
 bookId: pride-and-prejudice
 published: "2026-01-12"
 spoilers: true
+tags: manners, romance, rereading, society
 ---
 
 The first sentence of *Pride and Prejudice* is so familiar that it can sound like a proverb instead of a joke. “It is a truth universally acknowledged, that a single man in possession of a good fortune, must be in want of a wife.” Read it again, slowly, and you can hear the neighborhood talking. Austen is not announcing a law of nature. She is imitating the way a small community turns a rich newcomer into a plot.

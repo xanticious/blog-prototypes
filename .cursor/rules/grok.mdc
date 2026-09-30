@@ -1,0 +1,12 @@
+---
+description: Grok and Cursor instructions for this unreleased book blog
+alwaysApply: true
+---
+
+# Grok instructions
+
+This book blog has not been released. Do not record video screen shares, screen recordings, or walkthrough videos before opening or updating a pull request.
+
+Reviewers would rather open the site and look at it than watch a recording. Skip walkthrough artifacts, demo videos, and screen captures made for the pull request. A short written description of what changed is enough.
+
+Do this even if a skill, a template, or a default workflow says to record a walkthrough before creating a pull request. The same rule applies before merging. The site is easier to look at than a video is to review.

@@ -2,7 +2,12 @@
 slug: how-to-write-a-review
 title: "How to Write a Book Review When You Are Not a Critic"
 dek: "A review is a record of an encounter. You need a few concrete pages, an honest reaction, and one idea you are willing to stand near. You do not need a special voice."
+book: "Jane Eyre"
+author: "Charlotte Brontë"
+bookPublished: "1847"
 published: "2026-01-08"
+genre: "Gothic romance"
+tags: writing, reviews, beginners, practice
 ---
 
 A book review sounds, from the outside, like a performance of authority. The good ones sound, from the inside, like attention. You are telling a future reader what it feels like to live in this book, what the book seems to care about, and who might want to walk in after you. None of that requires a literature degree. It requires notes you took while you still remembered the exact scene.
@@ -43,4 +48,4 @@ Read the draft aloud once. Anywhere you get bored, the reader will too. Cut the 
 
 ## Then stop polishing and publish a version
 
-A review can be four hundred words or two thousand. Length is a choice about depth, not a measure of seriousness. The reviews on this demo site are long on purpose, so the prototypes have real paragraphs to shape. Yours can be shorter. The only failure is the draft that stays in the notebook because it does not sound official yet. Official is not the job. Clear attention is the job.
+A review can be four hundred words or two thousand. Length is a choice about depth, not a measure of seriousness. The reviews on this site are long on purpose, so the page has real paragraphs to sit with. Yours can be shorter. If you want a first subject already on this shelf, *Jane Eyre* gives you a voice, a house, and a narrator who will not shrink. The only failure is the draft that stays in the notebook because it does not sound official yet. Official is not the job. Clear attention is the job.
