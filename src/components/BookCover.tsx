@@ -1,3 +1,7 @@
+import { useState } from "react";
+import { getBook } from "../content/books";
+import { openLibraryCoverUrl, type CoverSize } from "../content/covers";
+
 type Motif =
   | "house"
   | "bolt"
@@ -252,16 +256,16 @@ function Motif({ motif, ink, accent }: { motif: Motif; ink: string; accent: stri
   }
 }
 
-export function BookCover({
+function DrawnCover({
   bookId,
   title,
   author,
-  size = "md",
+  size,
 }: {
   bookId: string;
   title: string;
   author: string;
-  size?: "sm" | "md" | "lg" | "tile";
+  size: CoverSize;
 }) {
   const jacket = jackets[bookId] ?? {
     bg: "#333",
@@ -310,5 +314,40 @@ export function BookCover({
       </text>
       <path d="M28 232 H150" stroke={jacket.accent} strokeWidth="2" />
     </svg>
+  );
+}
+
+export function BookCover({
+  bookId,
+  title,
+  author,
+  size = "md",
+}: {
+  bookId: string;
+  title: string;
+  author: string;
+  size?: CoverSize;
+}) {
+  const cover = getBook(bookId)?.cover;
+  const src = cover ? openLibraryCoverUrl(cover, size) : null;
+  const [failedSrc, setFailedSrc] = useState<string | null>(null);
+  const showPhoto = src !== null && failedSrc !== src;
+
+  if (!showPhoto || !src) {
+    return <DrawnCover bookId={bookId} title={title} author={author} size={size} />;
+  }
+
+  return (
+    <img
+      className={`cover cover-${size}`}
+      src={src}
+      alt={`Cover of ${title} by ${author}`}
+      decoding="async"
+      onLoad={(event) => {
+        const img = event.currentTarget;
+        if (img.naturalWidth < 2 || img.naturalHeight < 2) setFailedSrc(src);
+      }}
+      onError={() => setFailedSrc(src)}
+    />
   );
 }

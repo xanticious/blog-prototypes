@@ -1,9 +1,13 @@
+import { coverKeys, type OpenLibraryCover } from "./covers";
+
 export type Book = {
   id: string;
   title: string;
   authors: string[];
   year: string;
   genres: string[];
+  /** Open Library cover. Prefer `id` or `olid`; ISBN, OCLC, and LCCN are rate-limited. */
+  cover?: OpenLibraryCover;
 };
 
 export const books: Book[] = [
@@ -13,6 +17,7 @@ export const books: Book[] = [
     authors: ["Jane Austen"],
     year: "1813",
     genres: ["romance"],
+    cover: { key: "id", value: "12645114" }, // Penguin Classics, ISBN 9780141439518
   },
   {
     id: "frankenstein",
@@ -20,6 +25,7 @@ export const books: Book[] = [
     authors: ["Mary Shelley"],
     year: "1818",
     genres: ["sci-fi", "gothic"],
+    cover: { key: "id", value: "109033" }, // Penguin Classics, ISBN 9780141439471
   },
   {
     id: "jane-eyre",
@@ -27,6 +33,7 @@ export const books: Book[] = [
     authors: ["Charlotte Brontë"],
     year: "1847",
     genres: ["romance", "romantasy"],
+    cover: { key: "id", value: "109090" }, // Penguin Classics, ISBN 9780141441146
   },
   {
     id: "wuthering-heights",
@@ -34,6 +41,7 @@ export const books: Book[] = [
     authors: ["Emily Brontë"],
     year: "1847",
     genres: ["romance", "gothic"],
+    cover: { key: "id", value: "109038" }, // Penguin Classics, ISBN 9780141439556
   },
   {
     id: "dracula",
@@ -41,6 +49,7 @@ export const books: Book[] = [
     authors: ["Bram Stoker"],
     year: "1897",
     genres: ["fantasy", "gothic"],
+    cover: { key: "id", value: "12216503" }, // Open Library edition OL35373336M
   },
   {
     id: "dorian-gray",
@@ -48,6 +57,7 @@ export const books: Book[] = [
     authors: ["Oscar Wilde"],
     year: "1890",
     genres: ["gothic"],
+    cover: { key: "id", value: "15259210" }, // Penguin Classics, ISBN 9780141439570
   },
 ];
 
@@ -60,6 +70,9 @@ for (const book of books) {
   }
   if (book.genres.length === 0 || book.genres.some((genre) => !genre.trim())) {
     throw new Error(`Book "${book.id}" needs at least one genre`);
+  }
+  if (book.cover && (!coverKeys.includes(book.cover.key) || !book.cover.value.trim())) {
+    throw new Error(`Book "${book.id}" needs an Open Library cover key and value`);
   }
 }
 

@@ -99,7 +99,7 @@ A few of them are written down so we can decide not to build them. They live in 
 67. Transcripts, if we ever add audio. No audio yet, so this is a condition, not a task.
 68. Avoid moving covers or tilting cards. The old scatter layout did that. Window Seat should stay still.
 69. Test the essay, the search form, and the bio at a phone width and at a large desktop width whenever the layout changes.
-70. Write alt text for any future image that is not a decorative cover drawing. The covers are inline SVG and need a sensible name, which they have.
+70. Open Library covers and the drawn jackets already name themselves for a screen reader (`Cover of …`). Write alt text the same way for any future image.
 
 ## The librarian’s desk
 
