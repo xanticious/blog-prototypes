@@ -2,12 +2,12 @@
 
 A brainstorm, not a plan. These are one hundred directions someone could take Window Seat. They are grouped so we can tell a small improvement from a different product. Plenty of them are here because we might look at them and decide not to build them. Nothing on this list is scheduled. The site we have is one reading room, improved in small steps.
 
-The shelf today is six short public-domain reviews, eight blog posts, one poem, search by one genre, one author, one tag, and the text of a piece, a bio for Naomi Pell, hash addresses, and a floating menu. Suggestions below start from that room.
+The shelf today is seven short public-domain reviews, eight blog posts, one poem, search by one genre, one author, one tag, and the text of a piece, a bio for Naomi Pell, hash addresses, and a floating menu. Suggestions below start from that room.
 
 A few of them are written down so we can decide not to build them. They live in the categories with everything else, and they are listed together here:
 
 - Accounts, likes, comments, follower counts, and personalized recommendations: 84, 85, 90, 100.
-- A second layout, extra genre menus, two books on one post, audio, or a turn into a magazine: 30, 33, 38, 49, 50, 59, 60.
+- A second layout, extra genre menus, two books on a blog post, audio, or a turn into a magazine: 30, 33, 38, 49, 50, 59, 60.
 - Jokes and extras that would clutter the room: 73, 77, 96, 97.
 
 ## The reading page
@@ -45,7 +45,7 @@ A few of them are written down so we can decide not to build them. They live in 
 25. Original-language titles next to translations, for Homer and Cervantes.
 26. Translator credit, the day a review is of a translation rather than a public-domain English text.
 27. A content note that is not a spoiler: violence, grief, cruelty to animals. Separate from the spoiler flag.
-28. Series context, for the day a review is not a standalone novel.
+28. A series title of its own, separate from the books a review can already list.
 29. A “paired reading” between two reviews that argue with each other, such as the two Brontë novels.
 30. Audio of Naomi reading the first paragraph. Appealing, and a real production burden. We might leave it.
 
@@ -58,7 +58,7 @@ A few of them are written down so we can decide not to build them. They live in 
 35. A tag index page, one page per tag, for people who do not want the search form.
 36. Genre pages that read like a small introduction, not only a filtered list.
 37. Show the book’s original year as its own labeled fact, beside the post’s publication date, on every card and not only inside the book line.
-38. Let a post name two books, for a comparison essay. The metadata would get harder. We may not want that.
+38. Let a blog post name two books, the way a review already can. The metadata would get harder. We may not want that.
 39. A controlled vocabulary file, so tags cannot drift into `Gothic` and `gothic` and `the gothic`.
 40. Search inside the essay text is already on the search page, sorted by how often the words appear. A later pass could highlight the matches in the piece itself.
 

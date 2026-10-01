@@ -1,10 +1,13 @@
 import { useMemo, useState } from "react";
 import {
+  authorsOf,
   authorsOnShelf,
   excerpt,
   filterShelf,
   formatDate,
   formatGenres,
+  formatNames,
+  genresOf,
   genresOnShelf,
   getGuide,
   getPoem,
@@ -14,8 +17,10 @@ import {
   reviews,
   shelfPieces,
   tagsOnShelf,
+  yearsOf,
   type Guide,
   type Review,
+  type ShelfBook,
   type ShelfMatch,
 } from "../content/library";
 import { routeToHash, type View } from "../machine/routes";
@@ -24,33 +29,44 @@ import { BookCover } from "./BookCover";
 import { FilterMenu } from "./FilterMenu";
 import { MarkdownBody } from "./MarkdownBody";
 import { NavLink } from "./NavLink";
-import { GuidePiece, PoemPiece, ReviewPiece } from "./PieceLink";
+import { GuidePiece, PoemPiece, ReviewCovers, ReviewPiece } from "./PieceLink";
+
+function bookLine(book: ShelfBook): string {
+  return book.year ? `${book.title} (${book.year})` : book.title;
+}
 
 function PostMeta({
-  book,
-  author,
-  bookPublished,
+  books,
+  authors,
   published,
   genres,
   tags,
 }: {
-  book: string;
-  author: string;
-  bookPublished?: string;
+  books: ShelfBook[];
+  authors: string[];
   published: string;
   genres: string[];
   tags: string[];
 }) {
-  const bookLabel = bookPublished ? `${book} (${bookPublished})` : book;
   return (
     <dl className="post-meta">
       <div>
-        <dt>Book</dt>
-        <dd>{bookLabel}</dd>
+        <dt>{books.length > 1 ? "Books" : "Book"}</dt>
+        <dd>
+          {books.length === 1 ? (
+            bookLine(books[0])
+          ) : (
+            <ul className="meta-list">
+              {books.map((book, index) => (
+                <li key={`${book.title}-${index}`}>{bookLine(book)}</li>
+              ))}
+            </ul>
+          )}
+        </dd>
       </div>
       <div>
-        <dt>Author</dt>
-        <dd>{author}</dd>
+        <dt>{authors.length > 1 ? "Authors" : "Author"}</dt>
+        <dd>{formatNames(authors)}</dd>
       </div>
       <div>
         <dt>Publication date</dt>
@@ -120,14 +136,9 @@ export function HomeView({
       </header>
       {featured ? (
         <article className="featured">
-          <BookCover
-            bookId={featured.bookId}
-            title={featured.book.title}
-            author={featured.book.author}
-            size="lg"
-          />
+          <ReviewCovers books={featured.books} size="lg" groupClass="cover-row" />
           <div className="featured-copy">
-            <p className="kicker">Featured review · {featured.book.title}</p>
+            <p className="kicker">Featured review · {formatNames(featured.books.map((book) => book.title))}</p>
             <h2>
               <NavLink
                 href={routeToHash({
@@ -142,7 +153,7 @@ export function HomeView({
             </h2>
             <p className="excerpt">{excerpt(featured.body, 320)}</p>
             <p className="byline">
-              {featured.book.author} · {featured.book.year}
+              {formatNames(authorsOf(featured.books))} · {formatNames(yearsOf(featured.books))}
             </p>
           </div>
         </article>
@@ -187,7 +198,7 @@ export function ReviewsView({ prototype, reviews }: { prototype: Prototype; revi
         <p className="eyebrow">Book reviews</p>
         <h1>Notes on the books.</h1>
         <p className="lede">
-          Six short reviews, the kind you write when you have just finished and the margin notes are still fresh.
+          Seven short reviews, the kind you write when you have just finished and the margin notes are still fresh.
         </p>
       </header>
       <ul className="piece-list">
@@ -208,43 +219,57 @@ export function ReviewView({ prototype, slug }: { prototype: Prototype; slug: st
       <Missing prototype={prototype} heading="That review is not on the shelf." label="All book reviews" view={{ kind: "reviews" }} />
     );
   }
+  const authors = authorsOf(review.books);
+  const genres = genresOf(review.books);
+  const shelfBooks = review.books.map((book) => ({ title: book.title, year: book.year }));
   return (
     <article className="essay">
       <div className="essay-top">
-        <BookCover bookId={review.bookId} title={review.book.title} author={review.book.author} size="md" />
+        <ReviewCovers books={review.books} size="md" groupClass="cover-row" />
         <div>
-          <p className="kicker">{formatGenres(review.book.genres)}</p>
+          <p className="kicker">{formatGenres(genres)}</p>
           <h1>{review.title}</h1>
           <p className="dek">{review.dek}</p>
           {review.spoilers ? <p className="spoiler-warning">This review contains spoilers.</p> : null}
         </div>
       </div>
       <PostMeta
-        book={review.book.title}
-        author={review.book.author}
-        bookPublished={review.book.year}
+        books={shelfBooks}
+        authors={authors}
         published={review.published}
-        genres={review.book.genres}
+        genres={genres}
         tags={review.tags}
       />
       <aside className="book-facts">
         <p className="rail-label">In the margin</p>
         <dl>
           <div>
-            <dt>Book</dt>
-            <dd>{review.book.title}</dd>
+            <dt>{review.books.length > 1 ? "Books" : "Book"}</dt>
+            <dd>
+              {review.books.length === 1 ? (
+                review.books[0].title
+              ) : (
+                <ul className="meta-list">
+                  {review.books.map((book) => (
+                    <li key={book.id}>
+                      {book.title} ({book.year})
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </dd>
           </div>
           <div>
-            <dt>Author</dt>
-            <dd>{review.book.author}</dd>
+            <dt>{authors.length > 1 ? "Authors" : "Author"}</dt>
+            <dd>{formatNames(authors)}</dd>
           </div>
           <div>
             <dt>Published</dt>
-            <dd>{review.book.year}</dd>
+            <dd>{formatNames(yearsOf(review.books))}</dd>
           </div>
           <div>
             <dt>Kind</dt>
-            <dd>{formatGenres(review.book.genres)}</dd>
+            <dd>{formatGenres(genres)}</dd>
           </div>
         </dl>
       </aside>
@@ -300,9 +325,8 @@ export function GuideView({ prototype, slug }: { prototype: Prototype; slug: str
         </div>
       </div>
       <PostMeta
-        book={guide.book}
-        author={guide.author}
-        bookPublished={guide.bookPublished}
+        books={[{ title: guide.book, year: guide.bookPublished }]}
+        authors={[guide.author]}
         published={guide.published}
         genres={guide.genres}
         tags={guide.tags}
@@ -368,7 +392,7 @@ export function RelatedPosts({ prototype, current }: { prototype: Prototype; cur
     ...reviews.map((review) => ({
       key: `review-${review.slug}`,
       title: review.title,
-      meta: review.book.author,
+      meta: formatNames(authorsOf(review.books)),
       view: { kind: "review" as const, slug: review.slug },
     })),
     ...poems.map((poem) => ({
@@ -491,9 +515,8 @@ function SearchResult({ prototype, match }: { prototype: Prototype; match: Shelf
         <p className="search-score">{match.matches === 1 ? "1 mention" : `${match.matches} mentions`}</p>
       ) : null}
       <PostMeta
-        book={piece.book}
-        author={piece.author}
-        bookPublished={piece.bookPublished}
+        books={piece.books}
+        authors={piece.authors}
         published={piece.published}
         genres={piece.genres}
         tags={piece.tags}

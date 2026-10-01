@@ -64,9 +64,9 @@ You can write it in any text editor. You can read it even if the website disappe
 
 Markdown is the best default for a beginner who is willing to learn about ten symbols. It is also what most static-site tools expect.
 
-Each review and each blog post starts with **front matter**, a little block of facts between `---` lines. The site reads those facts and uses the rest of the file as the piece. Every post shows the same five facts on the page: the book, the author, a publication date, one or more genres, and one or more tags.
+Each review and each blog post starts with **front matter**, a little block of facts between `---` lines. The site reads those facts and uses the rest of the file as the piece. Every post shows the same kinds of facts on the page: the book or books, the author or authors, a publication date, one or more genres, and one or more tags.
 
-A review points at a book that already lives in `src/content/books.ts`. That record holds the title, the author, the original year, and the genres. The review file adds the date the note went up, and the tags.
+A review points at one or more books that already live in `src/content/books.ts`. Each record holds the title, one or more authors, the original year, and the genres. The review file adds the date the note went up, and the tags. Use `bookId` for a single book. Use `bookIds` when the note is about a series or a related shelf, and separate the ids with commas.
 
 ```markdown
 ---
@@ -80,6 +80,21 @@ tags: manners, romance, rereading
 
 The essay starts here.
 ```
+
+A note about more than one book lists every id:
+
+```markdown
+---
+slug: bronte-novels
+title: "Book review: The Brontë novels"
+dek: "One sentence that tells a passerby what the note is doing."
+bookIds: jane-eyre, wuthering-heights
+published: "2026-06-20"
+tags: gothic, sisters, comparison
+---
+```
+
+You can put several ids in `bookId` as well. If both fields are present, the page uses every id, with `bookId` first, and ignores a repeat. Each id has to exist. The page lists every title and every author, so two books by one person and one book by two people both show up. A book with more than one author keeps every name in `authors`.
 
 A blog post that is not itself a review writes the book facts in the file, because there may be no cover to look up:
 
@@ -97,7 +112,7 @@ tags: git, saving, versions, beginners
 ---
 ```
 
-The book on a practical post is the one the post is thinking beside. Say so in a sentence, so the fact does not feel pinned on from outside. A post can name more than one genre. Separate them with commas: `genre: fantasy, gothic`. The same shape is used for book records in `src/content/books.ts`, as a list: `genres: ["sci-fi", "gothic"]`. Names such as `romance`, `romantasy`, and `smut` are ordinary genre labels. Author names are matched as whole strings.
+The book on a practical post is the one the post is thinking beside. Say so in a sentence, so the fact does not feel pinned on from outside. A post can name more than one genre. Separate them with commas: `genre: fantasy, gothic`. The same shape is used for book records in `src/content/books.ts`, as a list: `genres: ["sci-fi", "gothic"]`. Authors are a list too: `authors: ["Jane Austen"]`, or two names when a book was written together. Names such as `romance`, `romantasy`, and `smut` are ordinary genre labels. Author names are matched as whole strings. A review of several people appears under each of those names.
 
 `slug` is the bit that shows up in the address. Use lowercase words and hyphens, and do not change it after you have shared the link.
 
@@ -127,7 +142,7 @@ Here is the whole loop, from “I finished a book” to “it is on the site.”
 
 1. **Install the tools once.** Install Node.js (the version in `.nvmrc` or any current Node 22 is fine), then, in this folder, run `npm install`. Node is the program that runs JavaScript on your computer. npm is the tool that downloads the libraries the site needs.
 2. **Start the preview.** Run `npm run dev`. Open the address it prints, usually `http://localhost:5173`. Leave that window open. When you save a file, the page refreshes.
-3. **Add the book, if it is new.** Open `src/content/books.ts`. Copy one of the existing book blocks and fill in an id (lowercase, hyphens), title, author, year, and genre. The id is how a review finds its cover.
+3. **Add the book, if it is new.** Open `src/content/books.ts`. Copy one of the existing book blocks and fill in an id (lowercase, hyphens), title, one or more authors, year, and genres. The id is how a review finds its cover. Add every book in a series before you point a review at the set.
 4. **Add a cover, if you want one.** Open `src/components/BookCover.tsx`. Each book has colors, a short title broken over a line or two, and a simple drawing. Copy a block, change the colors, and pick a motif. The drawings are original jacket designs, not reproductions of published covers, so you are not borrowing someone else’s artwork.
 5. **Write the review.** Create a new file in `src/content/reviews/`. The name can match the slug. Copy the front matter pattern above. Write the essay in Markdown underneath. Save.
 6. **Read it in Window Seat.** The site is one design now, the one we kept. Open the new essay from the home grid and from the review list. If a paragraph is hard to read, fix the paragraph. A short introduction to Git, if you want one before step 9, is `src/content/guides/getting-started-with-git.md`.
@@ -197,7 +212,7 @@ A hash address will not give you pretty links like `/reviews/jane-eyre` without 
 - [ ] The draft opens inside a scene.
 - [ ] I quoted less than I talked.
 - [ ] The front matter has a slug, title, dek, publication date, and at least one tag.
-- [ ] A review has a `bookId`. A blog post has a book, an author, and a genre.
+- [ ] A review names one or more books with `bookId` or `bookIds`. A blog post has a book, an author, and a genre.
 - [ ] I read the essay on Window Seat, including the metadata at the top.
 - [ ] `npm run build` succeeds.
 - [ ] I committed the Markdown file.
