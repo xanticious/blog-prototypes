@@ -1,5 +1,5 @@
 import type { CSSProperties, ReactNode } from "react";
-import { guides, reviews } from "../content/library";
+import { formatNames, guides, reviews } from "../content/library";
 import { useApp } from "../machine/AppState";
 import type { SidebarMode } from "../machine/appMachine";
 import { routeToHash, type View } from "../machine/routes";
@@ -309,7 +309,7 @@ export function PrototypeApp() {
                       current={view.kind === "review" && view.slug === review.slug}
                     >
                       <span>{String(index + 1).padStart(2, "0")}</span>
-                      {review.book.title}
+                      {formatNames(review.books.map((book) => book.title))}
                     </NavLink>
                   </li>
                 ))}

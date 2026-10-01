@@ -30,7 +30,7 @@ An unknown section falls back to home. A missing essay stays on its route and sh
 
 Reviews live in `src/content/reviews/*.md`. Blog posts live in `src/content/guides/*.md`. The poem lives in `src/content/poems/`.
 
-A review names a `bookId` that must exist in `src/content/books.ts`. The book record supplies the title, the author, the original year, and one or more genres (`romance`, `sci-fi`, `fantasy`, `romantasy`, `gothic`, and so on). The review file adds a publication date (when the note went up) and one or more tags. `spoilers: true` turns on the warning. Author names are compared as whole strings, so two books by the same person share one name in the author menu.
+A review names one or more books with `bookId` or `bookIds`. Every id must exist in `src/content/books.ts`. Separate several ids with commas. That is how a series, or a related shelf such as the two Brontë novels, shares one note. Each book record supplies the title, one or more authors, the original year, and one or more genres (`romance`, `sci-fi`, `fantasy`, `romantasy`, `gothic`, and so on). The review file adds a publication date (when the note went up) and one or more tags. `spoilers: true` turns on the warning. Author names are compared as whole strings, so two books by the same person share one name in the author menu, and a note that lists two authors appears under each name.
 
 A blog post does not need a cover. Its own front matter carries the book, the author, the book’s year (`bookPublished`), the publication date, one or more genres, and the tags. The book is the one the post is in conversation with. It can be a novel already on the shelf. Separate extra genres with commas.
 
@@ -50,7 +50,7 @@ tags: markdown, writing, tools, beginners
 
 `slug` is the bit that shows up in the address. Use lowercase words and hyphens, and do not change it after you have shared the link. Tags are separated by commas, and so are genres. At least one of each is required. If a required fact is missing, the build says which file.
 
-Search keeps a piece when it has the genre you picked, the author you picked, and the tag you picked. Leave a menu on “any” and that fact is not used. Text search looks through the title, the dek, the book, the author, the year, the genres, the tags, and the body. It sorts by how many times the text appears. A tie goes to the newer post. With the text field empty, the list is newest first.
+Search keeps a piece when it has the genre you picked, the author you picked, and the tag you picked. A review of several books matches if any of those books has the genre, and if any of its authors is the one you picked. Leave a menu on “any” and that fact is not used. Text search looks through the title, the dek, every book title and year, every author, the genres, the tags, and the body. It sorts by how many times the text appears. A tie goes to the newer post. With the text field empty, the list is newest first.
 
 The poem is an article, not a review. It does not carry book metadata, and search does not include it.
 

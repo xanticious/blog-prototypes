@@ -1,10 +1,33 @@
+import type { Book } from "../content/books";
 import type { Guide, Poem, Review } from "../content/library";
-import { formatDate, formatGenres } from "../content/library";
+import { authorsOf, formatDate, formatGenres, formatNames, yearsOf } from "../content/library";
 import type { View } from "../machine/routes";
 import { routeToHash } from "../machine/routes";
 import type { Prototype } from "../prototypes/catalog";
 import { BookCover } from "./BookCover";
 import { NavLink } from "./NavLink";
+
+export function ReviewCovers({
+  books,
+  size,
+  groupClass,
+}: {
+  books: Book[];
+  size: "sm" | "md" | "lg" | "tile";
+  groupClass: string;
+}) {
+  const covers = books.map((book) => (
+    <BookCover
+      key={book.id}
+      bookId={book.id}
+      title={book.title}
+      author={formatNames(book.authors)}
+      size={size}
+    />
+  ));
+  if (books.length < 2) return covers[0] ?? null;
+  return <span className={groupClass}>{covers}</span>;
+}
 
 export function reviewView(slug: string): View {
   return { kind: "review", slug };
@@ -35,16 +58,11 @@ export function ReviewPiece({
       href={routeToHash({ name: "prototype", prototypeId: prototype.id, view })}
       event={{ type: "OPEN_VIEW", view }}
     >
-      <BookCover
-        bookId={review.bookId}
-        title={review.book.title}
-        author={review.book.author}
-        size={tile ? "tile" : "sm"}
-      />
+      <ReviewCovers books={review.books} size={tile ? "tile" : "sm"} groupClass="piece-covers" />
       <span className="piece-num">{String(index + 1).padStart(2, "0")}</span>
       <span className="piece-copy">
         <span className="kicker">
-          {review.book.author} · {review.book.year}
+          {formatNames(authorsOf(review.books))} · {formatNames(yearsOf(review.books))}
         </span>
         <span className="piece-title">{review.title}</span>
         <span className="piece-meta">{formatDate(review.published)}</span>

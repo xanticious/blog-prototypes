@@ -1,11 +1,12 @@
-import { getBook, type Book } from "./books";
+import { authorsOf, genresOf, getBook, yearsOf, type Book } from "./books";
+
+export { authorsOf, genresOf, yearsOf };
 
 export type Review = {
   slug: string;
   title: string;
   dek: string;
-  bookId: string;
-  book: Book;
+  books: Book[];
   published: string;
   spoilers: boolean;
   tags: string[];
@@ -25,14 +26,18 @@ export type Guide = {
   body: string;
 };
 
+export type ShelfBook = {
+  title: string;
+  year: string;
+};
+
 export type ShelfPiece = {
   kind: "review" | "guide";
   slug: string;
   title: string;
   dek: string;
-  book: string;
-  author: string;
-  bookPublished: string;
+  books: ShelfBook[];
+  authors: string[];
   published: string;
   genres: string[];
   tags: string[];
@@ -63,7 +68,6 @@ type ReviewFrontmatter = {
   slug: string;
   title: string;
   dek: string;
-  bookId: string;
   published: string;
 };
 
@@ -115,12 +119,34 @@ function requireField(data: Record<string, string>, key: string, file: string): 
 }
 
 function parseList(value: string | undefined, file: string, label: string): string[] {
-  const items = (value ?? "")
+  const items = splitList(value);
+  if (items.length === 0) throw new Error(`Add at least one ${label} in ${file}`);
+  return items;
+}
+
+function splitList(value: string | undefined): string[] {
+  return (value ?? "")
     .split(",")
     .map((item) => item.trim())
     .filter(Boolean);
-  if (items.length === 0) throw new Error(`Add at least one ${label} in ${file}`);
-  return items;
+}
+
+function reviewBooks(data: Record<string, string>, file: string): Book[] {
+  const ids: string[] = [];
+  const seen = new Set<string>();
+  for (const id of [...splitList(data.bookId), ...splitList(data.bookIds)]) {
+    if (seen.has(id)) continue;
+    seen.add(id);
+    ids.push(id);
+  }
+  if (ids.length === 0) {
+    throw new Error(`Add at least one book in "bookId" or "bookIds" in ${file}`);
+  }
+  return ids.map((id) => {
+    const book = getBook(id);
+    if (!book) throw new Error(`Unknown book "${id}" in ${file}`);
+    return book;
+  });
 }
 
 function loadReviews(): Review[] {
@@ -128,16 +154,12 @@ function loadReviews(): Review[] {
     .map(([file, raw]) => {
       const { data, body } = parseFrontmatter(String(raw), file);
       const front = data as Partial<ReviewFrontmatter>;
-      const bookId = requireField(data, "bookId", file);
-      const book = getBook(bookId);
-      if (!book) throw new Error(`Unknown bookId "${bookId}" in ${file}`);
-      if (book.genres.length === 0) throw new Error(`Add at least one genre for "${bookId}"`);
+      const books = reviewBooks(data, file);
       const review: Review = {
         slug: front.slug || file,
         title: requireField(data, "title", file),
         dek: requireField(data, "dek", file),
-        bookId,
-        book,
+        books,
         published: requireField(data, "published", file),
         spoilers: data.spoilers === "true",
         tags: parseList(data.tags, file, "tag"),
@@ -222,11 +244,10 @@ export function shelfPieces(): ShelfPiece[] {
     slug: review.slug,
     title: review.title,
     dek: review.dek,
-    book: review.book.title,
-    author: review.book.author,
-    bookPublished: review.book.year,
+    books: review.books.map((book) => ({ title: book.title, year: book.year })),
+    authors: authorsOf(review.books),
     published: review.published,
-    genres: review.book.genres,
+    genres: genresOf(review.books),
     tags: review.tags,
     body: review.body,
   }));
@@ -235,9 +256,8 @@ export function shelfPieces(): ShelfPiece[] {
     slug: guide.slug,
     title: guide.title,
     dek: guide.dek,
-    book: guide.book,
-    author: guide.author,
-    bookPublished: guide.bookPublished,
+    books: [{ title: guide.book, year: guide.bookPublished }],
+    authors: [guide.author],
     published: guide.published,
     genres: guide.genres,
     tags: guide.tags,
@@ -246,8 +266,12 @@ export function shelfPieces(): ShelfPiece[] {
   return [...fromReviews, ...fromGuides].sort((a, b) => b.published.localeCompare(a.published));
 }
 
+export function formatNames(names: string[]): string {
+  return names.join(", ");
+}
+
 export function formatGenres(genres: string[]): string {
-  return genres.join(", ");
+  return formatNames(genres);
 }
 
 export function genresOnShelf(): string[] {
@@ -255,7 +279,7 @@ export function genresOnShelf(): string[] {
 }
 
 export function authorsOnShelf(): string[] {
-  return [...new Set(shelfPieces().map((piece) => piece.author))].sort((a, b) => a.localeCompare(b));
+  return [...new Set(shelfPieces().flatMap((piece) => piece.authors))].sort((a, b) => a.localeCompare(b));
 }
 
 export function tagsOnShelf(): string[] {
@@ -263,7 +287,15 @@ export function tagsOnShelf(): string[] {
 }
 
 function searchHaystack(piece: ShelfPiece): string {
-  return [piece.title, piece.dek, piece.book, piece.author, piece.bookPublished, ...piece.genres, ...piece.tags, piece.body]
+  return [
+    piece.title,
+    piece.dek,
+    ...piece.books.flatMap((book) => [book.title, book.year]),
+    ...piece.authors,
+    ...piece.genres,
+    ...piece.tags,
+    piece.body,
+  ]
     .join("\n")
     .toLowerCase();
 }
@@ -290,7 +322,7 @@ export function filterShelf(pieces: ShelfPiece[], query: ShelfQuery): ShelfMatch
 
   const matched = pieces.filter((piece) => {
     if (genre && !piece.genres.includes(genre)) return false;
-    if (author && piece.author !== author) return false;
+    if (author && !piece.authors.includes(author)) return false;
     if (tag && !piece.tags.includes(tag)) return false;
     return true;
   });
