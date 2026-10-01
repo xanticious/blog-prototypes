@@ -2,7 +2,7 @@
 
 A brainstorm, not a plan. These are one hundred directions someone could take Window Seat. They are grouped so we can tell a small improvement from a different product. Plenty of them are here because we might look at them and decide not to build them. Nothing on this list is scheduled. The site we have is one reading room, improved in small steps.
 
-The shelf today is seven short public-domain reviews, eight blog posts, one poem, search by one genre, one author, one tag, and the text of a piece, a bio for Naomi Pell, hash addresses, and a floating menu. Suggestions below start from that room.
+The shelf today is seven short public-domain reviews, eight blog posts, one poem, a search that looks through book reviews or blog posts (one at a time) by one genre, one author, one tag, and the text of a piece, a bio for Naomi Pell, hash addresses, and a floating menu. Suggestions below start from that room.
 
 A few of them are written down so we can decide not to build them. They live in the categories with everything else, and they are listed together here:
 

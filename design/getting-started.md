@@ -118,7 +118,7 @@ The book on a practical post is the one the post is thinking beside. Say so in a
 
 `dek` is newspaper slang for the sentence under the headline. Write it for someone who has not decided to read yet.
 
-Separate tags with commas. Use words a reader might actually search: `gothic`, `rereading`, `letters`. The search page can take one genre, one author, and one tag. The text field searches the writing and sorts by how often the words appear.
+Separate tags with commas. Use words a reader might actually search: `gothic`, `rereading`, `letters`. The search page looks through either book reviews or blog posts, never both at once. It can take one genre, one author, and one tag. The text field searches the writing and sorts by how often the words appear.
 
 ### A visual editor
 
