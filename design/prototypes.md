@@ -56,7 +56,7 @@ The poem is an article, not a review. It does not carry book metadata, and searc
 
 Some reviews use a spoiler warning. A whole paragraph can sit in a collapsed block (`:::spoiler` … `:::`). A phrase inside a sentence can be an inline spoiler: `I loved it when ||Elizabeth and Darcy got together||.` The page shows the word “spoiler” until it is clicked, and bold or italic inside the bars still works. The poem uses `:::verse` so line breaks survive. The books are in the public domain. The notes, the posts, and the poem are original sample writing.
 
-Jacket drawings live in `src/components/BookCover.tsx`. They are original drawings, not reproductions of published covers.
+A book can name an Open Library cover in `src/content/books.ts`: `cover: { key: "id", value: "12645114" }`. The key may be `id`, `olid`, `isbn`, `oclc`, or `lccn`. Home tiles request the large image, an essay requests the medium one, and a list requests the small one. ISBN, OCLC, and LCCN lookups are rate-limited; cover id and OLID are not. If the image is missing, or the book has no cover, the page uses the drawn jacket in `src/components/BookCover.tsx`. The poem keeps its drawing.
 
 ## Navigation, and where the state lives
 
