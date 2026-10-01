@@ -12,15 +12,17 @@ The sections are:
 
 | Hash | Screen |
 | --- | --- |
-| `#/p/window-seat` | Home |
-| `#/p/window-seat/reviews` | The review index |
-| `#/p/window-seat/reviews/jane-eyre` | One review. The last piece is the essay’s slug. |
-| `#/p/window-seat/guides` | The blog posts |
-| `#/p/window-seat/guides/close-reading` | One post |
-| `#/p/window-seat/search` | Search by two genres and by tags |
-| `#/p/window-seat/bio` | Naomi Pell |
-| `#/p/window-seat/poems/margin-light` | The poem |
-| `#/p/window-seat/about` | Why the room looks like this |
+| `#/` | Home |
+| `#/reviews` | The review index |
+| `#/reviews/jane-eyre` | One review. The last piece is the note’s slug. |
+| `#/guides` | The blog posts |
+| `#/guides/close-reading` | One post |
+| `#/search` | Filter by one genre, one author, one tag, or the text of a piece |
+| `#/bio` | Naomi Pell |
+| `#/poems/margin-light` | The poem |
+| `#/about` | Why the room looks like this |
+
+An older address such as `#/p/window-seat/reviews` still opens the same screen. The bar rewrites it to `#/reviews`.
 
 An unknown section falls back to home. A missing essay stays on its route and shows a short “not on the shelf” message. The machine does not invent content.
 
@@ -28,9 +30,9 @@ An unknown section falls back to home. A missing essay stays on its route and sh
 
 Reviews live in `src/content/reviews/*.md`. Blog posts live in `src/content/guides/*.md`. The poem lives in `src/content/poems/`.
 
-A review names a `bookId` that must exist in `src/content/books.ts`. The book record supplies the title, the author, the original year, and the genre. The review file adds a publication date (when the essay went up) and one or more tags. `spoilers: true` turns on the warning.
+A review names a `bookId` that must exist in `src/content/books.ts`. The book record supplies the title, the author, the original year, and one or more genres (`romance`, `sci-fi`, `fantasy`, `romantasy`, `gothic`, and so on). The review file adds a publication date (when the note went up) and one or more tags. `spoilers: true` turns on the warning. Author names are compared as whole strings, so two books by the same person share one name in the author menu.
 
-A blog post does not need a cover. Its own front matter carries the book, the author, the book’s year (`bookPublished`), the publication date, the genre, and the tags. The book is the one the post is in conversation with. It can be a novel already on the shelf.
+A blog post does not need a cover. Its own front matter carries the book, the author, the book’s year (`bookPublished`), the publication date, one or more genres, and the tags. The book is the one the post is in conversation with. It can be a novel already on the shelf. Separate extra genres with commas.
 
 ```markdown
 ---
@@ -41,18 +43,18 @@ book: "Alice’s Adventures in Wonderland"
 author: "Lewis Carroll"
 bookPublished: "1865"
 published: "2026-05-18"
-genre: "Literary nonsense"
+genre: fantasy
 tags: markdown, writing, tools, beginners
 ---
 ```
 
-`slug` is the bit that shows up in the address. Use lowercase words and hyphens, and do not change it after you have shared the link. Tags are separated by commas. At least one is required. If a required fact is missing, the build says which file.
+`slug` is the bit that shows up in the address. Use lowercase words and hyphens, and do not change it after you have shared the link. Tags are separated by commas, and so are genres. At least one of each is required. If a required fact is missing, the build says which file.
 
-Search reads those facts. The field matches tags, and it also matches genre names when you type them with commas between. The two menus are for choosing two genres without typing. A post is kept when it fits a chosen genre and every tag you typed. Two genre names in the field match either genre, so a search can cover two shelves at once.
+Search keeps a piece when it has the genre you picked, the author you picked, and the tag you picked. Leave a menu on “any” and that fact is not used. Text search looks through the title, the dek, the book, the author, the year, the genres, the tags, and the body. It sorts by how many times the text appears. A tie goes to the newer post. With the text field empty, the list is newest first.
 
 The poem is an article, not a review. It does not carry book metadata, and search does not include it.
 
-Some reviews use a spoiler warning, a collapsed spoiler block (`:::spoiler` … `:::`), a pull quote, and lists. The poem uses `:::verse` so line breaks survive. The books are in the public domain. The essays, the posts, and the poem are original sample writing.
+Some reviews use a spoiler warning. A whole paragraph can sit in a collapsed block (`:::spoiler` … `:::`). A phrase inside a sentence can be an inline spoiler: `I loved it when ||Elizabeth and Darcy got together||.` The page shows the word “spoiler” until it is clicked, and bold or italic inside the bars still works. The poem uses `:::verse` so line breaks survive. The books are in the public domain. The notes, the posts, and the poem are original sample writing.
 
 Jacket drawings live in `src/components/BookCover.tsx`. They are original drawings, not reproductions of published covers.
 

@@ -6,7 +6,7 @@ book: "Pride and Prejudice"
 author: "Jane Austen"
 bookPublished: "1813"
 published: "2026-06-09"
-genre: "Novel of manners"
+genre: romance
 tags: blogging, audience, letters, beginners
 ---
 

@@ -6,7 +6,7 @@ book: "The Odyssey"
 author: "Homer"
 bookPublished: "8th century BCE"
 published: "2026-05-25"
-genre: "Epic poem"
+genre: fantasy
 tags: git, saving, versions, beginners
 ---
 

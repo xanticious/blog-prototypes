@@ -1,4 +1,4 @@
-import { isPrototypeId, sitePrototypeId } from "../prototypes/catalog";
+import { sitePrototypeId } from "../prototypes/catalog";
 
 export type View =
   | { kind: "home" }
@@ -13,63 +13,50 @@ export type View =
 
 export type Route = { name: "prototype"; prototypeId: string; view: View };
 
+function viewFromParts(section: string | undefined, slug: string | undefined): View {
+  if (section === "reviews" && slug) return { kind: "review", slug };
+  if (section === "reviews") return { kind: "reviews" };
+  if (section === "guides" && slug) return { kind: "guide", slug };
+  if (section === "guides") return { kind: "guides" };
+  if (section === "poems" && slug) return { kind: "poem", slug };
+  if (section === "search") return { kind: "search" };
+  if (section === "bio") return { kind: "bio" };
+  if (section === "about") return { kind: "about" };
+  return { kind: "home" };
+}
+
 export function hashToRoute(hash: string): Route {
   const raw = decodeURIComponent(hash.replace(/^#/, "").replace(/^\//, ""));
   const parts = raw.split("/").filter(Boolean);
-  if (parts[0] !== "p" || !parts[1] || !isPrototypeId(parts[1])) {
-    return { name: "prototype", prototypeId: sitePrototypeId, view: { kind: "home" } };
-  }
-  const prototypeId = parts[1];
-  const section = parts[2];
-  const slug = parts[3];
-  if (section === "reviews" && slug) {
-    return { name: "prototype", prototypeId, view: { kind: "review", slug } };
-  }
-  if (section === "reviews") {
-    return { name: "prototype", prototypeId, view: { kind: "reviews" } };
-  }
-  if (section === "guides" && slug) {
-    return { name: "prototype", prototypeId, view: { kind: "guide", slug } };
-  }
-  if (section === "guides") {
-    return { name: "prototype", prototypeId, view: { kind: "guides" } };
-  }
-  if (section === "poems" && slug) {
-    return { name: "prototype", prototypeId, view: { kind: "poem", slug } };
-  }
-  if (section === "search") {
-    return { name: "prototype", prototypeId, view: { kind: "search" } };
-  }
-  if (section === "bio") {
-    return { name: "prototype", prototypeId, view: { kind: "bio" } };
-  }
-  if (section === "about") {
-    return { name: "prototype", prototypeId, view: { kind: "about" } };
-  }
-  return { name: "prototype", prototypeId, view: { kind: "home" } };
+  // Older addresses looked like #/p/window-seat/reviews. There is one site now.
+  const sectionParts = parts[0] === "p" ? parts.slice(2) : parts;
+  return {
+    name: "prototype",
+    prototypeId: sitePrototypeId,
+    view: viewFromParts(sectionParts[0], sectionParts[1]),
+  };
 }
 
 export function routeToHash(route: Route): string {
-  const base = `#/p/${route.prototypeId}`;
   switch (route.view.kind) {
     case "home":
-      return base;
+      return "#/";
     case "reviews":
-      return `${base}/reviews`;
+      return "#/reviews";
     case "review":
-      return `${base}/reviews/${encodeURIComponent(route.view.slug)}`;
+      return `#/reviews/${encodeURIComponent(route.view.slug)}`;
     case "guides":
-      return `${base}/guides`;
+      return "#/guides";
     case "guide":
-      return `${base}/guides/${encodeURIComponent(route.view.slug)}`;
+      return `#/guides/${encodeURIComponent(route.view.slug)}`;
     case "poem":
-      return `${base}/poems/${encodeURIComponent(route.view.slug)}`;
+      return `#/poems/${encodeURIComponent(route.view.slug)}`;
     case "search":
-      return `${base}/search`;
+      return "#/search";
     case "bio":
-      return `${base}/bio`;
+      return "#/bio";
     case "about":
-      return `${base}/about`;
+      return "#/about";
   }
 }
 

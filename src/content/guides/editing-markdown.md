@@ -6,7 +6,7 @@ book: "Alice’s Adventures in Wonderland"
 author: "Lewis Carroll"
 bookPublished: "1865"
 published: "2026-05-18"
-genre: "Literary nonsense"
+genre: fantasy
 tags: markdown, writing, tools, beginners
 ---
 

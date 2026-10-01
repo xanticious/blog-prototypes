@@ -6,7 +6,7 @@ book: "Pride and Prejudice"
 author: "Jane Austen"
 bookPublished: "1813"
 published: "2026-02-08"
-genre: "Novel of manners"
+genre: romance
 tags: rereading, attention, practice, pages
 ---
 

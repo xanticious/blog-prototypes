@@ -20,7 +20,7 @@ export type Guide = {
   author: string;
   bookPublished: string;
   published: string;
-  genre: string;
+  genres: string[];
   tags: string[];
   body: string;
 };
@@ -34,8 +34,21 @@ export type ShelfPiece = {
   author: string;
   bookPublished: string;
   published: string;
-  genre: string;
+  genres: string[];
   tags: string[];
+  body: string;
+};
+
+export type ShelfQuery = {
+  genre: string;
+  author: string;
+  tag: string;
+  text: string;
+};
+
+export type ShelfMatch = {
+  piece: ShelfPiece;
+  matches: number;
 };
 
 export type Poem = {
@@ -101,13 +114,13 @@ function requireField(data: Record<string, string>, key: string, file: string): 
   return value;
 }
 
-function parseTags(value: string | undefined, file: string): string[] {
-  const tags = (value ?? "")
+function parseList(value: string | undefined, file: string, label: string): string[] {
+  const items = (value ?? "")
     .split(",")
-    .map((tag) => tag.trim())
+    .map((item) => item.trim())
     .filter(Boolean);
-  if (tags.length === 0) throw new Error(`Add at least one tag in ${file}`);
-  return tags;
+  if (items.length === 0) throw new Error(`Add at least one ${label} in ${file}`);
+  return items;
 }
 
 function loadReviews(): Review[] {
@@ -118,6 +131,7 @@ function loadReviews(): Review[] {
       const bookId = requireField(data, "bookId", file);
       const book = getBook(bookId);
       if (!book) throw new Error(`Unknown bookId "${bookId}" in ${file}`);
+      if (book.genres.length === 0) throw new Error(`Add at least one genre for "${bookId}"`);
       const review: Review = {
         slug: front.slug || file,
         title: requireField(data, "title", file),
@@ -126,7 +140,7 @@ function loadReviews(): Review[] {
         book,
         published: requireField(data, "published", file),
         spoilers: data.spoilers === "true",
-        tags: parseTags(data.tags, file),
+        tags: parseList(data.tags, file, "tag"),
         body,
       };
       return review;
@@ -146,8 +160,8 @@ function loadGuides(): Guide[] {
         author: requireField(data, "author", file),
         bookPublished: requireField(data, "bookPublished", file),
         published: requireField(data, "published", file),
-        genre: requireField(data, "genre", file),
-        tags: parseTags(data.tags, file),
+        genres: parseList(data.genre, file, "genre"),
+        tags: parseList(data.tags, file, "tag"),
         body,
       };
       return guide;
@@ -197,7 +211,7 @@ export function excerpt(body: string, max = 240): string {
     .map((block) => block.trim())
     .find((block) => block && !block.startsWith("#") && !block.startsWith(">") && !block.startsWith(":::"));
   if (!paragraph) return "";
-  const clean = paragraph.replace(/[*_]/g, "");
+  const clean = paragraph.replace(/\|\|[^\n]*?\|\|/g, "spoiler").replace(/[*_]/g, "");
   if (clean.length <= max) return clean;
   return `${clean.slice(0, max).replace(/\s+\S*$/, "")}…`;
 }
@@ -212,8 +226,9 @@ export function shelfPieces(): ShelfPiece[] {
     author: review.book.author,
     bookPublished: review.book.year,
     published: review.published,
-    genre: review.book.genre,
+    genres: review.book.genres,
     tags: review.tags,
+    body: review.body,
   }));
   const fromGuides: ShelfPiece[] = guides.map((guide) => ({
     kind: "guide",
@@ -224,53 +239,74 @@ export function shelfPieces(): ShelfPiece[] {
     author: guide.author,
     bookPublished: guide.bookPublished,
     published: guide.published,
-    genre: guide.genre,
+    genres: guide.genres,
     tags: guide.tags,
+    body: guide.body,
   }));
   return [...fromReviews, ...fromGuides].sort((a, b) => b.published.localeCompare(a.published));
 }
 
+export function formatGenres(genres: string[]): string {
+  return genres.join(", ");
+}
+
 export function genresOnShelf(): string[] {
-  return [...new Set(shelfPieces().map((piece) => piece.genre))].sort((a, b) => a.localeCompare(b));
+  return [...new Set(shelfPieces().flatMap((piece) => piece.genres))].sort((a, b) => a.localeCompare(b));
+}
+
+export function authorsOnShelf(): string[] {
+  return [...new Set(shelfPieces().map((piece) => piece.author))].sort((a, b) => a.localeCompare(b));
 }
 
 export function tagsOnShelf(): string[] {
   return [...new Set(shelfPieces().flatMap((piece) => piece.tags))].sort((a, b) => a.localeCompare(b));
 }
 
-function isGenreToken(token: string, genres: string[]): boolean {
-  return genres.some((genre) => genre === token || (token.length >= 4 && genre.includes(token)));
+function searchHaystack(piece: ShelfPiece): string {
+  return [piece.title, piece.dek, piece.book, piece.author, piece.bookPublished, ...piece.genres, ...piece.tags, piece.body]
+    .join("\n")
+    .toLowerCase();
 }
 
-export function filterShelf(pieces: ShelfPiece[], genres: string[], text: string): ShelfPiece[] {
-  const chosen = [...new Set(genres.map((genre) => genre.trim().toLowerCase()).filter(Boolean))];
-  const tokens = text
-    .split(",")
-    .map((token) => token.trim().toLowerCase())
-    .filter(Boolean);
-  const knownGenres = [...new Set(pieces.map((piece) => piece.genre.toLowerCase()))];
-  const genreTokens = tokens.filter((token) => isGenreToken(token, knownGenres));
-  const otherTokens = tokens.filter((token) => !genreTokens.includes(token));
+function countOccurrences(haystackText: string, needle: string): number {
+  const query = needle.trim().toLowerCase();
+  if (!query) return 0;
+  let count = 0;
+  let index = 0;
+  while (index <= haystackText.length) {
+    const found = haystackText.indexOf(query, index);
+    if (found === -1) break;
+    count += 1;
+    index = found + query.length;
+  }
+  return count;
+}
 
-  return pieces.filter((piece) => {
-    const genreName = piece.genre.toLowerCase();
-    const menuOk = chosen.length === 0 || chosen.some((genre) => genre === genreName);
-    if (!menuOk) return false;
-    if (tokens.length === 0) return true;
+export function filterShelf(pieces: ShelfPiece[], query: ShelfQuery): ShelfMatch[] {
+  const genre = query.genre.trim();
+  const author = query.author.trim();
+  const tag = query.tag.trim();
+  const text = query.text.trim();
 
-    const genreTokenOk =
-      genreTokens.length === 0 ||
-      genreTokens.some(
-        (token) => genreName.includes(token) || piece.tags.some((tag) => tag.toLowerCase().includes(token)),
-      );
-    const otherOk = otherTokens.every((token) => {
-      const haystack = [piece.title, piece.dek, piece.book, piece.author, piece.genre, ...piece.tags]
-        .join("\n")
-        .toLowerCase();
-      return haystack.includes(token);
-    });
-    return genreTokenOk && otherOk;
+  const matched = pieces.filter((piece) => {
+    if (genre && !piece.genres.includes(genre)) return false;
+    if (author && piece.author !== author) return false;
+    if (tag && !piece.tags.includes(tag)) return false;
+    return true;
   });
+
+  const ranked = matched.map((piece) => ({
+    piece,
+    matches: text ? countOccurrences(searchHaystack(piece), text) : 0,
+  }));
+  const visible = text ? ranked.filter((item) => item.matches > 0) : ranked;
+
+  visible.sort((a, b) => {
+    if (text && b.matches !== a.matches) return b.matches - a.matches;
+    return b.piece.published.localeCompare(a.piece.published);
+  });
+
+  return visible;
 }
 
 export function formatDate(iso: string): string {
