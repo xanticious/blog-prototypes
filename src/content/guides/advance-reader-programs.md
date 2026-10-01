@@ -6,7 +6,7 @@ book: "A Tale of Two Cities"
 author: "Charles Dickens"
 bookPublished: "1859"
 published: "2026-06-02"
-genre: "Historical novel"
+genre: historical
 tags: publishers, reviews, beginners, arcs
 ---
 

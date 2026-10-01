@@ -1,5 +1,5 @@
 import type { Guide, Poem, Review } from "../content/library";
-import { formatDate } from "../content/library";
+import { formatDate, formatGenres } from "../content/library";
 import type { View } from "../machine/routes";
 import { routeToHash } from "../machine/routes";
 import type { Prototype } from "../prototypes/catalog";
@@ -90,7 +90,7 @@ export function GuidePiece({ prototype, guide }: { prototype: Prototype; guide: 
       href={routeToHash({ name: "prototype", prototypeId: prototype.id, view })}
       event={{ type: "OPEN_VIEW", view }}
     >
-      <span className="kicker">{guide.genre}</span>
+      <span className="kicker">{formatGenres(guide.genres)}</span>
       <span className="piece-title">{guide.title}</span>
       <span className="piece-dek">{guide.dek}</span>
       <span className="piece-meta">

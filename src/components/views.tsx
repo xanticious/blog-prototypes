@@ -1,8 +1,10 @@
 import { useMemo, useState } from "react";
 import {
+  authorsOnShelf,
   excerpt,
   filterShelf,
   formatDate,
+  formatGenres,
   genresOnShelf,
   getGuide,
   getPoem,
@@ -14,11 +16,12 @@ import {
   tagsOnShelf,
   type Guide,
   type Review,
-  type ShelfPiece,
+  type ShelfMatch,
 } from "../content/library";
 import { routeToHash, type View } from "../machine/routes";
 import { layoutLabels, moodLabels, shellLabels, type Prototype } from "../prototypes/catalog";
 import { BookCover } from "./BookCover";
+import { FilterMenu } from "./FilterMenu";
 import { MarkdownBody } from "./MarkdownBody";
 import { NavLink } from "./NavLink";
 import { GuidePiece, PoemPiece, ReviewPiece } from "./PieceLink";
@@ -28,14 +31,14 @@ function PostMeta({
   author,
   bookPublished,
   published,
-  genre,
+  genres,
   tags,
 }: {
   book: string;
   author: string;
   bookPublished?: string;
   published: string;
-  genre: string;
+  genres: string[];
   tags: string[];
 }) {
   const bookLabel = bookPublished ? `${book} (${bookPublished})` : book;
@@ -56,8 +59,8 @@ function PostMeta({
         </dd>
       </div>
       <div>
-        <dt>Genre</dt>
-        <dd>{genre}</dd>
+        <dt>Genres</dt>
+        <dd>{formatGenres(genres)}</dd>
       </div>
       <div>
         <dt>Tags</dt>
@@ -182,9 +185,9 @@ export function ReviewsView({ prototype, reviews }: { prototype: Prototype; revi
     <div className="section-page">
       <header className="page-intro">
         <p className="eyebrow">Book reviews</p>
-        <h1>Essays on the books.</h1>
+        <h1>Notes on the books.</h1>
         <p className="lede">
-          Twelve long reviews of books old enough to belong to everyone. Open a cover to read the essay.
+          Six short reviews, the kind you write when you have just finished and the margin notes are still fresh.
         </p>
       </header>
       <ul className="piece-list">
@@ -210,7 +213,7 @@ export function ReviewView({ prototype, slug }: { prototype: Prototype; slug: st
       <div className="essay-top">
         <BookCover bookId={review.bookId} title={review.book.title} author={review.book.author} size="md" />
         <div>
-          <p className="kicker">{review.book.genre}</p>
+          <p className="kicker">{formatGenres(review.book.genres)}</p>
           <h1>{review.title}</h1>
           <p className="dek">{review.dek}</p>
           {review.spoilers ? <p className="spoiler-warning">This review contains spoilers.</p> : null}
@@ -221,7 +224,7 @@ export function ReviewView({ prototype, slug }: { prototype: Prototype; slug: st
         author={review.book.author}
         bookPublished={review.book.year}
         published={review.published}
-        genre={review.book.genre}
+        genres={review.book.genres}
         tags={review.tags}
       />
       <aside className="book-facts">
@@ -241,7 +244,7 @@ export function ReviewView({ prototype, slug }: { prototype: Prototype; slug: st
           </div>
           <div>
             <dt>Kind</dt>
-            <dd>{review.book.genre}</dd>
+            <dd>{formatGenres(review.book.genres)}</dd>
           </div>
         </dl>
       </aside>
@@ -301,7 +304,7 @@ export function GuideView({ prototype, slug }: { prototype: Prototype; slug: str
         author={guide.author}
         bookPublished={guide.bookPublished}
         published={guide.published}
-        genre={guide.genre}
+        genres={guide.genres}
         tags={guide.tags}
       />
       <MarkdownBody body={guide.body} />
@@ -377,7 +380,7 @@ export function RelatedPosts({ prototype, current }: { prototype: Prototype; cur
     ...guides.map((guide) => ({
       key: `guide-${guide.slug}`,
       title: guide.title,
-      meta: guide.genre,
+      meta: formatGenres(guide.genres),
       view: { kind: "guide" as const, slug: guide.slug },
     })),
   ].filter((post) => {
@@ -444,8 +447,9 @@ export function AboutView({ prototype }: { prototype: Prototype }) {
         <p>{prototype.about}</p>
         <p>{prototype.description}</p>
         <p>
-          The essays are sample book reviews, with blog posts on how to stay with a book and how to keep a
-          small site. The shelf is here so the room can be read with real writing in it.
+          The notes are sample book reviews, written the way a journal looks after the last page, with blog
+          posts on how to stay with a book and how to keep a small site. The shelf is here so the room can be
+          read with real writing in it.
         </p>
         <p>
           <NavLink
@@ -461,21 +465,15 @@ export function AboutView({ prototype }: { prototype: Prototype }) {
   );
 }
 
-function searchTokens(text: string): string[] {
-  return text
-    .split(",")
-    .map((token) => token.trim())
-    .filter(Boolean);
+function resultSummary(count: number, active: boolean, byMentions: boolean): string {
+  const noun = count === 1 ? "1 piece" : `${count} pieces`;
+  const fit = !active ? " on the shelf." : count === 1 ? " matches." : " match.";
+  const sort = byMentions ? " Most mentions first." : " Most recent first.";
+  return `${noun}${fit}${sort}`;
 }
 
-function toggleTag(text: string, tag: string): string {
-  const tokens = searchTokens(text);
-  const exists = tokens.some((token) => token.toLowerCase() === tag.toLowerCase());
-  const next = exists ? tokens.filter((token) => token.toLowerCase() !== tag.toLowerCase()) : [...tokens, tag];
-  return next.join(", ");
-}
-
-function SearchResult({ prototype, piece }: { prototype: Prototype; piece: ShelfPiece }) {
+function SearchResult({ prototype, match }: { prototype: Prototype; match: ShelfMatch }) {
+  const piece = match.piece;
   const view: View = piece.kind === "review" ? { kind: "review", slug: piece.slug } : { kind: "guide", slug: piece.slug };
   return (
     <article className="search-hit">
@@ -489,12 +487,15 @@ function SearchResult({ prototype, piece }: { prototype: Prototype; piece: Shelf
         </NavLink>
       </h2>
       <p className="piece-dek">{piece.dek}</p>
+      {match.matches > 0 ? (
+        <p className="search-score">{match.matches === 1 ? "1 mention" : `${match.matches} mentions`}</p>
+      ) : null}
       <PostMeta
         book={piece.book}
         author={piece.author}
         bookPublished={piece.bookPublished}
         published={piece.published}
-        genre={piece.genre}
+        genres={piece.genres}
         tags={piece.tags}
       />
     </article>
@@ -504,22 +505,26 @@ function SearchResult({ prototype, piece }: { prototype: Prototype; piece: Shelf
 export function SearchView({ prototype }: { prototype: Prototype }) {
   const pieces = useMemo(() => shelfPieces(), []);
   const genres = useMemo(() => genresOnShelf(), []);
+  const authors = useMemo(() => authorsOnShelf(), []);
   const tags = useMemo(() => tagsOnShelf(), []);
-  const [genreA, setGenreA] = useState("");
-  const [genreB, setGenreB] = useState("");
+  const [genre, setGenre] = useState("");
+  const [author, setAuthor] = useState("");
+  const [tag, setTag] = useState("");
   const [text, setText] = useState("");
-  const results = useMemo(() => filterShelf(pieces, [genreA, genreB], text), [pieces, genreA, genreB, text]);
-  const active = Boolean(genreA || genreB || text.trim());
-  const chosen = searchTokens(text).map((token) => token.toLowerCase());
+  const results = useMemo(
+    () => filterShelf(pieces, { genre, author, tag, text }),
+    [pieces, genre, author, tag, text],
+  );
+  const active = Boolean(genre || author || tag || text.trim());
 
   return (
     <div className="section-page search-page">
       <header className="page-intro">
         <p className="eyebrow">Search</p>
-        <h1>Two genres, and the tags.</h1>
+        <h1>Find a piece.</h1>
         <p className="lede">
-          Look through the reviews and the posts by genre and by tag. Pick up to two genres, then narrow them
-          with tags. You can type the tags, or press them. Genre names work in the field too, separated by commas.
+          Narrow the shelf with one genre, one author, and one tag. Text search looks through the title, the
+          author, the tags, and the writing, then lists the pieces where those words show up most.
         </p>
       </header>
       <form
@@ -529,64 +534,47 @@ export function SearchView({ prototype }: { prototype: Prototype }) {
           event.preventDefault();
         }}
       >
-        <label htmlFor="shelf-search">
-          Search genres and tags
+        <div className="search-filters">
+          <FilterMenu label="Genre" value={genre} options={genres} anyLabel="Any genre" onChange={setGenre} />
+          <FilterMenu
+            label="Author"
+            value={author}
+            options={authors}
+            anyLabel="Any author"
+            searchable
+            searchPlaceholder="Filter authors"
+            onChange={setAuthor}
+          />
+          <FilterMenu
+            label="Tag"
+            value={tag}
+            options={tags}
+            anyLabel="Any tag"
+            searchable
+            searchPlaceholder="Filter tags"
+            onChange={setTag}
+          />
+        </div>
+        <label htmlFor="shelf-text">
+          Text search
           <input
-            id="shelf-search"
+            id="shelf-text"
             type="search"
             value={text}
             onChange={(event) => setText(event.target.value)}
-            placeholder="gothic, letters, rereading"
+            placeholder="A name, a place, a sentence"
             autoComplete="off"
           />
         </label>
-        <div className="genre-pair">
-          <label htmlFor="genre-a">
-            First genre
-            <select id="genre-a" value={genreA} onChange={(event) => setGenreA(event.target.value)}>
-              <option value="">Any genre</option>
-              {genres.map((genre) => (
-                <option key={genre} value={genre}>
-                  {genre}
-                </option>
-              ))}
-            </select>
-          </label>
-          <label htmlFor="genre-b">
-            Second genre
-            <select id="genre-b" value={genreB} onChange={(event) => setGenreB(event.target.value)}>
-              <option value="">Any genre</option>
-              {genres.map((genre) => (
-                <option key={genre} value={genre}>
-                  {genre}
-                </option>
-              ))}
-            </select>
-          </label>
-        </div>
-        <fieldset className="tag-field">
-          <legend>Tags</legend>
-          <ul className="tag-cloud">
-            {tags.map((tag) => {
-              const pressed = chosen.includes(tag.toLowerCase());
-              return (
-                <li key={tag}>
-                  <button type="button" aria-pressed={pressed} onClick={() => setText((current) => toggleTag(current, tag))}>
-                    {tag}
-                  </button>
-                </li>
-              );
-            })}
-          </ul>
-        </fieldset>
         {active ? (
           <button
             type="button"
             className="search-clear"
             onClick={() => {
+              setGenre("");
+              setAuthor("");
+              setTag("");
               setText("");
-              setGenreA("");
-              setGenreB("");
             }}
           >
             Clear search
@@ -594,16 +582,15 @@ export function SearchView({ prototype }: { prototype: Prototype }) {
         ) : null}
       </form>
       <p className="search-count" aria-live="polite">
-        {results.length === 1 ? "1 piece" : `${results.length} pieces`}
-        {active ? " match this search." : " on the shelf."}
+        {resultSummary(results.length, active, Boolean(text.trim()))}
       </p>
       {results.length === 0 ? (
-        <p className="search-empty">Nothing on the shelf fits those genres and tags. Try one genre, or a single tag.</p>
+        <p className="search-empty">Nothing on the shelf fits. Try another genre, author, tag, or a shorter phrase.</p>
       ) : (
         <ul className="search-results">
-          {results.map((piece) => (
-            <li key={`${piece.kind}-${piece.slug}`}>
-              <SearchResult prototype={prototype} piece={piece} />
+          {results.map((match) => (
+            <li key={`${match.piece.kind}-${match.piece.slug}`}>
+              <SearchResult prototype={prototype} match={match} />
             </li>
           ))}
         </ul>

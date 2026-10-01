@@ -6,7 +6,7 @@ book: "Frankenstein"
 author: "Mary Shelley"
 bookPublished: "1818"
 published: "2026-03-02"
-genre: "Gothic novel"
+genre: sci-fi, gothic
 tags: journal, notes, habit, practice
 ---
 

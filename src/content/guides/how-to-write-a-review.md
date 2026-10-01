@@ -6,7 +6,7 @@ book: "Jane Eyre"
 author: "Charlotte Brontë"
 bookPublished: "1847"
 published: "2026-01-08"
-genre: "Gothic romance"
+genre: romance, romantasy
 tags: writing, reviews, beginners, practice
 ---
 

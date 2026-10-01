@@ -234,7 +234,10 @@ export function PrototypeApp() {
     return (
       <main className="missing-shell">
         <h1>That page is not on the shelf.</h1>
-        <NavLink href={`#/p/${sitePrototypeId}`} event={{ type: "OPEN_PROTOTYPE", prototypeId: sitePrototypeId }}>
+        <NavLink
+          href={routeToHash({ name: "prototype", prototypeId: sitePrototypeId, view: { kind: "home" } })}
+          event={{ type: "OPEN_VIEW", view: { kind: "home" } }}
+        >
           Back home
         </NavLink>
       </main>

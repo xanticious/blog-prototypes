@@ -6,7 +6,7 @@ book: "Dracula"
 author: "Bram Stoker"
 bookPublished: "1897"
 published: "2026-04-02"
-genre: "Epistolary horror"
+genre: fantasy, gothic
 tags: conversation, friends, clubs, questions
 ---
 

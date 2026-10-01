@@ -2,7 +2,7 @@
 
 A brainstorm, not a plan. These are one hundred directions someone could take Window Seat. They are grouped so we can tell a small improvement from a different product. Plenty of them are here because we might look at them and decide not to build them. Nothing on this list is scheduled. The site we have is one reading room, improved in small steps.
 
-The shelf today is twelve public-domain reviews, eight blog posts, one poem, a search for two genres and for tags, a bio for Naomi Pell, hash addresses, and a floating menu. Suggestions below start from that room.
+The shelf today is six short public-domain reviews, eight blog posts, one poem, search by one genre, one author, one tag, and the text of a piece, a bio for Naomi Pell, hash addresses, and a floating menu. Suggestions below start from that room.
 
 A few of them are written down so we can decide not to build them. They live in the categories with everything else, and they are listed together here:
 
@@ -60,7 +60,7 @@ A few of them are written down so we can decide not to build them. They live in 
 37. Show the book’s original year as its own labeled fact, beside the post’s publication date, on every card and not only inside the book line.
 38. Let a post name two books, for a comparison essay. The metadata would get harder. We may not want that.
 39. A controlled vocabulary file, so tags cannot drift into `Gothic` and `gothic` and `the gothic`.
-40. Search inside the essay text, not only the metadata. Useful later, noisy now.
+40. Search inside the essay text is already on the search page, sorted by how often the words appear. A later pass could highlight the matches in the piece itself.
 
 ## Beside the reviews
 

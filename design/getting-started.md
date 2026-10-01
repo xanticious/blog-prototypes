@@ -64,9 +64,9 @@ You can write it in any text editor. You can read it even if the website disappe
 
 Markdown is the best default for a beginner who is willing to learn about ten symbols. It is also what most static-site tools expect.
 
-Each review and each blog post starts with **front matter**, a little block of facts between `---` lines. The site reads those facts and uses the rest of the file as the essay. Every post shows the same five facts on the page: the book, the author, a publication date, the genre, and one or more tags.
+Each review and each blog post starts with **front matter**, a little block of facts between `---` lines. The site reads those facts and uses the rest of the file as the piece. Every post shows the same five facts on the page: the book, the author, a publication date, one or more genres, and one or more tags.
 
-A review points at a book that already lives in `src/content/books.ts`. That record holds the title, the author, the original year, and the genre. The review file adds the date the essay went up, and the tags.
+A review points at a book that already lives in `src/content/books.ts`. That record holds the title, the author, the original year, and the genres. The review file adds the date the note went up, and the tags.
 
 ```markdown
 ---
@@ -92,18 +92,18 @@ book: "The Odyssey"
 author: "Homer"
 bookPublished: "8th century BCE"
 published: "2026-05-25"
-genre: "Epic poem"
+genre: fantasy
 tags: git, saving, versions, beginners
 ---
 ```
 
-The book on a practical post is the one the post is thinking beside. Say so in a sentence, so the fact does not feel pinned on from outside.
+The book on a practical post is the one the post is thinking beside. Say so in a sentence, so the fact does not feel pinned on from outside. A post can name more than one genre. Separate them with commas: `genre: fantasy, gothic`. The same shape is used for book records in `src/content/books.ts`, as a list: `genres: ["sci-fi", "gothic"]`. Names such as `romance`, `romantasy`, and `smut` are ordinary genre labels. Author names are matched as whole strings.
 
 `slug` is the bit that shows up in the address. Use lowercase words and hyphens, and do not change it after you have shared the link.
 
 `dek` is newspaper slang for the sentence under the headline. Write it for someone who has not decided to read yet.
 
-Separate tags with commas. Use words a reader might actually search: `gothic`, `rereading`, `letters`. The search page can take two genres and any of these tags.
+Separate tags with commas. Use words a reader might actually search: `gothic`, `rereading`, `letters`. The search page can take one genre, one author, and one tag. The text field searches the writing and sorts by how often the words appear.
 
 ### A visual editor
 
@@ -115,7 +115,7 @@ This is the right choice if you never want to see a file. It is a weaker choice 
 
 MDX is Markdown that can also contain little islands of website code (a custom pull-quote, an audio player, a spoiler box). Markdoc, used by some documentation sites, is a cousin with stricter rules.
 
-These are wonderful when a developer is building custom components and a writer is willing to type a few tags. They are a bad first step. A book review rarely needs a component. It needs paragraphs. This project stays with ordinary Markdown, plus two small fences the viewer already understands: `:::spoiler` for a collapsed block, and `:::verse` for a poem’s line breaks. A new essay cannot accidentally embed a program.
+These are wonderful when a developer is building custom components and a writer is willing to type a few tags. They are a bad first step. A book review rarely needs a component. It needs paragraphs. This project stays with ordinary Markdown, plus three small marks the viewer already understands: `:::spoiler` for a collapsed block, `||a hidden phrase||` for a spoiler inside a sentence, and `:::verse` for a poem’s line breaks. Bold and italic still work inside the bars. A new note cannot accidentally embed a program.
 
 ### Writing the essay inside the program
 
@@ -186,7 +186,7 @@ What you should not do, early, is design a login system, a commenting platform, 
 GitHub Pages serves a static folder. This app is built for that in two ways.
 
 - The build command (`npm run build`) writes a `dist/` folder, then copies the JavaScript, CSS, and favicon to the repository root. GitHub Pages is set to deploy from the `main` branch, folder `/ (root)`, and serves those files directly. The workflow in `.github/workflows/pages.yml` rebuilds and commits them when changes land on `main`.
-- The address of each page uses a **hash**, the `#` in a URL. `#/p/inkwell/reviews` is still the same `index.html` file as far as the server is concerned. The browser, and the state machine in this project, read the part after `#` and decide what to show. That works on GitHub Pages project sites (`https://yourname.github.io/your-repo/`) without a special server rule. The asset paths are relative for the same reason.
+- The address of each page uses a **hash**, the `#` in a URL. `#/reviews` is still the same `index.html` file as far as the server is concerned. The browser, and the state machine in this project, read the part after `#` and decide what to show. That works on GitHub Pages project sites (`https://yourname.github.io/your-repo/`) without a special server rule. The asset paths are relative for the same reason.
 
 A hash address will not give you pretty links like `/reviews/jane-eyre` without extra hosting setup. For a first static blog, that is a fair trade. If you later move to Netlify, Cloudflare Pages, or your own server, a developer can switch the router. The essays would not have to change.
 
