@@ -5,6 +5,7 @@ dek: "Dostoevsky’s novel follows a student who tries to turn a murder into an 
 bookId: crime-and-punishment
 published: "2026-02-28"
 spoilers: true
+tags: guilt, psychology, morality, city
 ---
 
 Raskolnikov’s room is so small he can lie on the bed and touch the door. From that cupboard of a life he builds a theory large enough to justify a killing. Fyodor Dostoevsky’s *Crime and Punishment* is the story of what a theory does when it has to walk down an actual staircase, past a caretaker, into a flat where a woman is still alive and inconvenient.

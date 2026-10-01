@@ -90,9 +90,17 @@ export function GuidePiece({ prototype, guide }: { prototype: Prototype; guide: 
       href={routeToHash({ name: "prototype", prototypeId: prototype.id, view })}
       event={{ type: "OPEN_VIEW", view }}
     >
-      <span className="kicker">Blog post</span>
+      <span className="kicker">{guide.genre}</span>
       <span className="piece-title">{guide.title}</span>
       <span className="piece-dek">{guide.dek}</span>
+      <span className="piece-meta">
+        {guide.book} · {guide.author}
+      </span>
+      <span className="piece-meta">
+        <time dateTime={guide.published}>{formatDate(guide.published)}</time>
+        {" · "}
+        {guide.tags.join(" · ")}
+      </span>
     </NavLink>
   );
 }

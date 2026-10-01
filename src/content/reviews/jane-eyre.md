@@ -5,6 +5,7 @@ dek: "Charlotte Brontë gives a plain, employed, watchful girl the narrative aut
 bookId: jane-eyre
 published: "2026-02-02"
 spoilers: true
+tags: gothic, romance, voice, independence
 ---
 
 *Jane Eyre* opens in a window seat, behind a curtain, with a book about birds and a cousin who thinks the orphan in the house is furniture. From that hiding place Jane tells her own story, and she never really gives the telling back. Charlotte Brontë’s radical move is not the madwoman in the attic, though the attic matters. It is the decision to let a governess — poor, small, “obscure” by her own description — speak in a voice this sure.

@@ -4,6 +4,7 @@ title: "Book review: Moby-Dick"
 dek: "Melville’s whale book is a novel, a work manual, a sermon, and a joke that keeps going until it is not a joke. You do not have to love every chapter to feel the size of the hold."
 bookId: moby-dick
 published: "2026-02-14"
+tags: sea, obsession, adventure, ambition
 ---
 
 Call me impatient, a reader might think, opening *Moby-Dick* and finding etymology, extracts, a sermon, and a hundred pages before the Pequod even loses sight of shore. Herman Melville seems to agree that a whale is too large for a single kind of chapter. He changes the form whenever the subject changes. There is theater, encyclopedia, slapstick, natural history, and a revenge plot told by a sailor who is sometimes in the scene and sometimes only the voice left over.

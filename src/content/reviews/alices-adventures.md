@@ -4,6 +4,7 @@ title: "Book review: Alice’s Adventures in Wonderland"
 dek: "Lewis Carroll’s Wonderland is not random. It is a place where rules are enforced by people who change them, and a girl who keeps asking the next reasonable question."
 bookId: alices-adventures
 published: "2026-04-06"
+tags: nonsense, wordplay, fantasy, childhood
 ---
 
 Alice follows a rabbit because she is bored, not because she is chosen. That small detail is the tone of the whole book. Lewis Carroll, the pen name of the mathematician Charles Dodgson, sends a practical child into a country of arguments, and the comedy comes from her refusal to stop applying ordinary sense. When a cake says “EAT ME,” she checks the label. When she is shrinking and growing without permission, she worries about whether she is still herself, and whether her feet will still obey her if she sends them boots by post. Wonderland is strange. Alice’s mind is orderly. The friction is the book.

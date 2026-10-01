@@ -2,7 +2,12 @@
 slug: close-reading
 title: "Three Passes: A Simple Close-Reading Routine"
 dek: "Close reading sounds like a seminar trick. It is really just rereading with a different question each time, so the page has a chance to be more than a plot."
+book: "Pride and Prejudice"
+author: "Jane Austen"
+bookPublished: "1813"
 published: "2026-02-08"
+genre: "Novel of manners"
+tags: rereading, attention, practice, pages
 ---
 
 You do not have to close-read a whole novel. That way lies misery and a second job. Choose a passage that snagged you — two pages is a generous portion — and walk through it three times. Each pass has one job. Trying to do all three jobs at once is how people decide they are “bad at literature.”

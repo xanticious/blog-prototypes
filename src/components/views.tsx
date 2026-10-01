@@ -1,14 +1,20 @@
+import { useMemo, useState } from "react";
 import {
   excerpt,
+  filterShelf,
   formatDate,
+  genresOnShelf,
   getGuide,
   getPoem,
   getReview,
   guides,
   poems,
   reviews,
+  shelfPieces,
+  tagsOnShelf,
   type Guide,
   type Review,
+  type ShelfPiece,
 } from "../content/library";
 import { routeToHash, type View } from "../machine/routes";
 import { layoutLabels, moodLabels, shellLabels, type Prototype } from "../prototypes/catalog";
@@ -16,6 +22,56 @@ import { BookCover } from "./BookCover";
 import { MarkdownBody } from "./MarkdownBody";
 import { NavLink } from "./NavLink";
 import { GuidePiece, PoemPiece, ReviewPiece } from "./PieceLink";
+
+function PostMeta({
+  book,
+  author,
+  bookPublished,
+  published,
+  genre,
+  tags,
+}: {
+  book: string;
+  author: string;
+  bookPublished?: string;
+  published: string;
+  genre: string;
+  tags: string[];
+}) {
+  const bookLabel = bookPublished ? `${book} (${bookPublished})` : book;
+  return (
+    <dl className="post-meta">
+      <div>
+        <dt>Book</dt>
+        <dd>{bookLabel}</dd>
+      </div>
+      <div>
+        <dt>Author</dt>
+        <dd>{author}</dd>
+      </div>
+      <div>
+        <dt>Publication date</dt>
+        <dd>
+          <time dateTime={published}>{formatDate(published)}</time>
+        </dd>
+      </div>
+      <div>
+        <dt>Genre</dt>
+        <dd>{genre}</dd>
+      </div>
+      <div>
+        <dt>Tags</dt>
+        <dd>
+          <ul className="tag-list">
+            {tags.map((tag) => (
+              <li key={tag}>{tag}</li>
+            ))}
+          </ul>
+        </dd>
+      </div>
+    </dl>
+  );
+}
 
 function Missing({
   prototype,
@@ -157,13 +213,17 @@ export function ReviewView({ prototype, slug }: { prototype: Prototype; slug: st
           <p className="kicker">{review.book.genre}</p>
           <h1>{review.title}</h1>
           <p className="dek">{review.dek}</p>
-          <p className="byline">
-            On {review.book.title} by {review.book.author} · {review.book.year}
-            <span> · {formatDate(review.published)}</span>
-          </p>
           {review.spoilers ? <p className="spoiler-warning">This review contains spoilers.</p> : null}
         </div>
       </div>
+      <PostMeta
+        book={review.book.title}
+        author={review.book.author}
+        bookPublished={review.book.year}
+        published={review.published}
+        genre={review.book.genre}
+        tags={review.tags}
+      />
       <aside className="book-facts">
         <p className="rail-label">In the margin</p>
         <dl>
@@ -205,8 +265,8 @@ export function GuidesView({ prototype, guides }: { prototype: Prototype; guides
         <p className="eyebrow">Blog posts</p>
         <h1>How to stay with a book.</h1>
         <p className="lede">
-          Short tutorials for the part of a book blog that is not a review: taking notes, rereading a page,
-          and talking with other people.
+          Notes on reading, and a few plain introductions for writers who are new to the tools around a blog:
+          Markdown, saving drafts, early copies, and finding readers.
         </p>
       </header>
       <ul className="guide-list">
@@ -234,9 +294,16 @@ export function GuideView({ prototype, slug }: { prototype: Prototype; slug: str
           <p className="kicker">Blog post</p>
           <h1>{guide.title}</h1>
           <p className="dek">{guide.dek}</p>
-          <p className="byline">{formatDate(guide.published)}</p>
         </div>
       </div>
+      <PostMeta
+        book={guide.book}
+        author={guide.author}
+        bookPublished={guide.bookPublished}
+        published={guide.published}
+        genre={guide.genre}
+        tags={guide.tags}
+      />
       <MarkdownBody body={guide.body} />
       <p className="essay-foot">
         <NavLink
@@ -310,7 +377,7 @@ export function RelatedPosts({ prototype, current }: { prototype: Prototype; cur
     ...guides.map((guide) => ({
       key: `guide-${guide.slug}`,
       title: guide.title,
-      meta: "Blog post",
+      meta: guide.genre,
       view: { kind: "guide" as const, slug: guide.slug },
     })),
   ].filter((post) => {
@@ -377,8 +444,223 @@ export function AboutView({ prototype }: { prototype: Prototype }) {
         <p>{prototype.about}</p>
         <p>{prototype.description}</p>
         <p>
-          The essays are sample book reviews, with a few blog posts on how to stay with a book. The shelf is
-          here so the room can be read with real writing in it.
+          The essays are sample book reviews, with blog posts on how to stay with a book and how to keep a
+          small site. The shelf is here so the room can be read with real writing in it.
+        </p>
+        <p>
+          <NavLink
+            href={routeToHash({ name: "prototype", prototypeId: prototype.id, view: { kind: "bio" } })}
+            event={{ type: "OPEN_VIEW", view: { kind: "bio" } }}
+          >
+            Naomi Pell
+          </NavLink>{" "}
+          keeps the shelf. Her note is on the bio page.
+        </p>
+      </div>
+    </article>
+  );
+}
+
+function searchTokens(text: string): string[] {
+  return text
+    .split(",")
+    .map((token) => token.trim())
+    .filter(Boolean);
+}
+
+function toggleTag(text: string, tag: string): string {
+  const tokens = searchTokens(text);
+  const exists = tokens.some((token) => token.toLowerCase() === tag.toLowerCase());
+  const next = exists ? tokens.filter((token) => token.toLowerCase() !== tag.toLowerCase()) : [...tokens, tag];
+  return next.join(", ");
+}
+
+function SearchResult({ prototype, piece }: { prototype: Prototype; piece: ShelfPiece }) {
+  const view: View = piece.kind === "review" ? { kind: "review", slug: piece.slug } : { kind: "guide", slug: piece.slug };
+  return (
+    <article className="search-hit">
+      <p className="kicker">{piece.kind === "review" ? "Book review" : "Blog post"}</p>
+      <h2>
+        <NavLink
+          href={routeToHash({ name: "prototype", prototypeId: prototype.id, view })}
+          event={{ type: "OPEN_VIEW", view }}
+        >
+          {piece.title}
+        </NavLink>
+      </h2>
+      <p className="piece-dek">{piece.dek}</p>
+      <PostMeta
+        book={piece.book}
+        author={piece.author}
+        bookPublished={piece.bookPublished}
+        published={piece.published}
+        genre={piece.genre}
+        tags={piece.tags}
+      />
+    </article>
+  );
+}
+
+export function SearchView({ prototype }: { prototype: Prototype }) {
+  const pieces = useMemo(() => shelfPieces(), []);
+  const genres = useMemo(() => genresOnShelf(), []);
+  const tags = useMemo(() => tagsOnShelf(), []);
+  const [genreA, setGenreA] = useState("");
+  const [genreB, setGenreB] = useState("");
+  const [text, setText] = useState("");
+  const results = useMemo(() => filterShelf(pieces, [genreA, genreB], text), [pieces, genreA, genreB, text]);
+  const active = Boolean(genreA || genreB || text.trim());
+  const chosen = searchTokens(text).map((token) => token.toLowerCase());
+
+  return (
+    <div className="section-page search-page">
+      <header className="page-intro">
+        <p className="eyebrow">Search</p>
+        <h1>Two genres, and the tags.</h1>
+        <p className="lede">
+          Look through the reviews and the posts by genre and by tag. Pick up to two genres, then narrow them
+          with tags. You can type the tags, or press them. Genre names work in the field too, separated by commas.
+        </p>
+      </header>
+      <form
+        className="search-form"
+        role="search"
+        onSubmit={(event) => {
+          event.preventDefault();
+        }}
+      >
+        <label htmlFor="shelf-search">
+          Search genres and tags
+          <input
+            id="shelf-search"
+            type="search"
+            value={text}
+            onChange={(event) => setText(event.target.value)}
+            placeholder="gothic, letters, rereading"
+            autoComplete="off"
+          />
+        </label>
+        <div className="genre-pair">
+          <label htmlFor="genre-a">
+            First genre
+            <select id="genre-a" value={genreA} onChange={(event) => setGenreA(event.target.value)}>
+              <option value="">Any genre</option>
+              {genres.map((genre) => (
+                <option key={genre} value={genre}>
+                  {genre}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label htmlFor="genre-b">
+            Second genre
+            <select id="genre-b" value={genreB} onChange={(event) => setGenreB(event.target.value)}>
+              <option value="">Any genre</option>
+              {genres.map((genre) => (
+                <option key={genre} value={genre}>
+                  {genre}
+                </option>
+              ))}
+            </select>
+          </label>
+        </div>
+        <fieldset className="tag-field">
+          <legend>Tags</legend>
+          <ul className="tag-cloud">
+            {tags.map((tag) => {
+              const pressed = chosen.includes(tag.toLowerCase());
+              return (
+                <li key={tag}>
+                  <button type="button" aria-pressed={pressed} onClick={() => setText((current) => toggleTag(current, tag))}>
+                    {tag}
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
+        </fieldset>
+        {active ? (
+          <button
+            type="button"
+            className="search-clear"
+            onClick={() => {
+              setText("");
+              setGenreA("");
+              setGenreB("");
+            }}
+          >
+            Clear search
+          </button>
+        ) : null}
+      </form>
+      <p className="search-count" aria-live="polite">
+        {results.length === 1 ? "1 piece" : `${results.length} pieces`}
+        {active ? " match this search." : " on the shelf."}
+      </p>
+      {results.length === 0 ? (
+        <p className="search-empty">Nothing on the shelf fits those genres and tags. Try one genre, or a single tag.</p>
+      ) : (
+        <ul className="search-results">
+          {results.map((piece) => (
+            <li key={`${piece.kind}-${piece.slug}`}>
+              <SearchResult prototype={prototype} piece={piece} />
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
+
+export function BioView({ prototype }: { prototype: Prototype }) {
+  return (
+    <article className="essay about-essay">
+      <div className="essay-top essay-top-plain">
+        <div>
+          <p className="eyebrow">Bio</p>
+          <h1>Naomi Pell</h1>
+          <p className="dek">
+            A former reference librarian who still answers the question “what should I read next,” only now she
+            writes the answer down.
+          </p>
+        </div>
+      </div>
+      <div className="prose">
+        <p>
+          I spent fourteen years on the evening shift at the Millrace Public Library, at the desk nearest the
+          tall windows. People asked for tax forms, train times, and “a novel like the one I loved in 1998,
+          but I cannot remember the title.” The title usually came back. The person usually stayed to tell me
+          why it had mattered. I left the job in 2024. I did not leave the habit.
+        </p>
+        <p>
+          {prototype.name} is the chair I would have pointed them toward if the library had been allowed to
+          keep one person reading for an hour. I write about old books that belong to everyone, and about the
+          ordinary skills around a reading life: notes, clubs, a plain file, a way to save a draft. I am not a
+          critic by training. I am a person who got good at listening to what a reader was actually asking.
+        </p>
+        <p>A few things I like, besides the next chapter:</p>
+        <ul>
+          <li>Rereading a novel I already know, with a pencil and no ambition to be fair.</li>
+          <li>Mysteries with a library, a train, or a secret nobody is keeping very well.</li>
+          <li>Graphic memoirs, and cookbooks I read as essays.</li>
+          <li>Dawn walks before the town is noisy, and cold-water swimming in summer, badly.</li>
+          <li>Sunday community radio, crosswords, and the fountain pen that leaks.</li>
+          <li>Notes left in used books by strangers who thought they were only talking to themselves.</li>
+          <li>Orange cake, black tea, and the dollar cart at the friends-of-the-library sale.</li>
+          <li>Postcards. A private list of books I did not like, with the reason written down.</li>
+        </ul>
+        <p>
+          If you want a recommendation, tell me what you finished last, and whether you want more of that
+          feeling or a change of weather. That is still my favorite question. The design of this room has its
+          own page, if you came looking for type and color instead of a person.
+        </p>
+        <p>
+          <NavLink
+            href={routeToHash({ name: "prototype", prototypeId: prototype.id, view: { kind: "about" } })}
+            event={{ type: "OPEN_VIEW", view: { kind: "about" } }}
+          >
+            About this design
+          </NavLink>
         </p>
       </div>
     </article>

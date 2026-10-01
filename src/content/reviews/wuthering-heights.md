@@ -4,6 +4,7 @@ title: "Book review: Wuthering Heights"
 dek: "Emily Brontë’s only novel is not a love story that happens to be stormy. It is a study of possession: of houses, of children, of the right to tell the past."
 bookId: wuthering-heights
 published: "2026-03-08"
+tags: gothic, passion, landscape, revenge
 ---
 
 A tenant named Lockwood arrives at Wuthering Heights, mistakes his landlord for a rustic, and is pinned into a nightmare by a child’s name scratched on a windowsill: Catherine. He gets out as fast as the weather allows and asks the housekeeper, Nelly Dean, what on earth he has walked into. Emily Brontë then tells one of the strangest novels in English almost entirely through Nelly’s voice, with Lockwood as a polite, slightly foolish frame. We are not in the storm. We are in the kitchen, hearing about the storm from someone who survived it and has opinions.

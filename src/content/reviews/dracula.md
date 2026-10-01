@@ -4,6 +4,7 @@ title: "Book review: Dracula"
 dek: "Bram Stoker tells a vampire story as a file of documents. Diaries, letters, and a ship’s log turn superstition into a case the modern world has to answer."
 bookId: dracula
 published: "2026-03-18"
+tags: horror, gothic, letters, fear
 ---
 
 Jonathan Harker’s journal begins like a young solicitor’s travel notes: paprika chicken, a delayed train, a castle in the Carpathians, a client who does not want his picture taken. The professionalism is the horror’s door. Bram Stoker’s *Dracula* lets ordinary record-keeping stumble into a predator, then asks whether the tools of a modern city — shorthand, medical notes, phonograph cylinders, railway timetables — can be turned around and used as weapons.

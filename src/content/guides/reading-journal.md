@@ -2,7 +2,12 @@
 slug: reading-journal
 title: "Keeping a Reading Journal You Will Actually Use"
 dek: "The best reading journal is the one that survives a busy month. A few repeatable fields will beat a beautiful blank notebook you are afraid to mark."
+book: "Frankenstein"
+author: "Mary Shelley"
+bookPublished: "1818"
 published: "2026-03-02"
+genre: "Gothic novel"
+tags: journal, notes, habit, practice
 ---
 
 A reading journal fails in two elegant ways. The first is the empty notebook with thick paper, purchased in a hopeful January, still empty in March because every sentence had to be worthy of the paper. The second is the log that records only titles and stars, which you never reread because it does not contain a single remembered room. You want something between those: light enough to fill in on a tired night, specific enough to be useful in a year.
@@ -33,4 +38,4 @@ If you like ratings, use them, but make the scale describe use rather than great
 
 ## Reread the journal, not only the books
 
-Every so often, read a month of notes straight through. You will notice habits: the kinds of scenes you copy out, the characters you forgive too quickly, the subjects you keep circling. That pattern is more valuable than a yearly list of books completed. A reading life is not a score. It is a set of returns. The journal is how you make the returns visible to yourself, in ink or in a file, before you ever decide to make them public on a blog.
+Every so often, read a month of notes straight through. You will notice habits: the kinds of scenes you copy out, the characters you forgive too quickly, the subjects you keep circling. That pattern is more valuable than a yearly list of books completed. A reading life is not a score. It is a set of returns. The journal is how you make the returns visible to yourself, in ink or in a file, before you ever decide to make them public on a blog. *Frankenstein* is a generous book to practice on: a single scene, the creature with a book in his hands, is enough for one day’s note.

@@ -5,16 +5,18 @@ import type { SidebarMode } from "../machine/appMachine";
 import { routeToHash, type View } from "../machine/routes";
 import { getPrototype, layoutLabels, sitePrototypeId, type Prototype } from "../prototypes/catalog";
 import { NavLink } from "./NavLink";
-import { AboutView, GuideView, GuidesView, HomeView, PoemView, RelatedPosts, ReviewView, ReviewsView } from "./views";
+import { AboutView, BioView, GuideView, GuidesView, HomeView, PoemView, RelatedPosts, ReviewView, ReviewsView, SearchView } from "./views";
 
 const internalNav: { label: string; view: View; match: View["kind"][]; icon: IconName }[] = [
   { label: "Home", view: { kind: "home" }, match: ["home"], icon: "home" },
   { label: "Book reviews", view: { kind: "reviews" }, match: ["reviews", "review"], icon: "book" },
   { label: "Blog posts", view: { kind: "guides" }, match: ["guides", "guide"], icon: "guide" },
+  { label: "Search", view: { kind: "search" }, match: ["search"], icon: "search" },
+  { label: "Bio", view: { kind: "bio" }, match: ["bio"], icon: "bio" },
   { label: "About", view: { kind: "about" }, match: ["about"], icon: "about" },
 ];
 
-type IconName = "menu" | "close" | "home" | "book" | "guide" | "about" | "back" | "panel";
+type IconName = "menu" | "close" | "home" | "book" | "guide" | "search" | "bio" | "about" | "back" | "panel";
 
 function Icon({ name }: { name: IconName }) {
   return (
@@ -24,6 +26,18 @@ function Icon({ name }: { name: IconName }) {
       {name === "home" ? <path d="M4 11.5 12 5l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1z" /> : null}
       {name === "book" ? <path d="M5 5.5A2.5 2.5 0 0 1 7.5 3H20v16H7.5A2.5 2.5 0 0 0 5 21.5zM5 5.5V21" /> : null}
       {name === "guide" ? <path d="M8 4h9l3 3v13H8zM8 4v16M11 10h6M11 14h6" /> : null}
+      {name === "search" ? (
+        <>
+          <circle cx="11" cy="11" r="6" />
+          <path d="m16 16 3.5 3.5" />
+        </>
+      ) : null}
+      {name === "bio" ? (
+        <>
+          <circle cx="12" cy="8.5" r="3" />
+          <path d="M6.5 19.5c1.1-2.6 3-3.8 5.5-3.8s4.4 1.2 5.5 3.8" />
+        </>
+      ) : null}
       {name === "about" ? (
         <>
           <circle cx="12" cy="12" r="8" />
@@ -193,6 +207,8 @@ function Article({ prototype, view }: { prototype: Prototype; view: View }) {
       {view.kind === "guides" ? <GuidesView prototype={prototype} guides={guides} /> : null}
       {view.kind === "guide" ? <GuideView prototype={prototype} slug={view.slug} /> : null}
       {view.kind === "poem" ? <PoemView prototype={prototype} slug={view.slug} /> : null}
+      {view.kind === "search" ? <SearchView prototype={prototype} /> : null}
+      {view.kind === "bio" ? <BioView prototype={prototype} /> : null}
       {view.kind === "about" ? <AboutView prototype={prototype} /> : null}
     </>
   );
