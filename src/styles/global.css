@@ -1456,6 +1456,39 @@ img.cover {
   color: var(--muted);
 }
 
+.search-scope {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.search-scope-toggle {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.25rem;
+  margin-top: 0.15rem;
+  padding: 0.22rem;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  background: var(--surface);
+}
+
+.search-scope-toggle button {
+  border: 0;
+  border-radius: 999px;
+  padding: 0.48rem 0.75rem;
+  background: transparent;
+  color: var(--ink);
+  font-family: var(--text);
+  font-size: 1.05rem;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.search-scope-toggle button[aria-checked="true"] {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
 .search-filters {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));

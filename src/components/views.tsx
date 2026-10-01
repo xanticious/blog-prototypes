@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useId, useMemo, useRef, useState, type KeyboardEvent } from "react";
 import {
   authorsOf,
   authorsOnShelf,
@@ -21,6 +21,7 @@ import {
   type Guide,
   type Review,
   type ShelfBook,
+  type ShelfKind,
   type ShelfMatch,
 } from "../content/library";
 import { routeToHash, type View } from "../machine/routes";
@@ -489,11 +490,70 @@ export function AboutView({ prototype }: { prototype: Prototype }) {
   );
 }
 
-function resultSummary(count: number, active: boolean, byMentions: boolean): string {
-  const noun = count === 1 ? "1 piece" : `${count} pieces`;
+const searchKinds = [
+  { value: "review", label: "Book reviews", singular: "book review", plural: "book reviews" },
+  { value: "guide", label: "Blog posts", singular: "blog post", plural: "blog posts" },
+] as const satisfies ReadonlyArray<{
+  value: ShelfKind;
+  label: string;
+  singular: string;
+  plural: string;
+}>;
+
+function kindCopy(kind: ShelfKind) {
+  return searchKinds.find((option) => option.value === kind) ?? searchKinds[0];
+}
+
+function resultSummary(count: number, kind: ShelfKind, active: boolean, byMentions: boolean): string {
+  const copy = kindCopy(kind);
+  const noun = count === 1 ? `1 ${copy.singular}` : `${count} ${copy.plural}`;
   const fit = !active ? " on the shelf." : count === 1 ? " matches." : " match.";
   const sort = byMentions ? " Most mentions first." : " Most recent first.";
   return `${noun}${fit}${sort}`;
+}
+
+function SearchKindToggle({ kind, onChange }: { kind: ShelfKind; onChange: (kind: ShelfKind) => void }) {
+  const labelId = useId();
+  const buttons = useRef<Array<HTMLButtonElement | null>>([]);
+
+  function move(event: KeyboardEvent<HTMLButtonElement>, nextIndex: number) {
+    event.preventDefault();
+    onChange(searchKinds[nextIndex].value);
+    buttons.current[nextIndex]?.focus();
+  }
+
+  return (
+    <div className="search-scope">
+      <span className="filter-label" id={labelId}>
+        Looking for
+      </span>
+      <div className="search-scope-toggle" role="radiogroup" aria-labelledby={labelId}>
+        {searchKinds.map((option, index) => (
+          <button
+            key={option.value}
+            ref={(node) => {
+              buttons.current[index] = node;
+            }}
+            type="button"
+            role="radio"
+            aria-checked={kind === option.value}
+            tabIndex={kind === option.value ? 0 : -1}
+            onClick={() => onChange(option.value)}
+            onKeyDown={(event) => {
+              if (event.key === "ArrowRight" || event.key === "ArrowDown") {
+                move(event, (index + 1) % searchKinds.length);
+              }
+              if (event.key === "ArrowLeft" || event.key === "ArrowUp") {
+                move(event, (index - 1 + searchKinds.length) % searchKinds.length);
+              }
+            }}
+          >
+            {option.label}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
 }
 
 function SearchResult({ prototype, match }: { prototype: Prototype; match: ShelfMatch }) {
@@ -527,18 +587,27 @@ function SearchResult({ prototype, match }: { prototype: Prototype; match: Shelf
 
 export function SearchView({ prototype }: { prototype: Prototype }) {
   const pieces = useMemo(() => shelfPieces(), []);
-  const genres = useMemo(() => genresOnShelf(), []);
-  const authors = useMemo(() => authorsOnShelf(), []);
-  const tags = useMemo(() => tagsOnShelf(), []);
+  const [kind, setKind] = useState<ShelfKind>("review");
+  const genres = useMemo(() => genresOnShelf(kind), [kind]);
+  const authors = useMemo(() => authorsOnShelf(kind), [kind]);
+  const tags = useMemo(() => tagsOnShelf(kind), [kind]);
   const [genre, setGenre] = useState("");
   const [author, setAuthor] = useState("");
   const [tag, setTag] = useState("");
   const [text, setText] = useState("");
   const results = useMemo(
-    () => filterShelf(pieces, { genre, author, tag, text }),
-    [pieces, genre, author, tag, text],
+    () => filterShelf(pieces, { kind, genre, author, tag, text }),
+    [pieces, kind, genre, author, tag, text],
   );
   const active = Boolean(genre || author || tag || text.trim());
+  const copy = kindCopy(kind);
+
+  function chooseKind(next: ShelfKind) {
+    setKind(next);
+    if (genre && !genresOnShelf(next).includes(genre)) setGenre("");
+    if (author && !authorsOnShelf(next).includes(author)) setAuthor("");
+    if (tag && !tagsOnShelf(next).includes(tag)) setTag("");
+  }
 
   return (
     <div className="section-page search-page">
@@ -546,8 +615,9 @@ export function SearchView({ prototype }: { prototype: Prototype }) {
         <p className="eyebrow">Search</p>
         <h1>Find a piece.</h1>
         <p className="lede">
-          Narrow the shelf with one genre, one author, and one tag. Text search looks through the title, the
-          author, the tags, and the writing, then lists the pieces where those words show up most.
+          Choose book reviews or blog posts. Narrow that list with one genre, one author, and one tag. Text
+          search looks through the title, the author, the tags, and the writing, then lists the pieces where
+          those words show up most.
         </p>
       </header>
       <form
@@ -557,6 +627,7 @@ export function SearchView({ prototype }: { prototype: Prototype }) {
           event.preventDefault();
         }}
       >
+        <SearchKindToggle kind={kind} onChange={chooseKind} />
         <div className="search-filters">
           <FilterMenu label="Genre" value={genre} options={genres} anyLabel="Any genre" onChange={setGenre} />
           <FilterMenu
@@ -605,10 +676,12 @@ export function SearchView({ prototype }: { prototype: Prototype }) {
         ) : null}
       </form>
       <p className="search-count" aria-live="polite">
-        {resultSummary(results.length, active, Boolean(text.trim()))}
+        {resultSummary(results.length, kind, active, Boolean(text.trim()))}
       </p>
       {results.length === 0 ? (
-        <p className="search-empty">Nothing on the shelf fits. Try another genre, author, tag, or a shorter phrase.</p>
+        <p className="search-empty">
+          No {copy.plural} fit. Try another genre, author, tag, or a shorter phrase.
+        </p>
       ) : (
         <ul className="search-results">
           {results.map((match) => (

@@ -44,7 +44,10 @@ export type ShelfPiece = {
   body: string;
 };
 
+export type ShelfKind = ShelfPiece["kind"];
+
 export type ShelfQuery = {
+  kind: ShelfKind;
   genre: string;
   author: string;
   tag: string;
@@ -274,16 +277,25 @@ export function formatGenres(genres: string[]): string {
   return formatNames(genres);
 }
 
-export function genresOnShelf(): string[] {
-  return [...new Set(shelfPieces().flatMap((piece) => piece.genres))].sort((a, b) => a.localeCompare(b));
+function uniqueSorted(values: string[]): string[] {
+  return [...new Set(values)].sort((a, b) => a.localeCompare(b));
 }
 
-export function authorsOnShelf(): string[] {
-  return [...new Set(shelfPieces().flatMap((piece) => piece.authors))].sort((a, b) => a.localeCompare(b));
+function piecesOfKind(kind?: ShelfKind): ShelfPiece[] {
+  const pieces = shelfPieces();
+  return kind ? pieces.filter((piece) => piece.kind === kind) : pieces;
 }
 
-export function tagsOnShelf(): string[] {
-  return [...new Set(shelfPieces().flatMap((piece) => piece.tags))].sort((a, b) => a.localeCompare(b));
+export function genresOnShelf(kind?: ShelfKind): string[] {
+  return uniqueSorted(piecesOfKind(kind).flatMap((piece) => piece.genres));
+}
+
+export function authorsOnShelf(kind?: ShelfKind): string[] {
+  return uniqueSorted(piecesOfKind(kind).flatMap((piece) => piece.authors));
+}
+
+export function tagsOnShelf(kind?: ShelfKind): string[] {
+  return uniqueSorted(piecesOfKind(kind).flatMap((piece) => piece.tags));
 }
 
 function searchHaystack(piece: ShelfPiece): string {
@@ -321,6 +333,7 @@ export function filterShelf(pieces: ShelfPiece[], query: ShelfQuery): ShelfMatch
   const text = query.text.trim();
 
   const matched = pieces.filter((piece) => {
+    if (piece.kind !== query.kind) return false;
     if (genre && !piece.genres.includes(genre)) return false;
     if (author && !piece.authors.includes(author)) return false;
     if (tag && !piece.tags.includes(tag)) return false;

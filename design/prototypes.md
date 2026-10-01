@@ -17,7 +17,7 @@ The sections are:
 | `#/reviews/jane-eyre` | One review. The last piece is the note’s slug. |
 | `#/guides` | The blog posts |
 | `#/guides/close-reading` | One post |
-| `#/search` | Filter by one genre, one author, one tag, or the text of a piece |
+| `#/search` | Search book reviews or blog posts, by one genre, one author, one tag, or the text of a piece |
 | `#/bio` | Naomi Pell |
 | `#/poems/margin-light` | The poem |
 | `#/about` | Why the room looks like this |
@@ -50,7 +50,7 @@ tags: markdown, writing, tools, beginners
 
 `slug` is the bit that shows up in the address. Use lowercase words and hyphens, and do not change it after you have shared the link. Tags are separated by commas, and so are genres. At least one of each is required. If a required fact is missing, the build says which file.
 
-Search keeps a piece when it has the genre you picked, the author you picked, and the tag you picked. A review of several books matches if any of those books has the genre, and if any of its authors is the one you picked. Leave a menu on “any” and that fact is not used. Text search looks through the title, the dek, every book title and year, every author, the genres, the tags, and the body. It sorts by how many times the text appears. A tie goes to the newer post. With the text field empty, the list is newest first.
+Search looks through book reviews or blog posts, and never both at once. It keeps a piece when it has the genre you picked, the author you picked, and the tag you picked. A review of several books matches if any of those books has the genre, and if any of its authors is the one you picked. Leave a menu on “any” and that fact is not used. The genre, author, and tag menus list only the kind you are searching. Text search looks through the title, the dek, every book title and year, every author, the genres, the tags, and the body. It sorts by how many times the text appears. A tie goes to the newer post. With the text field empty, the list is newest first. Switching kinds drops a genre, author, or tag that the other kind does not have.
 
 The poem is an article, not a review. It does not carry book metadata, and search does not include it.
 

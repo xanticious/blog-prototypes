@@ -23,7 +23,7 @@ This repository used to hold a gallery of visual prototypes, the same essays dre
 
 Every review and every blog post records books, authors, a publication date, one or more genres, and one or more tags. On a review, the books, authors, and genres come from `src/content/books.ts`, and the tags and date live in the Markdown file. A review can name one book or several — a series, or a related shelf — and each book can name one author or several. On a blog post, the facts live in the file. Author names are matched as whole strings, so a review of two authors appears under each name.
 
-Search, in the site menu, narrows that shelf. You can choose one genre, one author, and one tag. A text search looks through the title, the author, the tags, and the writing, and sorts by how often the words appear.
+Search, in the site menu, looks through book reviews or blog posts, one at a time. You can choose one genre, one author, and one tag. A text search looks through the title, the author, the tags, and the writing, and sorts by how often the words appear.
 
 The bio is a separate page. The person keeping the shelf is Naomi Pell, a former reference librarian.
 
