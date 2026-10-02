@@ -2,9 +2,6 @@
 slug: close-reading
 title: "Three Passes: A Simple Close-Reading Routine"
 dek: "Close reading sounds like a seminar trick. It is really just rereading with a different question each time, so the page has a chance to be more than a plot."
-book: "Pride and Prejudice"
-author: "Jane Austen"
-bookPublished: "1813"
 published: "2026-02-08"
 genre: romance
 tags: rereading, attention, practice, pages
@@ -28,13 +25,13 @@ Now ignore, as much as you can, the urge to decide the theme. Look at the making
 - What the narrator compares the moment to. Metaphors are opinions in costume.
 - What is described with care, and what is skipped. Skips are choices.
 
-A useful trick: copy out one sentence by hand, or retype it, and break it into pieces. A sentence from Austen or Melville can carry a whole attitude in its balance. You are not hunting for a hidden code. You are noticing that the sentence could have been written another way and was not.
+A useful trick: copy out one sentence by hand, or retype it, and break it into pieces. A long sentence can carry a whole attitude in its balance. You are not hunting for a hidden code. You are noticing that the sentence could have been written another way and was not.
 
 ## Pass three: why this, here
 
 Only on the third pass do you ask the meaning question. How does this scene tilt the book. What would be missing if it were cut. Does it confirm what you thought the book was about, or does it embarrass that theory.
 
-This is the pass where you are allowed an idea. Keep it tied to something you saw in pass two. “The book is about class” is a cloud. “Elizabeth rereads Darcy’s letter and her wit changes jobs, from weapon to instrument” is an idea with a handle.
+This is the pass where you are allowed an idea. Keep it tied to something you saw in pass two. “The book is about class” is a cloud. “She rereads the letter and her wit changes jobs, from weapon to instrument” is an idea with a handle.
 
 > A close reading is a receipt. It shows the lines you actually paid attention to.
 

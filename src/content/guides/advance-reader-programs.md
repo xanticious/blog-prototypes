@@ -2,9 +2,6 @@
 slug: advance-reader-programs
 title: "How to Start with Advance Reader Programs"
 dek: "Publishers share early copies with readers who will talk about the book. You can begin with one honest request, or you can skip the programs and still have a blog."
-book: "A Tale of Two Cities"
-author: "Charles Dickens"
-bookPublished: "1859"
 published: "2026-06-02"
 genre: historical
 tags: publishers, reviews, beginners, arcs
@@ -14,7 +11,7 @@ An advance reader copy is a book a publisher lets you read before the day it off
 
 This is not the same thing as a school or library program for a young person who is ready for harder books. That one is about the reader’s pace. Ask a librarian. They already keep those lists, and they will not ask you for a follower count. This post is about the publisher kind, because that is the one new bloggers hear about and cannot find the door to.
 
-*A Tale of Two Cities* is a reminder that books have always had a public life before the private one of reading them alone. Serialization, reviews, arguments in newspapers. An ARC is a modern, smaller version of “please read this while the ink is still settling,” with rules attached.
+Books have always had a public life before the private one of reading them alone. Serialization, reviews, arguments in newspapers. An ARC is a modern, smaller version of “please read this while the ink is still settling,” with rules attached.
 
 ## What you are actually joining
 

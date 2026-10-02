@@ -13,13 +13,17 @@ export type Review = {
   body: string;
 };
 
+export type GuideBook = {
+  title: string;
+  author: string;
+  year: string;
+};
+
 export type Guide = {
   slug: string;
   title: string;
   dek: string;
-  book: string;
-  author: string;
-  bookPublished: string;
+  book: GuideBook | null;
   published: string;
   genres: string[];
   tags: string[];
@@ -173,6 +177,19 @@ function loadReviews(): Review[] {
     .sort((a, b) => b.published.localeCompare(a.published));
 }
 
+function guideBook(data: Record<string, string>, file: string): GuideBook | null {
+  const title = data.book?.trim() ?? "";
+  const author = data.author?.trim() ?? "";
+  const year = data.bookPublished?.trim() ?? "";
+  if (!title && !author && !year) return null;
+  if (!title || !author || !year) {
+    throw new Error(
+      `Name a book with "book", "author", and "bookPublished" together, or leave all three out, in ${file}`,
+    );
+  }
+  return { title, author, year };
+}
+
 function loadGuides(): Guide[] {
   return Object.entries(guideFiles)
     .map(([file, raw]) => {
@@ -181,9 +198,7 @@ function loadGuides(): Guide[] {
         slug: data.slug || file,
         title: requireField(data, "title", file),
         dek: requireField(data, "dek", file),
-        book: requireField(data, "book", file),
-        author: requireField(data, "author", file),
-        bookPublished: requireField(data, "bookPublished", file),
+        book: guideBook(data, file),
         published: requireField(data, "published", file),
         genres: parseList(data.genre, file, "genre"),
         tags: parseList(data.tags, file, "tag"),
@@ -259,8 +274,8 @@ export function shelfPieces(): ShelfPiece[] {
     slug: guide.slug,
     title: guide.title,
     dek: guide.dek,
-    books: [{ title: guide.book, year: guide.bookPublished }],
-    authors: [guide.author],
+    books: guide.book ? [{ title: guide.book.title, year: guide.book.year }] : [],
+    authors: guide.book ? [guide.book.author] : [],
     published: guide.published,
     genres: guide.genres,
     tags: guide.tags,

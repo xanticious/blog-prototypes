@@ -51,24 +51,28 @@ function PostMeta({
 }) {
   return (
     <dl className="post-meta">
-      <div>
-        <dt>{books.length > 1 ? "Books" : "Book"}</dt>
-        <dd>
-          {books.length === 1 ? (
-            bookLine(books[0])
-          ) : (
-            <ul className="meta-list">
-              {books.map((book, index) => (
-                <li key={`${book.title}-${index}`}>{bookLine(book)}</li>
-              ))}
-            </ul>
-          )}
-        </dd>
-      </div>
-      <div>
-        <dt>{authors.length > 1 ? "Authors" : "Author"}</dt>
-        <dd>{formatNames(authors)}</dd>
-      </div>
+      {books.length > 0 ? (
+        <div>
+          <dt>{books.length > 1 ? "Books" : "Book"}</dt>
+          <dd>
+            {books.length === 1 ? (
+              bookLine(books[0])
+            ) : (
+              <ul className="meta-list">
+                {books.map((book, index) => (
+                  <li key={`${book.title}-${index}`}>{bookLine(book)}</li>
+                ))}
+              </ul>
+            )}
+          </dd>
+        </div>
+      ) : null}
+      {authors.length > 0 ? (
+        <div>
+          <dt>{authors.length > 1 ? "Authors" : "Author"}</dt>
+          <dd>{formatNames(authors)}</dd>
+        </div>
+      ) : null}
       <div>
         <dt>Publication date</dt>
         <dd>
@@ -326,8 +330,8 @@ export function GuideView({ prototype, slug }: { prototype: Prototype; slug: str
         </div>
       </div>
       <PostMeta
-        books={[{ title: guide.book, year: guide.bookPublished }]}
-        authors={[guide.author]}
+        books={guide.book ? [{ title: guide.book.title, year: guide.book.year }] : []}
+        authors={guide.book ? [guide.book.author] : []}
         published={guide.published}
         genres={guide.genres}
         tags={guide.tags}
