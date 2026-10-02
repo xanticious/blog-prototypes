@@ -7,7 +7,7 @@ genre: historical
 tags: covers, blurbs, images, design
 ---
 
-A review wants two things beside the essay: a picture of the book, and a short paragraph that says what the book is. The picture is the cover. The paragraph is the blurb. Both are easy to want and awkward to borrow, because the interesting jackets and the smooth flap copy usually belong to someone else.
+A review wants two things beside the essay: a picture of the book, and jacket copy that tells a reader what kind of story they are about to walk into. The picture is the cover. The copy is the blurb. Both are easy to want and awkward to borrow, because the interesting jackets and the smooth flap copy usually belong to someone else.
 
 This is the panel the review page uses. The jacket is at the top left. The blurb fills the rest of the gray field, starting level with the top of the jacket and wrapping underneath.
 
@@ -81,9 +81,9 @@ A post that is not about one edition can skip the photograph. The poem on this s
 
 ## Where a blurb can come from
 
-The panel wants a paragraph, not a plot from start to finish. The useful ones are short enough to sit beside a jacket and specific enough that a reader can tell this book from the one next to it.
+The panel wants the back of the book, not a plot from start to finish. A few paragraphs is the right length. Name the people, the place, and the trouble, and stop before the ending. A reader should be able to tell this book from the one beside it, and should want to open it.
 
-Write it. This is the option this shelf chose. Each book in `src/content/books.ts` has a `blurb`, a few sentences written here, and `CoverBlurb` prints them. A review can be long. The blurb is the sentence you would say if someone picked the book up while you were still finding the page. Writing it yourself also means you are not storing someone else’s advertisement in your repository.
+Write it. This is the option this shelf chose. Each book in `src/content/books.ts` has a `blurb`, written here, and `CoverBlurb` prints it. A blank line starts a new paragraph. A review can go on, and it can spoil if it warns. The blurb cannot. It is the copy you would put on the jacket if someone picked the book up while you were still finding the page. Writing it yourself also means you are not storing someone else’s advertisement in your repository.
 
 Open Library’s book records often include a `description`. Sometimes a volunteer wrote it. Sometimes it is the first paragraph of a scan. Sometimes it is a publisher’s text that arrived with the catalog record. Read it. If it is good, let it teach you what the book is keen to emphasize, and then write your own. If you quote their sentence, link the Open Library page.
 

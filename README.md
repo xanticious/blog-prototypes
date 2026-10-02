@@ -15,7 +15,7 @@ This repository used to hold a gallery of visual prototypes, the same essays dre
 | `src/content/reviews/` | Book reviews, one Markdown file each. |
 | `src/content/guides/` | Blog posts: reading notes, and plain introductions to tools. |
 | `src/content/poems/` | The sample poem. |
-| `src/content/books.ts` | Book facts the reviews point at, including an Open Library cover and a short blurb. |
+| `src/content/books.ts` | Book facts the reviews point at, including an Open Library cover and jacket copy for the blurb. |
 | `src/prototypes/catalog.ts` | Window Seat’s name, type, colors, and layout. |
 | `src/machine/` | The XState machine and the hash routes. |
 

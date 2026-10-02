@@ -6,7 +6,10 @@ export type Book = {
   authors: string[];
   year: string;
   genres: string[];
-  /** Short original description shown beside the cover. */
+  /**
+   * Jacket copy shown beside the cover. A few paragraphs, separated by a
+   * blank line: people, place, and trouble, with the ending left unread.
+   */
   blurb: string;
   /** Open Library cover. Prefer `id` or `olid`; ISBN, OCLC, and LCCN are rate-limited. */
   cover?: OpenLibraryCover;
@@ -19,8 +22,11 @@ export const books: Book[] = [
     authors: ["Jane Austen"],
     year: "1813",
     genres: ["romance"],
-    blurb:
-      "Elizabeth Bennet has four sisters, a mother who treats every visit as a proposal, and a sharp opinion of a man she has met once. The neighborhood’s business is marriage: who has the fortune, who has the manners, and who will still be welcome if she chooses wrong. Elizabeth turns down the practical match and misjudges the proud one. The pleasure of the book is watching her revise the sentence she was so sure of, without becoming anyone quieter than she was.",
+    blurb: `Mrs. Bennet has five daughters and one piece of news worth repeating: a single gentleman of good fortune has taken Netherfield Park. Jane, the eldest, is as sweet as the neighborhood hopes. Elizabeth, the next, would rather be amused than agreeable. At the assembly she hears Mr. Darcy decline to dance with her, and she decides, with great satisfaction, that she has the measure of him.
+
+Around them a small country world counts incomes out loud. A charming officer pays the kind of attention a young woman is told to trust. A clergyman proposes as if the answer were a formality. Visits run long, letters arrive at the wrong hour, and everyone is certain they understand everyone else. The comedy lives in the gap.
+
+Jane Austen’s novel is the story of first impressions, told in drawing rooms, on muddy walks, and in sentences people will wish they could take back. Fortunes are public. Feelings are supposed to be practical. Come for the wit, and for a heroine who answers. The season has only just begun.`,
     cover: { key: "id", value: "12645114" }, // Penguin Classics, ISBN 9780141439518
   },
   {
@@ -29,8 +35,11 @@ export const books: Book[] = [
     authors: ["Mary Shelley"],
     year: "1818",
     genres: ["sci-fi", "gothic"],
-    blurb:
-      "A student in Ingolstadt builds a person out of parts and then will not look at what he made. The creature learns speech, kindness, and how completely he has been refused, and he asks for a companion the maker will not give him. What follows is a chase across ice, told by a man who still thinks the story is about his own genius. The horror is the abandonment as much as the assembly.",
+    blurb: `Captain Walton writes to his sister from a ship locked in Arctic ice. Out of the fog his crew pulls a stranger, half-frozen and still pursuing something they only glimpsed on the pack. The man’s name is Victor Frankenstein. The story he tells begins years earlier, in a room in Ingolstadt, with a student who believes he can give life to matter.
+
+He works alone and shuts the door. On a dreary night in November the figure on the table opens its eye, and Victor’s triumph lasts only as long as it takes him to look. He runs. The being he brought into the world is left to learn the weather, human speech, and the sight of people turning away.
+
+Mary Shelley’s novel is a confession folded inside a voyage. It asks what a maker owes the life he started, and it does not let either of them rest. The ice is still closing in. Victor has not come to the end of what he has to say.`,
     cover: { key: "id", value: "109033" }, // Penguin Classics, ISBN 9780141439471
   },
   {
@@ -39,8 +48,11 @@ export const books: Book[] = [
     authors: ["Charlotte Brontë"],
     year: "1847",
     genres: ["romance", "romantasy"],
-    blurb:
-      "An orphan who will not perform gratitude grows up, takes a post in a house with a locked room, and leaves when the terms of love turn out to be a lie. Thornfield has the brooding master, the uncanny laugh, and the fire, but the book belongs to Jane’s voice: precise, angry, and unwilling to be rescued into someone else’s story. She comes back only when she can choose the return.",
+    blurb: `Jane Eyre is small, plain, and unwelcome. At her aunt’s house she is punished for telling the truth. At Lowood school she learns endurance, a fierce friendship, and how to live on too little. When she takes a post as governess at Thornfield Hall, she expects a quiet child and a quiet life. She finds the child. She also finds a corridor that laughs after dark, and a master who speaks to her as if her opinion mattered.
+
+Mr. Rochester is abrupt, wealthy, and bad at pretending. The house has more rooms than Jane is invited to enter. What starts between them is as plain as talk by the fire, and as uneasy as a sound behind a door. Jane has been poor and dependent all her life. She is not willing to be either of those things in love.
+
+Charlotte Brontë’s novel is a romance with weather in it. Read it for a voice that answers back, for the candle along the gallery, and for the feeling that Thornfield is keeping a secret. The secret can wait. Jane will not be hurried.`,
     cover: { key: "id", value: "109090" }, // Penguin Classics, ISBN 9780141441146
   },
   {
@@ -49,8 +61,11 @@ export const books: Book[] = [
     authors: ["Emily Brontë"],
     year: "1847",
     genres: ["romance", "gothic"],
-    blurb:
-      "Two children on a Yorkshire moor make a bond the houses around them cannot hold, and then the book refuses to let them tell it alone. Neighbors, servants, and the next generation all get a turn at the story, and none of them agree. The weather stays in the rooms. The second half belongs to the people who inherit the damage and have to decide whether the house is finished with them.",
+    blurb: `Mr. Lockwood, new to the Yorkshire moors, walks up to Wuthering Heights looking for a landlord and a little civility. He gets neither. The dogs are rough, the company is rougher, and in the night a child’s voice comes to the window and will not be reasoned with. By morning he wants the history of the place. The housekeeper at the neighboring grange has been holding it for years.
+
+Nelly Dean begins with two children and two houses. Catherine Earnshaw and Heathcliff grow up on the heights, as wild as the weather, while Thrushcross Grange below them shines with carpets and rules. One world tries to claim Catherine. The other will not let Heathcliff go. Between the kitchen fire and the open moor, a passion starts that no parlor is going to domesticate.
+
+Emily Brontë’s novel is told by the people who watched from the doorway, and the moor keeps finishing their sentences. Come for the wind off the heights, for a love that refuses to learn manners, and for the hand at the glass that Lockwood cannot send away.`,
     cover: { key: "id", value: "109038" }, // Penguin Classics, ISBN 9780141439556
   },
   {
@@ -59,8 +74,11 @@ export const books: Book[] = [
     authors: ["Bram Stoker"],
     year: "1897",
     genres: ["fantasy", "gothic"],
-    blurb:
-      "A young solicitor travels to a castle in the Carpathians and keeps a diary of a count who is preparing a move to England. The rest of the novel is letters, ship logs, and newspaper cuttings: a small group trying to name a hunger that has already crossed the sea. The fright is in the paperwork as much as in the teeth. Everyone writes it down because speaking it would sound impossible.",
+    blurb: `Jonathan Harker, a solicitor from Exeter, travels east to help a nobleman finish a purchase in London. Count Dracula is courteous. He knows the train tables. He asks intelligent questions about houses and English law. Harker is pleased to be useful, right up until he understands that the castle doors do not open from his side, that his host casts no reflection, and that the count is preparing a journey the solicitor was not meant to share.
+
+The story comes home in pieces. Mina Murray writes letters. Lucy Westenra keeps notes. Dr. Seward records a patient who eats flies and waits by the window. A ship’s log begins. Professor Van Helsing arrives and asks a practical century to believe something it has no form for. Boxes of earth are already moving toward England. The count intends to follow them.
+
+Bram Stoker’s novel is a file of documents, each one dated, sensible, and a little too late. Start on the road to the castle, with the sound of a door. The people who love one another are still only writing to each other. The crossing has not yet reached port.`,
     cover: { key: "id", value: "12216503" }, // Open Library edition OL35373336M
   },
   {
@@ -69,8 +87,11 @@ export const books: Book[] = [
     authors: ["Oscar Wilde"],
     year: "1890",
     genres: ["gothic"],
-    blurb:
-      "A beautiful young man wishes that a portrait would age in his place, and the painting takes him at his word. He spends the years collecting sensations while the picture in the locked room keeps the accounts: cruelty, boredom, and the friends he uses up. The wit is bright and the moral is not subtle. The interesting question is how long a person can look like the first chapter.",
+    blurb: `In a London studio that smells of lilac and paint, Basil Hallward is finishing a portrait and wishing he had never let his friend through the door. Lord Henry Wotton arrives anyway, trailing opinions. He tells the sitter, Dorian Gray, that beauty is brief, that goodness is dull, and that a young man ought to hurry. Dorian looks at the face on the canvas and says aloud that he would give anything if the picture would grow old, and he could stay as he is.
+
+The wish holds. Seasons turn and Dorian does not. He goes out into the city for music, scent, and company, and the portrait goes upstairs under a cloth, where no one is invited to look. Rumors begin to follow him. When he dares to lift the cloth, the painting has started a record his mirror will not keep.
+
+Oscar Wilde’s novel is a fable dressed for dinner: bright talk, beautiful rooms, and a bargain that does not care how charming you are. Come for the sentences. They are a pleasure. Then turn the page, and leave the thing in the schoolroom waiting.`,
     cover: { key: "id", value: "15259210" }, // Penguin Classics, ISBN 9780141439570
   },
 ];

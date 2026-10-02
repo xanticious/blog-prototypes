@@ -6,7 +6,7 @@ An earlier version of this repository was a studio: the same reviews, set in man
 
 ## What the reader sees
 
-Window Seat is a lamp-warm reading room: clay, sage-brown, and cream. EB Garamond carries the titles and the essays. The home page is a tight grid of covers. Open a review and the page narrows. The jacket sits at the top left of a gray panel, and a short blurb wraps beside it, because the cover that led you here should still be in the room. A round button in the corner opens the sections. Other posts stay listed beside an essay, a post, or the poem.
+Window Seat is a lamp-warm reading room: clay, sage-brown, and cream. EB Garamond carries the titles and the essays. The home page is a tight grid of covers. Open a review and the page narrows. The jacket sits at the top left of a gray panel, and the blurb wraps beside it, because the cover that led you here should still be in the room. A round button in the corner opens the sections. Other posts stay listed beside an essay, a post, or the poem.
 
 The sections are:
 
@@ -55,7 +55,7 @@ Some reviews use a spoiler warning. A whole paragraph can sit in a collapsed blo
 
 A book can name an Open Library cover in `src/content/books.ts`: `cover: { key: "id", value: "12645114" }`. The key may be `id`, `olid`, `isbn`, `oclc`, or `lccn`. Home tiles request the large image, a panel requests the medium one, and a list requests the small one. ISBN, OCLC, and LCCN lookups are rate-limited; cover id and OLID are not. If the image is missing, or the book has no cover, the page uses the drawn jacket in `src/components/BookCover.tsx`. The poem keeps its drawing.
 
-Each book also has a `blurb`, a short paragraph written for this shelf. On a review, `CoverBlurb` (`src/components/CoverBlurb.tsx`) sets the jacket at the top left of a gray panel and lets the blurb fill the rest, wrapping under the jacket. A post can ask for the same panel with a line on its own: `:::book jane-eyre`. The fields and the rest of the marks are listed in the post `markdown-format`.
+Each book also has a `blurb`, jacket copy written for this shelf in a few paragraphs. A blank line starts a new paragraph. On a review, `CoverBlurb` (`src/components/CoverBlurb.tsx`) sets the jacket at the top left of a gray panel and lets the blurb fill the rest, wrapping under the jacket. A post can ask for the same panel with a line on its own: `:::book jane-eyre`. The fields and the rest of the marks are listed in the post `markdown-format`.
 
 ## Navigation, and where the state lives
 
