@@ -13,7 +13,7 @@ This is the panel the review page uses. The jacket is at the top left. The blurb
 
 :::book jane-eyre
 
-The rest of this note is a tour of where that picture and that paragraph can come from. It includes the free options, the paid ones, and the homemade ones, and it starts with the two this shelf already depends on.
+The rest of this note is a tour of where that picture and that jacket copy can come from. It includes the free options, the paid ones, and the homemade ones, and it starts with the two this shelf already depends on.
 
 ## What this shelf already uses
 
