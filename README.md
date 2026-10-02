@@ -1,6 +1,6 @@
 # Spine & Page
 
-Window Seat is a book blog: short reviews of public-domain books, posts for people who love reading and are new to the practical side of writing online, and one short poem. The site is a React + TypeScript app. Navigation and the rest of the interface state live in an [XState](https://stately.ai/docs) machine. Addresses use a hash (`#/reviews`), so the built files work on GitHub Pages without a server-side redirect.
+Window Seat is a book blog: short reviews of public-domain books, posts for people who love reading and are new to the practical side of writing online, and one short poem. The site is a React + TypeScript app. Navigation and the rest of the interface state live in an [XState](https://stately.ai/docs) machine. Addresses use a hash (`#/book-reviews`), so the built files work on GitHub Pages without a server-side redirect.
 
 This repository used to hold a gallery of visual prototypes, the same essays dressed many ways so a design could be chosen on purpose. That comparison is finished. Window Seat is the design we are keeping. Further work is a series of small improvements to this one site.
 
@@ -15,7 +15,7 @@ This repository used to hold a gallery of visual prototypes, the same essays dre
 | `src/content/reviews/` | Book reviews, one Markdown file each. |
 | `src/content/guides/` | Blog posts: reading notes, and plain introductions to tools. |
 | `src/content/poems/` | The sample poem. |
-| `src/content/books.ts` | Book facts the reviews point at, including an Open Library cover when one is set. |
+| `src/content/books.ts` | Book facts the reviews point at, including an Open Library cover and a short blurb. |
 | `src/prototypes/catalog.ts` | Window Seat’s name, type, colors, and layout. |
 | `src/machine/` | The XState machine and the hash routes. |
 

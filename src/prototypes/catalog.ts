@@ -85,9 +85,9 @@ export const prototypes: Prototype[] = [
     name: "Window Seat",
     tagline: "A tiled shelf, and then just the page.",
     description:
-      "Clay and cream, covers packed edge to edge, and a quiet measure once a review opens — with the jacket kept beside the title.",
+      "Clay and cream, covers packed edge to edge, and a quiet measure once a review opens — with the jacket and a short blurb in a gray panel under the title.",
     about:
-      "Window Seat is a lamp-warm reading room: clay, sage-brown, and cream. The home page is a tight grid of covers. EB Garamond carries the titles and the notes. Once a piece opens, the page narrows and keeps the jacket beside the title, because the cover that led you here should still be in the room. A round button in the corner opens the sections, and other posts stay listed beside what you are reading.",
+      "Window Seat is a lamp-warm reading room: clay, sage-brown, and cream. The home page is a tight grid of covers. EB Garamond carries the titles and the notes. Once a piece opens, the page narrows. The jacket sits at the top left of a gray panel, and a short blurb wraps beside it, because the cover that led you here should still be in the room. A round button in the corner opens the sections, and other posts stay listed beside what you are reading.",
     mood: "cozy",
     layout: "tiles",
     tone: "light",

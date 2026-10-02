@@ -467,6 +467,35 @@ img.cover {
 
 .prose blockquote.pull p { margin: 0; }
 
+.cover-blurb {
+  display: flow-root;
+  background: #e4e2de;
+  color: var(--ink);
+  padding: 1rem 1.1rem 0.2rem;
+  margin: 0 0 1.35rem;
+  text-align: left;
+}
+
+.cover-blurb .cover {
+  float: left;
+  display: block;
+  width: 7.4rem;
+  height: auto;
+  margin: 0 1rem 0.75rem 0;
+}
+
+.cover-blurb p,
+.prose .cover-blurb p {
+  margin: 0 0 0.8rem;
+  font-size: 1.05rem;
+  line-height: 1.55;
+}
+
+.cover-blurb-missing {
+  font-family: var(--sans);
+  color: var(--muted);
+}
+
 .essay-foot { margin-top: 2rem; font-family: var(--sans); }
 
 .essay-foot a { border-bottom: 1px solid var(--accent); }
@@ -875,6 +904,10 @@ img.cover {
 .prototype[data-id="atlas"] .rail a,
 .prototype[data-id="atlas"] .rail .rail-label { color: inherit; }
 .prototype[data-id="atlas"] .rail a[aria-current="page"] { color: #e7b2a4; }
+
+@media (max-width: 520px) {
+  .cover-blurb .cover { width: 5.5rem; }
+}
 
 @media (max-width: 800px) {
   .menu-toggle {

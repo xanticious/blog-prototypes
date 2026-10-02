@@ -60,7 +60,7 @@ This is a paragraph. *This is italic.* **This is bold.**
 > This is a quotation.
 ```
 
-You can write it in any text editor. You can read it even if the website disappears. The sample reviews in this project are Markdown files. A small library called `react-markdown` is the viewer: it reads those marks and turns them into headings, paragraphs, and quotations in the browser. A plain tour of the tools is one of the blog posts (`src/content/guides/editing-markdown.md`).
+You can write it in any text editor. You can read it even if the website disappears. The sample reviews in this project are Markdown files. A small library called `react-markdown` is the viewer: it reads those marks and turns them into headings, paragraphs, and quotations in the browser. A plain tour of the tools is one of the blog posts (`src/content/guides/editing-markdown.md`). The fields and the marks this site actually reads are listed in `src/content/guides/markdown-format.md`.
 
 Markdown is the best default for a beginner who is willing to learn about ten symbols. It is also what most static-site tools expect.
 
@@ -149,7 +149,7 @@ Here is the whole loop, from “I finished a book” to “it is on the site.”
 
 1. **Install the tools once.** Install Node.js (the version in `.nvmrc` or any current Node 22 is fine), then, in this folder, run `npm install`. Node is the program that runs JavaScript on your computer. npm is the tool that downloads the libraries the site needs.
 2. **Start the preview.** Run `npm run dev`. Open the address it prints, usually `http://localhost:5173`. Leave that window open. When you save a file, the page refreshes.
-3. **Add the book, if it is new.** Open `src/content/books.ts`. Copy one of the existing book blocks and fill in an id (lowercase, hyphens), title, one or more authors, year, and genres. The id is how a review finds its cover. Add every book in a series before you point a review at the set.
+3. **Add the book, if it is new.** Open `src/content/books.ts`. Copy one of the existing book blocks and fill in an id (lowercase, hyphens), title, one or more authors, year, genres, and a blurb. The blurb is the short paragraph that sits beside the jacket. The id is how a review finds its cover. Add every book in a series before you point a review at the set.
 4. **Add a cover, if you want one.** On the book record, add a `cover` with a key and a value. Open Library serves the picture. The address is `https://covers.openlibrary.org/b/$key/$value-$size.jpg`. The key can be `isbn`, `olid`, `id` (their cover id), `oclc`, or `lccn`. The shelf asks for a small image in a list, a medium one beside an essay, and a large one on the home tiles. Cover id and OLID are the kinder choices: lookups by ISBN, OCLC, and LCCN are limited to 100 requests from one address every five minutes, and a burst past that comes back forbidden. A missing picture, or a book with no `cover`, falls back to a drawn jacket in `src/components/BookCover.tsx`. The poem uses one of those drawings. A blog post still does not need a cover.
 5. **Write the review.** Create a new file in `src/content/reviews/`. The name can match the slug. Copy the front matter pattern above. Write the essay in Markdown underneath. Save.
 6. **Read it in Window Seat.** The site is one design now, the one we kept. Open the new essay from the home grid and from the review list. If a paragraph is hard to read, fix the paragraph. A short introduction to Git, if you want one before step 9, is `src/content/guides/getting-started-with-git.md`.
@@ -208,9 +208,9 @@ What you should not do, early, is design a login system, a commenting platform, 
 GitHub Pages serves a static folder. This app is built for that in two ways.
 
 - The build command (`npm run build`) writes a `dist/` folder, then copies the JavaScript, CSS, and favicon to the repository root. GitHub Pages is set to deploy from the `main` branch, folder `/ (root)`, and serves those files directly. The workflow in `.github/workflows/pages.yml` rebuilds and commits them when changes land on `main`.
-- The address of each page uses a **hash**, the `#` in a URL. `#/reviews` is still the same `index.html` file as far as the server is concerned. The browser, and the state machine in this project, read the part after `#` and decide what to show. That works on GitHub Pages project sites (`https://yourname.github.io/your-repo/`) without a special server rule. The asset paths are relative for the same reason.
+- The address of each page uses a **hash**, the `#` in a URL. `#/book-reviews` is still the same `index.html` file as far as the server is concerned. The browser, and the state machine in this project, read the part after `#` and decide what to show. That works on GitHub Pages project sites (`https://yourname.github.io/your-repo/`) without a special server rule. The asset paths are relative for the same reason.
 
-A hash address will not give you pretty links like `/reviews/jane-eyre` without extra hosting setup. For a first static blog, that is a fair trade. If you later move to Netlify, Cloudflare Pages, or your own server, a developer can switch the router. The essays would not have to change.
+A hash address will not give you pretty links like `/book-reviews/jane-eyre` without extra hosting setup. For a first static blog, that is a fair trade. If you later move to Netlify, Cloudflare Pages, or your own server, a developer can switch the router. The essays would not have to change.
 
 ## A checklist for the first real post
 

@@ -6,23 +6,23 @@ An earlier version of this repository was a studio: the same reviews, set in man
 
 ## What the reader sees
 
-Window Seat is a lamp-warm reading room: clay, sage-brown, and cream. EB Garamond carries the titles and the essays. The home page is a tight grid of covers. Open a piece and the page narrows, and the jacket stays beside the title, because the cover that led you here should still be in the room. A round button in the corner opens the sections. Other posts stay listed beside an essay, a guide, or the poem.
+Window Seat is a lamp-warm reading room: clay, sage-brown, and cream. EB Garamond carries the titles and the essays. The home page is a tight grid of covers. Open a review and the page narrows. The jacket sits at the top left of a gray panel, and a short blurb wraps beside it, because the cover that led you here should still be in the room. A round button in the corner opens the sections. Other posts stay listed beside an essay, a post, or the poem.
 
 The sections are:
 
 | Hash | Screen |
 | --- | --- |
 | `#/` | Home |
-| `#/reviews` | The review index |
-| `#/reviews/jane-eyre` | One review. The last piece is the note’s slug. |
-| `#/guides` | The blog posts |
-| `#/guides/close-reading` | One post |
+| `#/book-reviews` | The review index |
+| `#/book-reviews/jane-eyre` | One review. The last piece is the note’s slug. |
+| `#/posts` | The blog posts |
+| `#/posts/close-reading` | One post |
 | `#/search` | Search book reviews or blog posts, by one genre, one author, one tag, or the text of a piece |
 | `#/bio` | Naomi Pell |
 | `#/poems/margin-light` | The poem |
 | `#/about` | Why the room looks like this |
 
-An older address such as `#/p/window-seat/reviews` still opens the same screen. The bar rewrites it to `#/reviews`.
+An older address such as `#/reviews`, `#/guides`, or `#/p/window-seat/reviews` still opens the same screen. The bar rewrites it to `#/book-reviews` or `#/posts`.
 
 An unknown section falls back to home. A missing essay stays on its route and shows a short “not on the shelf” message. The machine does not invent content.
 
@@ -53,7 +53,9 @@ The poem is an article, not a review. It does not carry book metadata, and searc
 
 Some reviews use a spoiler warning. A whole paragraph can sit in a collapsed block (`:::spoiler` … `:::`). A phrase inside a sentence can be an inline spoiler: `I loved it when ||Elizabeth and Darcy got together||.` The page shows the word “spoiler” until it is clicked, and bold or italic inside the bars still works. The poem uses `:::verse` so line breaks survive. The books are in the public domain. The notes, the posts, and the poem are original sample writing.
 
-A book can name an Open Library cover in `src/content/books.ts`: `cover: { key: "id", value: "12645114" }`. The key may be `id`, `olid`, `isbn`, `oclc`, or `lccn`. Home tiles request the large image, an essay requests the medium one, and a list requests the small one. ISBN, OCLC, and LCCN lookups are rate-limited; cover id and OLID are not. If the image is missing, or the book has no cover, the page uses the drawn jacket in `src/components/BookCover.tsx`. The poem keeps its drawing.
+A book can name an Open Library cover in `src/content/books.ts`: `cover: { key: "id", value: "12645114" }`. The key may be `id`, `olid`, `isbn`, `oclc`, or `lccn`. Home tiles request the large image, a panel requests the medium one, and a list requests the small one. ISBN, OCLC, and LCCN lookups are rate-limited; cover id and OLID are not. If the image is missing, or the book has no cover, the page uses the drawn jacket in `src/components/BookCover.tsx`. The poem keeps its drawing.
+
+Each book also has a `blurb`, a short paragraph written for this shelf. On a review, `CoverBlurb` (`src/components/CoverBlurb.tsx`) sets the jacket at the top left of a gray panel and lets the blurb fill the rest, wrapping under the jacket. A post can ask for the same panel with a line on its own: `:::book jane-eyre`. The fields and the rest of the marks are listed in the post `markdown-format`.
 
 ## Navigation, and where the state lives
 

@@ -27,6 +27,7 @@ import {
 import { routeToHash, type View } from "../machine/routes";
 import { layoutLabels, moodLabels, shellLabels, type Prototype } from "../prototypes/catalog";
 import { BookCover } from "./BookCover";
+import { CoverBlurb } from "./CoverBlurb";
 import { FilterMenu } from "./FilterMenu";
 import { MarkdownBody } from "./MarkdownBody";
 import { NavLink } from "./NavLink";
@@ -229,8 +230,7 @@ export function ReviewView({ prototype, slug }: { prototype: Prototype; slug: st
   const shelfBooks = review.books.map((book) => ({ title: book.title, year: book.year }));
   return (
     <article className="essay">
-      <div className="essay-top">
-        <ReviewCovers books={review.books} size="md" groupClass="cover-row" />
+      <div className="essay-top essay-top-plain">
         <div>
           <p className="kicker">{formatGenres(genres)}</p>
           <h1>{review.title}</h1>
@@ -238,6 +238,15 @@ export function ReviewView({ prototype, slug }: { prototype: Prototype; slug: st
           {review.spoilers ? <p className="spoiler-warning">This review contains spoilers.</p> : null}
         </div>
       </div>
+      {review.books.map((book) => (
+        <CoverBlurb
+          key={book.id}
+          bookId={book.id}
+          title={book.title}
+          author={formatNames(book.authors)}
+          blurb={book.blurb}
+        />
+      ))}
       <PostMeta
         books={shelfBooks}
         authors={authors}

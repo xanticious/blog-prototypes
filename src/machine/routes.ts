@@ -14,10 +14,10 @@ export type View =
 export type Route = { name: "prototype"; prototypeId: string; view: View };
 
 function viewFromParts(section: string | undefined, slug: string | undefined): View {
-  if (section === "reviews" && slug) return { kind: "review", slug };
-  if (section === "reviews") return { kind: "reviews" };
-  if (section === "guides" && slug) return { kind: "guide", slug };
-  if (section === "guides") return { kind: "guides" };
+  if ((section === "book-reviews" || section === "reviews") && slug) return { kind: "review", slug };
+  if (section === "book-reviews" || section === "reviews") return { kind: "reviews" };
+  if ((section === "posts" || section === "guides") && slug) return { kind: "guide", slug };
+  if (section === "posts" || section === "guides") return { kind: "guides" };
   if (section === "poems" && slug) return { kind: "poem", slug };
   if (section === "search") return { kind: "search" };
   if (section === "bio") return { kind: "bio" };
@@ -28,7 +28,8 @@ function viewFromParts(section: string | undefined, slug: string | undefined): V
 export function hashToRoute(hash: string): Route {
   const raw = decodeURIComponent(hash.replace(/^#/, "").replace(/^\//, ""));
   const parts = raw.split("/").filter(Boolean);
-  // Older addresses looked like #/p/window-seat/reviews. There is one site now.
+  // Older addresses looked like #/p/window-seat/reviews, #/reviews, or #/guides.
+  // There is one site now, and those still open the same screen.
   const sectionParts = parts[0] === "p" ? parts.slice(2) : parts;
   return {
     name: "prototype",
@@ -42,13 +43,13 @@ export function routeToHash(route: Route): string {
     case "home":
       return "#/";
     case "reviews":
-      return "#/reviews";
+      return "#/book-reviews";
     case "review":
-      return `#/reviews/${encodeURIComponent(route.view.slug)}`;
+      return `#/book-reviews/${encodeURIComponent(route.view.slug)}`;
     case "guides":
-      return "#/guides";
+      return "#/posts";
     case "guide":
-      return `#/guides/${encodeURIComponent(route.view.slug)}`;
+      return `#/posts/${encodeURIComponent(route.view.slug)}`;
     case "poem":
       return `#/poems/${encodeURIComponent(route.view.slug)}`;
     case "search":
