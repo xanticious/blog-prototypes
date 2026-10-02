@@ -207,7 +207,7 @@ What you should not do, early, is design a login system, a commenting platform, 
 
 GitHub Pages serves a static folder. This app is built for that in two ways.
 
-- The build command (`npm run build`) writes a `dist/` folder, then copies the JavaScript, CSS, and favicon to the repository root. GitHub Pages is set to deploy from the `main` branch, folder `/ (root)`, and serves those files directly. The workflow in `.github/workflows/pages.yml` rebuilds and commits them when changes land on `main`.
+- The build command (`npm run build`) writes a `dist/` folder, then copies the JavaScript, CSS, favicon, and bio photo to the repository root. GitHub Pages is set to deploy from the `main` branch, folder `/ (root)`, and serves those files directly. The workflow in `.github/workflows/pages.yml` rebuilds and commits them when changes land on `main`.
 - The address of each page uses a **hash**, the `#` in a URL. `#/book-reviews` is still the same `index.html` file as far as the server is concerned. The browser, and the state machine in this project, read the part after `#` and decide what to show. That works on GitHub Pages project sites (`https://yourname.github.io/your-repo/`) without a special server rule. The asset paths are relative for the same reason.
 
 A hash address will not give you pretty links like `/book-reviews/jane-eyre` without extra hosting setup. For a first static blog, that is a fair trade. If you later move to Netlify, Cloudflare Pages, or your own server, a developer can switch the router. The essays would not have to change.
