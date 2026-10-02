@@ -25,7 +25,7 @@ Every review records one or more books, and with them the authors and genres, pl
 
 Search, in the site menu, looks through book reviews or blog posts, one at a time. You can choose one genre, one author, and one tag. A text search looks through the title, the author, the tags, and the writing, and sorts by how often the words appear.
 
-The bio is a separate page. The person keeping the shelf is Naomi Pell, a former reference librarian.
+The bio is a separate page. Naomi Pell keeps the shelf and introduces herself there: a photo from her purple office, the books she loves, and what she does when she is not reading.
 
 ## Scripts
 

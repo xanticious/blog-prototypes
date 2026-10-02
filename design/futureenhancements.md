@@ -33,7 +33,7 @@ A few of them are written down so we can decide not to build them. They live in 
 16. Dates for a first reading and a second reading, when a review is revised after a reread.
 17. A margin-note style for the poem, so “Margin Light” can carry one gloss without becoming an essay.
 18. A yearly rereading list, written as a post, not as a database.
-19. A way to mark a review as “abandoned on purpose,” for books Naomi did not finish, which the bio already admits she keeps a list of.
+19. A way to mark a review as “abandoned on purpose,” for books Naomi did not finish.
 20. Sample journal entries, fictional and short, so the journal post has a picture of the finished note.
 
 ## The review as a form

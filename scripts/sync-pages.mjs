@@ -6,6 +6,7 @@ const files = [
   ["dist/assets/index.js", "assets/index.js"],
   ["dist/assets/index.css", "assets/index.css"],
   ["dist/favicon.svg", "favicon.svg"],
+  ["dist/naomi-selfie.jpg", "naomi-selfie.jpg"],
 ];
 
 for (const [from] of files) {
