@@ -220,7 +220,7 @@ A hash address will not give you pretty links like `/book-reviews/jane-eyre` wit
 - [ ] I quoted less than I talked.
 - [ ] The front matter has a slug, title, dek, publication date, and at least one tag.
 - [ ] A review names one or more books with `bookId` or `bookIds`. A blog post has a genre. A book on a blog post is optional, and when present it has a title, an author, and a year.
-- [ ] I read the essay on Window Seat, including the metadata at the top.
+- [ ] I read the essay on Window Seat, including the metadata below the writing.
 - [ ] `npm run build` succeeds.
 - [ ] I committed the Markdown file.
 

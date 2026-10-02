@@ -6,7 +6,7 @@ An earlier version of this repository was a studio: the same reviews, set in man
 
 ## What the reader sees
 
-Window Seat is a lamp-warm reading room: clay, sage-brown, and cream. EB Garamond carries the titles and the essays. The home page is a tight grid of covers. Open a review and the page narrows. The jacket sits at the top left of a gray panel, and the blurb wraps beside it, because the cover that led you here should still be in the room. A round button in the corner opens the sections. Other posts stay listed beside an essay, a post, or the poem.
+Window Seat is a lamp-warm reading room: clay, sage-brown, and cream. EB Garamond carries the titles and the essays. The home page is a tight grid of covers. Open a review and the page narrows. The jacket sits at the top left of a gray panel, and the blurb wraps beside it, because the cover that led you here should still be in the room. The book, author, publication date, genres, and tags follow the essay, on a review and on a blog post. A round button in the corner opens the sections. Other posts stay listed beside an essay, a post, or the poem.
 
 The sections are:
 
