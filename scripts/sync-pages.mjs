@@ -5,8 +5,8 @@ import { copyFileSync, existsSync, mkdirSync } from "node:fs";
 const files = [
   ["dist/assets/index.js", "assets/index.js"],
   ["dist/assets/index.css", "assets/index.css"],
+  ["dist/assets/naomi-selfie.jpg", "assets/naomi-selfie.jpg"],
   ["dist/favicon.svg", "favicon.svg"],
-  ["dist/naomi-selfie.jpg", "naomi-selfie.jpg"],
 ];
 
 for (const [from] of files) {

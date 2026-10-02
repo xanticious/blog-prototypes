@@ -737,7 +737,7 @@ export function BioView({ prototype }: { prototype: Prototype }) {
       <div className="essay-top essay-top-plain">
         <figure className="bio-portrait">
           <img
-            src={`${import.meta.env.BASE_URL}naomi-selfie.jpg`}
+            src={`${import.meta.env.BASE_URL}assets/naomi-selfie.jpg`}
             alt="Naomi Pell smiling in a selfie. She has long brown hair and wears a solid rust t-shirt. Behind her is a purple home office with white shelves packed with books, a white desk, and a white lamp."
             width={864}
             height={1152}

@@ -36,13 +36,13 @@ npm install
 npm run dev
 ```
 
-`npm run dev` starts a local preview. `npm run build` typechecks, writes `dist/`, and copies the published JavaScript, CSS, and favicon to the repository root. `npm run preview` serves `dist/`.
+`npm run dev` starts a local preview. `npm run build` typechecks, writes `dist/`, and copies the published JavaScript, CSS, favicon, and bio photo to the repository root. `npm run preview` serves `dist/`.
 
 ## GitHub Pages
 
 This repository's Pages site is published from the `main` branch, folder `/ (root)`. Pages serves those files as they are. It does not compile TypeScript.
 
-`index.html` loads `./assets/index.js`, `./assets/index.css`, and `./favicon.svg`. Relative URLs keep the project-site prefix, so a page at `https://<user>.github.io/<repo>/` requests `https://<user>.github.io/<repo>/assets/index.js` rather than `https://<user>.github.io/src/main.tsx`.
+`index.html` loads `./assets/index.js`, `./assets/index.css`, and `./favicon.svg`. The bio photo is `./assets/naomi-selfie.jpg`, the same relative kind of path. Relative URLs keep the project-site prefix, so a page at `https://<user>.github.io/<repo>/` requests `https://<user>.github.io/<repo>/assets/index.js` rather than `https://<user>.github.io/src/main.tsx`.
 
 `npm run build` produces those files. The workflow in `.github/workflows/pages.yml` runs that build when commits land on `main` and commits the result. In the repository settings, leave Pages on **Deploy from a branch**, branch `main`, folder `/ (root)`.
 
