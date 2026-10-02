@@ -708,55 +708,144 @@ export function SearchView({ prototype }: { prototype: Prototype }) {
   );
 }
 
+function ShelfReviewLink({
+  prototype,
+  slug,
+  children,
+}: {
+  prototype: Prototype;
+  slug: string;
+  children: string;
+}) {
+  return (
+    <NavLink
+      href={routeToHash({ name: "prototype", prototypeId: prototype.id, view: { kind: "review", slug } })}
+      event={{ type: "OPEN_VIEW", view: { kind: "review", slug } }}
+    >
+      {children}
+    </NavLink>
+  );
+}
+
 export function BioView({ prototype }: { prototype: Prototype }) {
   return (
-    <article className="essay about-essay">
+    <article className="essay about-essay bio-essay">
       <div className="essay-top essay-top-plain">
+        <figure className="bio-portrait">
+          <img
+            src={`${import.meta.env.BASE_URL}naomi-selfie.jpg`}
+            alt="Naomi Pell smiling in a selfie. She has long brown hair and wears a solid rust t-shirt. Behind her is a purple home office with white shelves packed with books, a white desk, and a white lamp."
+            width={864}
+            height={1152}
+          />
+          <figcaption>Hi. This is the purple office, the white shelves, and me, thrilled you stopped by.</figcaption>
+        </figure>
         <div>
-          <p className="eyebrow">Bio</p>
+          <p className="eyebrow">Hello, friend</p>
           <h1>Naomi Pell</h1>
           <p className="dek">
-            A former reference librarian who still answers the question “what should I read next,” only now she
-            writes the answer down.
+            I am thirty, I get loud about books, and I made {prototype.name} so we could talk about them the way
+            friends talk about people they love.
           </p>
         </div>
       </div>
       <div className="prose">
         <p>
-          I spent fourteen years on the evening shift at the Millrace Public Library, at the desk nearest the
-          tall windows. People asked for tax forms, train times, and “a novel like the one I loved in 1998,
-          but I cannot remember the title.” The title usually came back. The person usually stayed to tell me
-          why it had mattered. I left the job in 2024. I did not leave the habit.
+          I am Naomi. I read with a pencil, I text the sentence that made me sit up, and I am happiest when
+          someone writes back with a sentence of their own. This page is the hello. The shelf is the ongoing
+          conversation. If you loved a book, I want the reason. If you bounced off it, I want that reason too.
+          Bring a snack. I always do.
         </p>
         <p>
-          {prototype.name} is the chair I would have pointed them toward if the library had been allowed to
-          keep one person reading for an hour. I write about old books that belong to everyone, and about the
-          ordinary skills around a reading life: notes, clubs, a plain file, a way to save a draft. I am not a
-          critic by training. I am a person who got good at listening to what a reader was actually asking.
+          The room in the photo is where the notes get written: purple walls, white desk, white lamp, and a
+          bookcase I restock the way other people restock a kitchen. The rust shirt is what I put on when I
+          promise myself one chapter. You can guess how that promise goes.
         </p>
-        <p>A few things I like, besides the next chapter:</p>
-        <ul>
-          <li>Rereading a novel I already know, with a pencil and no ambition to be fair.</li>
-          <li>Mysteries with a library, a train, or a secret nobody is keeping very well.</li>
-          <li>Graphic memoirs, and cookbooks I read as essays.</li>
-          <li>Dawn walks before the town is noisy, and cold-water swimming in summer, badly.</li>
-          <li>Sunday community radio, crosswords, and the fountain pen that leaks.</li>
-          <li>Notes left in used books by strangers who thought they were only talking to themselves.</li>
-          <li>Orange cake, black tea, and the dollar cart at the friends-of-the-library sale.</li>
-          <li>Postcards. A private list of books I did not like, with the reason written down.</li>
+        <h2>Books I press into people’s hands</h2>
+        <p>
+          These are the favorites I will talk about for as long as you let me. Each one has a note on the
+          shelf, so you can start with the novel or with the friend who already finished it.
+        </p>
+        <ul className="bio-favorites">
+          <li>
+            <ShelfReviewLink prototype={prototype} slug="jane-eyre">
+              Jane Eyre
+            </ShelfReviewLink>
+            . My come-sit-with-me book. It is fierce and tender, and Jane talks to you like you are already in
+            the room. I reread it when I want company that has been through weather.
+          </li>
+          <li>
+            <ShelfReviewLink prototype={prototype} slug="pride-and-prejudice">
+              Pride and Prejudice
+            </ShelfReviewLink>
+            . The banter is a sport. I read the arguments out loud and I do every voice. My friends allow
+            this, which is how I know they are my friends.
+          </li>
+          <li>
+            <ShelfReviewLink prototype={prototype} slug="frankenstein">
+              Frankenstein
+            </ShelfReviewLink>
+            . The one I hand to anyone who thinks an old novel will be polite. It is lonely, electric, and
+            still the best conversation I know about what we owe the things we make.
+          </li>
+          <li>
+            <ShelfReviewLink prototype={prototype} slug="dracula">
+              Dracula
+            </ShelfReviewLink>
+            . Letters, diaries, a ship in awful weather. It feels like a group chat that got terrifying, and
+            I love a story told by people who refuse to go through it alone.
+          </li>
+          <li>
+            <ShelfReviewLink prototype={prototype} slug="wuthering-heights">
+              Wuthering Heights
+            </ShelfReviewLink>
+            . For the days I want feelings bigger than the house, and weather to match.
+          </li>
+          <li>
+            <ShelfReviewLink prototype={prototype} slug="dorian-gray">
+              The Picture of Dorian Gray
+            </ShelfReviewLink>
+            . Sharp enough to quote in a text. Mean in a way that makes me laugh, and then think about it on
+            the walk home.
+          </li>
         </ul>
         <p>
-          If you want a recommendation, tell me what you finished last, and whether you want more of that
-          feeling or a change of weather. That is still my favorite question. The design of this room has its
-          own page, if you came looking for type and color instead of a person.
+          If your favorite is missing, tell me. That is how this shelf grows. I would rather add your book
+          than pretend I have already read everything worth loving.
+        </p>
+        <h2>What I do when the book is closed</h2>
+        <ul>
+          <li>Host a tiny book club. Two people and a cake still counts, and I will bring the cake.</li>
+          <li>Bake on Sundays and drop the extra with whoever is mid-chapter and forgetting lunch.</li>
+          <li>Walk with an audiobook and argue with the narrator. The neighbors have adjusted.</li>
+          <li>
+            Hunt library sales for the paperback with a stranger’s notes in the margin. Those notes feel like
+            a friendship that started without us.
+          </li>
+          <li>Write postcards. A recommendation fits on one. So does “I miss you. Read this.”</li>
+          <li>Puzzle nights, movie musicals we already know the words to, and a crossword I will not finish alone.</li>
+          <li>Rearrange the white shelves against the purple wall. The trophy is a better view of the spines.</li>
+        </ul>
+        <p>
+          Come tell me what you finished last, and whether you want more of that feeling or a completely
+          different afternoon. That question is my favorite. I answer it like a friend, not a syllabus.
         </p>
         <p>
+          The books are on the{" "}
+          <NavLink
+            href={routeToHash({ name: "prototype", prototypeId: prototype.id, view: { kind: "home" } })}
+            event={{ type: "OPEN_VIEW", view: { kind: "home" } }}
+          >
+            home shelf
+          </NavLink>
+          . If you came for type and color and stayed for the person, the{" "}
           <NavLink
             href={routeToHash({ name: "prototype", prototypeId: prototype.id, view: { kind: "about" } })}
             event={{ type: "OPEN_VIEW", view: { kind: "about" } }}
           >
-            About this design
-          </NavLink>
+            design of this room
+          </NavLink>{" "}
+          has its own page.
         </p>
       </div>
     </article>

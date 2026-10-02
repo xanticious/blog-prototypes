@@ -500,6 +500,38 @@ img.cover {
 
 .essay-foot a { border-bottom: 1px solid var(--accent); }
 
+.bio-portrait {
+  margin: 0 auto 1.15rem;
+  max-width: 18.5rem;
+}
+
+.bio-portrait img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 1.15rem;
+  box-shadow: 0 16px 36px rgba(42, 24, 16, 0.16);
+}
+
+.bio-portrait figcaption {
+  margin-top: 0.55rem;
+  color: var(--muted);
+  font-family: var(--sans);
+  font-size: 0.88rem;
+  line-height: 1.45;
+  text-align: center;
+}
+
+.prose .bio-favorites {
+  list-style: none;
+  margin: 0 0 1rem;
+  padding-left: 0;
+}
+
+.prose .bio-favorites li + li { margin-top: 0.75rem; }
+
+.bio-favorites a { font-family: var(--display); }
+
 .about-facts {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
