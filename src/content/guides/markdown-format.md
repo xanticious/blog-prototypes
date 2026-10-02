@@ -166,7 +166,7 @@ The panel below is that line, live. The jacket sits at the top left of a gray fi
 
 :::book jane-eyre
 
-The words come from the book’s `blurb`. The picture comes from the book’s `cover`, or from the drawn jacket when there is no picture. The component that draws the panel is `CoverBlurb`, in `src/components/CoverBlurb.tsx`. It takes a title, an author, the blurb, and an optional book id. A review page uses it once for each book on the note. A post uses the `:::book` line.
+The words come from the book’s `blurb`. A blank line in that field starts a new paragraph. The picture comes from the book’s `cover`, or from the drawn jacket when there is no picture. The component that draws the panel is `CoverBlurb`, in `src/components/CoverBlurb.tsx`. It takes a title, an author, the blurb, and an optional book id. A review page uses it once for each book on the note. A post uses the `:::book` line.
 
 An id that is not on the shelf leaves a short note in place of the panel. Inside a fenced sample, the line is shown as typed, which is why the sample above did not draw a second panel.
 
