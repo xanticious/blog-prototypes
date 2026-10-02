@@ -1456,6 +1456,14 @@ img.cover {
   text-align: left;
 }
 
+.post-meta-below {
+  margin: 1.75rem 0 0;
+}
+
+.prototype[data-layout="rail"] .essay > .post-meta {
+  grid-column: 1;
+}
+
 .post-meta dt {
   font-family: var(--sans);
   font-size: 0.72rem;

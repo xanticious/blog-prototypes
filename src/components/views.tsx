@@ -43,15 +43,17 @@ function PostMeta({
   published,
   genres,
   tags,
+  below = false,
 }: {
   books: ShelfBook[];
   authors: string[];
   published: string;
   genres: string[];
   tags: string[];
+  below?: boolean;
 }) {
   return (
-    <dl className="post-meta">
+    <dl className={below ? "post-meta post-meta-below" : "post-meta"}>
       {books.length > 0 ? (
         <div>
           <dt>{books.length > 1 ? "Books" : "Book"}</dt>
@@ -247,13 +249,6 @@ export function ReviewView({ prototype, slug }: { prototype: Prototype; slug: st
           blurb={book.blurb}
         />
       ))}
-      <PostMeta
-        books={shelfBooks}
-        authors={authors}
-        published={review.published}
-        genres={genres}
-        tags={review.tags}
-      />
       <aside className="book-facts">
         <p className="rail-label">In the margin</p>
         <dl>
@@ -288,6 +283,14 @@ export function ReviewView({ prototype, slug }: { prototype: Prototype; slug: st
         </dl>
       </aside>
       <MarkdownBody body={review.body} />
+      <PostMeta
+        books={shelfBooks}
+        authors={authors}
+        published={review.published}
+        genres={genres}
+        tags={review.tags}
+        below
+      />
       <p className="essay-foot">
         <NavLink
           href={routeToHash({ name: "prototype", prototypeId: prototype.id, view: { kind: "reviews" } })}
@@ -338,14 +341,15 @@ export function GuideView({ prototype, slug }: { prototype: Prototype; slug: str
           <p className="dek">{guide.dek}</p>
         </div>
       </div>
+      <MarkdownBody body={guide.body} />
       <PostMeta
         books={guide.book ? [{ title: guide.book.title, year: guide.book.year }] : []}
         authors={guide.book ? [guide.book.author] : []}
         published={guide.published}
         genres={guide.genres}
         tags={guide.tags}
+        below
       />
-      <MarkdownBody body={guide.body} />
       <p className="essay-foot">
         <NavLink
           href={routeToHash({ name: "prototype", prototypeId: prototype.id, view: { kind: "guides" } })}
