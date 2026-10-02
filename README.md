@@ -21,7 +21,7 @@ This repository used to hold a gallery of visual prototypes, the same essays dre
 
 ## What a post carries
 
-Every review and every blog post records books, authors, a publication date, one or more genres, and one or more tags. On a review, the books, authors, and genres come from `src/content/books.ts`, and the tags and date live in the Markdown file. A review can name one book or several — a series, or a related shelf — and each book can name one author or several. On a blog post, the facts live in the file. Author names are matched as whole strings, so a review of two authors appears under each name.
+Every review records one or more books, and with them the authors and genres, plus a publication date and one or more tags. The books, authors, and genres come from `src/content/books.ts`, and the tags and date live in the Markdown file. A review can name one book or several — a series, or a related shelf — and each book can name one author or several. A blog post records a publication date, one or more genres, and one or more tags in the file. A book is optional. When a post names one, the title, the author, and the year live in the file too. Author names are matched as whole strings, so a review of two authors appears under each name. A post with no book does not match an author search.
 
 Search, in the site menu, looks through book reviews or blog posts, one at a time. You can choose one genre, one author, and one tag. A text search looks through the title, the author, the tags, and the writing, and sorts by how often the words appear.
 

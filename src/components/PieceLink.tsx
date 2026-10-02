@@ -111,9 +111,11 @@ export function GuidePiece({ prototype, guide }: { prototype: Prototype; guide: 
       <span className="kicker">{formatGenres(guide.genres)}</span>
       <span className="piece-title">{guide.title}</span>
       <span className="piece-dek">{guide.dek}</span>
-      <span className="piece-meta">
-        {guide.book} · {guide.author}
-      </span>
+      {guide.book ? (
+        <span className="piece-meta">
+          {guide.book.title} · {guide.book.author}
+        </span>
+      ) : null}
       <span className="piece-meta">
         <time dateTime={guide.published}>{formatDate(guide.published)}</time>
         {" · "}

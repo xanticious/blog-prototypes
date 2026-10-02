@@ -2,15 +2,12 @@
 slug: getting-started-with-git
 title: "Git, Briefly, for People Who Write"
 dek: "Git is a labeled box of drafts. You do not have to become a programmer to keep one."
-book: "The Odyssey"
-author: "Homer"
-bookPublished: "8th century BCE"
 published: "2026-05-25"
 genre: fantasy
 tags: git, saving, versions, beginners
 ---
 
-*The Odyssey* survives in more than one telling. A reader can still ask which version they are holding. Git is a small, practical version of that question for your own files: what did this essay say last Tuesday, and can I get that wording back?
+A piece of writing can survive in more than one telling. You can still ask which version you are holding. Git is a small, practical version of that question for your own files: what did this essay say last Tuesday, and can I get that wording back?
 
 You do not need Git to write. You need it when more than one person touches the same folder, or when you want a history that is better than “essay-final-final-2.”
 
@@ -18,7 +15,7 @@ You do not need Git to write. You need it when more than one person touches the 
 
 Think of a folder of drafts on a desk.
 
-- A **commit** is one labeled draft. The label is a sentence you write: “Add the Jane Eyre review” or “Fix the spoiler note.”
+- A **commit** is one labeled draft. The label is a sentence you write: “Add the new review” or “Fix the spoiler note.”
 - **Git** is the record of those drafts, kept in order.
 - A **push** sends the latest drafts to a shared shelf, often GitHub, so they are not only on your laptop.
 - A **repository** is the project folder plus that history. This blog is one repository.

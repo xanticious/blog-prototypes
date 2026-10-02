@@ -2,15 +2,12 @@
 slug: building-a-following
 title: "Starting a Blog, and Then a Following"
 dek: "A following is a group of people who know where to find the next thing you wrote. It grows from a rhythm and a specific welcome, not from a launch."
-book: "Pride and Prejudice"
-author: "Jane Austen"
-bookPublished: "1813"
 published: "2026-06-09"
 genre: romance
 tags: blogging, audience, letters, beginners
 ---
 
-*Pride and Prejudice* begins with a neighborhood that already knows how to talk. News moves by visit and by letter. Nobody builds an audience in a week, because an audience is just people who have come to expect you. A blog works the same way, with worse stationery.
+A neighborhood that already knows how to talk does not appear overnight. News moves by visit and by letter. Nobody builds an audience in a week, because an audience is just people who have come to expect you. A blog works the same way, with worse stationery.
 
 You can start before anyone is watching. That is the best time to start. The early posts teach you what you sound like when you are not performing for a crowd that has not arrived.
 

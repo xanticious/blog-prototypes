@@ -64,7 +64,7 @@ You can write it in any text editor. You can read it even if the website disappe
 
 Markdown is the best default for a beginner who is willing to learn about ten symbols. It is also what most static-site tools expect.
 
-Each review and each blog post starts with **front matter**, a little block of facts between `---` lines. The site reads those facts and uses the rest of the file as the piece. Every post shows the same kinds of facts on the page: the book or books, the author or authors, a publication date, one or more genres, and one or more tags.
+Each review and each blog post starts with **front matter**, a little block of facts between `---` lines. The site reads those facts and uses the rest of the file as the piece. A review shows the book or books, the author or authors, a publication date, one or more genres, and one or more tags. A blog post shows a publication date, one or more genres, and one or more tags. A book on a blog post is optional. When the post names one, the page shows that title, author, and year as well.
 
 A review points at one or more books that already live in `src/content/books.ts`. Each record holds the title, one or more authors, the original year, and the genres. The review file adds the date the note went up, and the tags. Use `bookId` for a single book. Use `bookIds` when the note is about a series or a related shelf, and separate the ids with commas.
 
@@ -96,23 +96,30 @@ tags: gothic, sisters, comparison
 
 You can put several ids in `bookId` as well. If both fields are present, the page uses every id, with `bookId` first, and ignores a repeat. Each id has to exist. The page lists every title and every author, so two books by one person and one book by two people both show up. A book with more than one author keeps every name in `authors`.
 
-A blog post that is not itself a review writes the book facts in the file, because there may be no cover to look up:
+A blog post that is not itself a review usually names no book. The publication date, the genres, and the tags live in the file:
 
 ```markdown
 ---
 slug: getting-started-with-git
 title: "Git, Briefly, for People Who Write"
 dek: "One sentence under the headline."
-book: "The Odyssey"
-author: "Homer"
-bookPublished: "8th century BCE"
 published: "2026-05-25"
 genre: fantasy
 tags: git, saving, versions, beginners
 ---
 ```
 
-The book on a practical post is the one the post is thinking beside. Say so in a sentence, so the fact does not feel pinned on from outside. A post can name more than one genre. Separate them with commas: `genre: fantasy, gothic`. The same shape is used for book records in `src/content/books.ts`, as a list: `genres: ["sci-fi", "gothic"]`. Authors are a list too: `authors: ["Jane Austen"]`, or two names when a book was written together. Names such as `romance`, `romantasy`, and `smut` are ordinary genre labels. Author names are matched as whole strings. A review of several people appears under each of those names.
+A book is optional. Add one only when the post is in conversation with a particular title. Write the three facts together, because there may be no cover to look up:
+
+```markdown
+book: "The Odyssey"
+author: "Homer"
+bookPublished: "8th century BCE"
+```
+
+Leave them out together. A title without an author, or a year without a title, stops the build. Say the book in a sentence in the essay, so the fact does not feel pinned on from outside. The posts already on the site do not name a book.
+
+A post can name more than one genre. Separate them with commas: `genre: fantasy, gothic`. The same shape is used for book records in `src/content/books.ts`, as a list: `genres: ["sci-fi", "gothic"]`. Authors are a list too: `authors: ["Jane Austen"]`, or two names when a book was written together. Names such as `romance`, `romantasy`, and `smut` are ordinary genre labels. Author names are matched as whole strings. A review of several people appears under each of those names. A blog post matches an author search only when it names a book by that person.
 
 `slug` is the bit that shows up in the address. Use lowercase words and hyphens, and do not change it after you have shared the link.
 
@@ -146,7 +153,7 @@ Here is the whole loop, from “I finished a book” to “it is on the site.”
 4. **Add a cover, if you want one.** On the book record, add a `cover` with a key and a value. Open Library serves the picture. The address is `https://covers.openlibrary.org/b/$key/$value-$size.jpg`. The key can be `isbn`, `olid`, `id` (their cover id), `oclc`, or `lccn`. The shelf asks for a small image in a list, a medium one beside an essay, and a large one on the home tiles. Cover id and OLID are the kinder choices: lookups by ISBN, OCLC, and LCCN are limited to 100 requests from one address every five minutes, and a burst past that comes back forbidden. A missing picture, or a book with no `cover`, falls back to a drawn jacket in `src/components/BookCover.tsx`. The poem uses one of those drawings. A blog post still does not need a cover.
 5. **Write the review.** Create a new file in `src/content/reviews/`. The name can match the slug. Copy the front matter pattern above. Write the essay in Markdown underneath. Save.
 6. **Read it in Window Seat.** The site is one design now, the one we kept. Open the new essay from the home grid and from the review list. If a paragraph is hard to read, fix the paragraph. A short introduction to Git, if you want one before step 9, is `src/content/guides/getting-started-with-git.md`.
-7. **Write a blog post the same way,** in `src/content/guides/`, if the piece is a tutorial rather than a review. Give it a book, an author, a genre, a publication date, and at least one tag. It does not need a `bookId` or a cover.
+7. **Write a blog post the same way,** in `src/content/guides/`, if the piece is a tutorial rather than a review. Give it a genre, a publication date, and at least one tag. Add a book, an author, and a year only when the post is about one book. It does not need a `bookId` or a cover.
 8. **Check that the site still builds.** Run `npm run build`. This is the same command GitHub will run. If it complains about missing front matter, the message names the file.
 9. **Save the change in Git.** Git is a history of the folder. The usual three commands are `git add`, `git commit`, and `git push`. A commit is a labeled snapshot. Push sends that snapshot to GitHub.
 
@@ -212,7 +219,7 @@ A hash address will not give you pretty links like `/reviews/jane-eyre` without 
 - [ ] The draft opens inside a scene.
 - [ ] I quoted less than I talked.
 - [ ] The front matter has a slug, title, dek, publication date, and at least one tag.
-- [ ] A review names one or more books with `bookId` or `bookIds`. A blog post has a book, an author, and a genre.
+- [ ] A review names one or more books with `bookId` or `bookIds`. A blog post has a genre. A book on a blog post is optional, and when present it has a title, an author, and a year.
 - [ ] I read the essay on Window Seat, including the metadata at the top.
 - [ ] `npm run build` succeeds.
 - [ ] I committed the Markdown file.

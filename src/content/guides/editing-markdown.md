@@ -2,17 +2,12 @@
 slug: editing-markdown
 title: "A Few Tools for Writing in Markdown"
 dek: "Markdown is a plain text file with a handful of marks. You can write it in a notes app, a calm editor, or whatever program already opens a text file on your computer."
-book: "Alice’s Adventures in Wonderland"
-author: "Lewis Carroll"
-bookPublished: "1865"
 published: "2026-05-18"
 genre: fantasy
 tags: markdown, writing, tools, beginners
 ---
 
-You do not need a special writing program to keep a book blog. You need a place to put sentences, and a way to say “this line is a heading” without the file becoming a private format that only one website understands. Markdown is that way. It is a text file. The marks are typed with keys you already have.
-
-*Alice’s Adventures in Wonderland* is a useful companion here, not because Carroll used Markdown, but because the book trusts plain language to do strange work. A heading is still a heading. A list is still a list. The costume can wait.
+You do not need a special writing program to keep a book blog. You need a place to put sentences, and a way to say “this line is a heading” without the file becoming a private format that only one website understands. Markdown is that way. It is a text file. The marks are typed with keys you already have. A heading is still a heading. A list is still a list. The costume can wait.
 
 ## What the marks look like
 
