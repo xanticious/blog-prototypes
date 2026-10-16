@@ -7,6 +7,10 @@ published: "2026-01-20"
 spoilers: true
 tags: ambition, science, letters
 ---
+Frankenstein is the novel that begs us to look inward and ask if we are the monster, or the man. 
+
+I started the novel engrossed in Victor's story, until, just as he was horrified by what he'd done, I was horrified by him and was fully engrossed in the tale of his monster until the bitter end.
+
 
 I started this on a train and nearly missed my stop during Walton’s letters, which is embarrassing, because almost nothing has happened yet except weather and ambition. **Victor is already unbearable, and the book knows it.**
 

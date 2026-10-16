@@ -8,6 +8,7 @@ spoilers: true
 tags: vampires, letters, horror
 ---
 
+
 I read the diaries out of order the first night and had to go back, which feels like the right mistake. The book is a stack of documents that all think they are being reasonable. *Jonathan’s journal* is the one that made me lock the door, and nothing supernatural had really happened yet except a wrong feeling about the castle.
 
 Mina is the person I trusted. Everyone else is brave in a way that needs an audience. I yelped, actually yelped, when ||Lucy died and then came back, and they had to stake her||. The tenderness around that scene is what got me, more than the teeth.
